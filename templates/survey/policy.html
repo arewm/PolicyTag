@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Create policies</title>
+    <link rel="stylesheet" href="static/survey/css/main.css">
+</head>
+<body>
+    <div id="top_row" class="row">
+      <div id="suggestions">
+        <div id="policy_suggestion">
+          <p class="title" >Policy Suggestions</p>
+        </div>
+        <div id="tags">
+          <p class="title" >Tag Suggestions</p>
+            {% for t in tags %}
+                <div class="{ t.tag_class }" >{ t.text }</div>
+            {% endfor %}
+        </div>
+      </div>
+      <div id="top_right">
+        <div id="tutorial_buffer">&nbsp;</div>
+        <div id="tutorial">
+          Open tutorial
+        </div>
+        <div id="tutorial_buffer">&nbsp;</div>
+      </div>
+
+    </div>
+
+    <div id="mid_row" class="row">
+        <div id="workspace" class="dropzone-wrapper">
+          <p class="title" >Workspace</p>
+        </div>
+        <div id="action_box">
+          <div id="operation">
+            &nbsp;
+          </div>
+          <div id="action">
+            <div id="default_action_toggle">{Default action toggle}</div>
+            <p class="title" >&nbsp; Default action preference</p>
+          </div>
+        </div>
+    </div>
+
+    <div id="bottom_row" class="row">
+        <div id="policies">
+          <p class="title" >Defined policies</p>
+        </div>
+    </div>
+
+
+
+</body>
+</html>
