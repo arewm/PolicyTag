@@ -4,16 +4,16 @@ from django.db import models
 # Create your models here.
 
 class Person(models.Model):
-	expert_class = models.BooleanField()
+	expert_class = models.BooleanField(default=False)
 	person_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-	consent_accepted = models.BooleanField()
+	consent_accepted = models.BooleanField(default=False)
 
 class Tag(models.Model):
 	tag_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 	text = models.CharField(max_length=50)
 	tag_class = models.CharField(max_length=50)
-	custom = models.BooleanField()
-	creator = models.ForeignKey(Person, on_delete=models.CASCADE)
+	custom = models.BooleanField(default=False)
+	creator = models.ForeignKey(Person, on_delete=models.CASCADE, default=None)
 
 class Action(models.Model):
 	action_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
