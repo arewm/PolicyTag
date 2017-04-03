@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Create policies</title>
-    <link rel="stylesheet" href="static/survey/css/main.css">
+    <link rel="stylesheet" href="/static/survey/css/main.css">
 </head>
 <body>
     <div id="top_row" class="row">
@@ -14,7 +14,7 @@
         <div id="tags">
           <p class="title" >Tag Suggestions</p>
             {% for t in tags %}
-                <div class="{ t.tag_class }" >{ t.text }</div>
+                <div class="{{ t.tag_class }}" >{{ t.text }}</div>
             {% endfor %}
         </div>
       </div>
