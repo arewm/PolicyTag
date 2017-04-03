@@ -18,7 +18,7 @@ class Tag(models.Model):
     text = models.CharField(max_length=50)
     tag_class = models.CharField(max_length=50)
     custom = models.BooleanField(default=False)
-    creator = models.ForeignKey(Person, on_delete=modelsCASCADE, default=None, null=True)
+    creator = models.ForeignKey(Person, on_delete=models.CASCADE, default=None, null=True)
 
     def __str__(self):
         return '{}: {}'.format(self.tag_class, self.text)
