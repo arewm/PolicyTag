@@ -9,23 +9,35 @@ class Person(models.Model):
     person_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     consent_accepted = models.BooleanField(default=False)
 
+    def __str__(self):
+        return '{}: expert={}'.format(self.person_id, self.expert_class)
+
 
 class Tag(models.Model):
     tag_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     text = models.CharField(max_length=50)
     tag_class = models.CharField(max_length=50)
     custom = models.BooleanField(default=False)
-    creator = models.ForeignKey(Person, on_delete=models.CASCADE, default=None, null=True)
+    creator = models.ForeignKey(Person, on_delete=modelsCASCADE, default=None, null=True)
+
+    def __str__(self):
+        return '{}: {}'.format(self.tag_class, self.text)
 
 
 class Action(models.Model):
     action_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     text = models.CharField(max_length=100)
 
+    def __str__(self):
+        return '{}'.format(self.text)
+
 
 class PolicyAction(models.Model):
     action_id = models.ForeignKey(Action, on_delete=models.PROTECT)
     allow = models.BooleanField()
+
+    def __str__(self):
+        return '{}'.format(self.allow)
 
 
 class PolicyTag(models.Model):
