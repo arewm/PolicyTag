@@ -35,4 +35,4 @@ def survey(request):
 
 def end(request):
     context = {}
-    return render(request, 'survey/end.html', content)
+    return render(request, 'survey/end.html', context)
