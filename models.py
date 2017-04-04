@@ -51,3 +51,4 @@ class Policies(models.Model):
     actions = models.ManyToManyField(PolicyAction)
     owner = models.ForeignKey(Person, on_delete=models.CASCADE)
     time_to_generate = models.FloatField()
+    generated = models.BooleanField(default=False)
