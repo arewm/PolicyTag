@@ -4,8 +4,12 @@ body { font-family: Helvetica, Arial, sans-serif; }
   font-size: 130%;
 }
 
-.dropzone-wrapper {
+.half-wrapper {
     float: left;
+    width: 50%;
+}
+
+.dropzone-wrapper {
     position: absolute;
     top: 30px;
     left: 10px;
@@ -26,7 +30,6 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .tags {
-    float: left;
     position: absolute;
     width: 50%;
     left: 50px;
