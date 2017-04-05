@@ -54,17 +54,14 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .first {
-    top: 30px;
     left: 600px;
     margin: .25em;
 }
 .second {
-    top: -20px;
     left: 740px;
     margin: 0 .25em;
 }
 .third{
-    top: -50px;
     left: 880px;
     margin: 0 .25em;
 }
