@@ -19,6 +19,9 @@
 
 
 <div class="tags">
+    {% for t in tags %}
+        <div id= "{{ t.text }}" class="draggable js-drag" >{{ t.text }}</div>
+    {% endfor %}
 	<div id="drag1" class="draggable js-drag">Drag me…</div>
 	<div id="drag2" class="draggable js-drag">Drag me…</div>
 	<div id="drag3" class="draggable js-drag">Drag me…</div>
