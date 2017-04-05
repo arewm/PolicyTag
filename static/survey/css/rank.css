@@ -44,7 +44,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
     z-index: 10;
     /*left: 1050px;/**/
     width: 100px;
-    margin: .25em;
+    padding: 1em 1em;
     /*background-color: #29e;/**/
     /*color: #fff;/**/
     text-align: center;
@@ -56,17 +56,17 @@ body { font-family: Helvetica, Arial, sans-serif; }
 .first {
     top: 30px;
     left: 600px;
-    padding: 1em 1em;
+    margin: .25em;
 }
 .second {
     top: -20px;
     left: 740px;
-    padding: 0 1em;
+    margin: .25em 0;
 }
 .third{
     top: -50px;
     left: 880px;
-    padding: 0 1em;
+    margin: .25em 0;
 }
 
 .draggable.-drop-possible { background-color: #42bd41; }
