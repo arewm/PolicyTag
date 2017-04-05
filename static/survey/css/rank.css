@@ -4,14 +4,6 @@ body { font-family: Helvetica, Arial, sans-serif; }
   font-size: 130%;
 }
 
-.half-wrapper {
-    float: left;
-    width: 50%;
-    height: 100vh;
-    background-color: lightgrey;/**/
-    padding: 2px;
-}
-
 .dropzone-wrapper {
     position: absolute;
     top: 30px;
@@ -48,7 +40,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .draggable {
-    position: absolute;
+    position: relative;
     z-index: 10;
     top: 30px;
     left: 1050px;
