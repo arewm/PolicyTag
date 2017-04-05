@@ -24,7 +24,7 @@
         {% if c == 'first' %}
             <div style="position:relative; height: 62px;">
         {% endif %}
-        <div id= "{{ t.tag_id }}" class="draggable js-drag {{ t.tag_class }} {{ c }}" >{{ t.text }}</div>
+        <div id= "{{ t.tag_id }}" class="draggable js-drag {{ t.tag_class }} {{ c }}" data-x="0">{{ t.text }}</div>
         {% if c == 'third' %}
             </div>
         {% endif %}
