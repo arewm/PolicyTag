@@ -20,7 +20,8 @@ def policy(request):
     return render(request, 'survey/policy.html', context)
 
 def rank(request):
-    context = {}
+    tag_list = Tag.objects.order_by('text')
+    context = {'tags': tag_list}
     return render(request, 'survey/rank.html', context)
     #return HttpResponse('Hellow, you are at rank. {}'.format(request))
 
