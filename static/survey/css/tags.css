@@ -1,39 +1,39 @@
 .type {
     background-color: #009933;
     color: #000;
-    min-width: 10px;
+    /*min-width: 10px;
     float: left;
-    padding: 2px;
+    padding: 2px;/**/
 }
 
 .location {
     background-color: #ff9900;
     color: #000;
-    min-width: 10px;
+    /*min-width: 10px;
     float: left;
-    padding: 2px;
+    padding: 2px;/**/
 }
 
 .things {
     background-color: #006699;
     color: #000;
-    min-width: 10px;
+    /*min-width: 10px;
     float: left;
-    padding: 2px;
+    padding: 2px;/**/
 }
 
 .properties {
     background-color: #cc0066;
     color: #000;
-    min-width: 10px;
+    /*min-width: 10px;
     float: left;
-    padding: 2px;
+    padding: 2px;/**/
 }
 
 .time {
     background-color: #6666ff;
     color: #000;
-    min-width: 10px;
+    /*min-width: 10px;
     float: left;
-    padding: 2px;
+    padding: 2px;/**/
 }
