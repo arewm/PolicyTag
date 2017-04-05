@@ -1,19 +1,29 @@
 .type {
-  background-color: #009933;
+    background-color: #009933;
+    min-width: 10px;
+    float: left;
 }
 
 .location {
-  background-color: #ff9900;
+    background-color: #ff9900;
+    min-width: 10px;
+    float: left;
 }
 
 .things {
-  background-color: #006699;
+    background-color: #006699;
+    min-width: 10px;
+    float: left;
 }
 
 .properties {
-  background-color: #cc0066;
+    background-color: #cc0066;
+    min-width: 10px;
+    float: left;
 }
 
 .time {
-  background-color: #6666ff;
+    background-color: #6666ff;
+    min-width: 10px;
+    float: left;
 }

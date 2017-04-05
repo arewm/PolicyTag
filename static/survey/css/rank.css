@@ -44,7 +44,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
     z-index: 10;
     top: 30px;
     left: 1050px;
-    width: 100px;
+    min-width: 10px;
     margin: .25em;
     padding: 1em 2em;
     background-color: #29e;
