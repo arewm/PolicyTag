@@ -55,13 +55,13 @@ body { font-family: Helvetica, Arial, sans-serif; }
         touch-action: none;
 }
 
-.draggable .first {
+.first {
     left: 800px;
 }
-.draggable .second {
+.second {
     left: 900px;
 }
-.draggable .third{
+.third{
     left: 1000px;
 }
 
