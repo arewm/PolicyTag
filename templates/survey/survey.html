@@ -5,6 +5,17 @@
     <title>Survey</title>
 </head>
 <body>
+<form>
+    <input name="person" type="hidden" value="{{ person_id }}"/>
+    {% for q in questions %}
+        <p class="question">{{ q.question }}</p>
+        <ul class="answers">
+            {% for a in q.answers %}
+                <input type="radio" name="{{ q.name }}" value="{{ a.value }}">{{ a.text }}<br />
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</form>
 
 </body>
 </html>

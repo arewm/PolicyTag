@@ -3,11 +3,22 @@ from django.db import models
 
 # Create your models here.
 
+class Demographics(models.Model):
+    age = 12
+    education_level = 'kindergarten'
+    gender = 'N/A'
+
+class Survey(models.Model):
+    pass
+
 
 class Person(models.Model):
     expert_class = models.BooleanField(default=False)
     person_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     consent_accepted = models.BooleanField(default=False)
+    demographics = models.ForeignKey(Demographics, on_delete=models.CASCADE)
+    questions = models.ForeignKey(Survey, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return '{}: expert={}'.format(self.person_id, self.expert_class)
