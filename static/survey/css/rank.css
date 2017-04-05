@@ -42,7 +42,6 @@ body { font-family: Helvetica, Arial, sans-serif; }
 .draggable {
     position: relative;
     z-index: 10;
-    top: 30px;
     /*left: 1050px;/**/
     width: 100px;
     margin: .25em;
@@ -56,13 +55,14 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .first {
-    left: 550px;
+    top: 30px;
+    left: 600px;
 }
 .second {
     left: 740px;
 }
 .third{
-    left: 9300px;
+    left: 880px;
 }
 
 .draggable.-drop-possible { background-color: #42bd41; }
