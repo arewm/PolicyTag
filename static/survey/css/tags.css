@@ -2,28 +2,33 @@
     background-color: #009933;
     min-width: 10px;
     float: left;
+    padding: 2px;
 }
 
 .location {
     background-color: #ff9900;
     min-width: 10px;
     float: left;
+    padding: 2px;
 }
 
 .things {
     background-color: #006699;
     min-width: 10px;
     float: left;
+    padding: 2px;
 }
 
 .properties {
     background-color: #cc0066;
     min-width: 10px;
     float: left;
+    padding: 2px;
 }
 
 .time {
     background-color: #6666ff;
     min-width: 10px;
     float: left;
+    padding: 2px;
 }
