@@ -55,7 +55,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
 
 .first {
     left: 600px;
-    margin: .25em;
+    margin: 0 .25em;
 }
 .second {
     left: 740px;
