@@ -25,11 +25,11 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .tags {
-  position: absolute;
-  width: 50%;
-  left: 50px;
-  top:10px;
-  overflow-y: scroll;
+    position: absolute;
+    width: 50%;
+    left: 50px;
+    top:10px;
+    overflow-y: scroll;
 }
 
 .dropzone.-drop-possible { border-color: #666; }
@@ -40,12 +40,11 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .draggable {
-    /*position: relative;*/
-    float: left;
-    /*z-index: 10;
-    /*top: 30px;
-    left: 1050px;*/
-    min-width: 10px;
+    position: relative;
+    z-index: 10;
+    top: 30px;
+    left: 1050px;
+    width: 100px;
     margin: .25em;
     padding: 1em 2em;
     background-color: #29e;
