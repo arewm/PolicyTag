@@ -61,12 +61,12 @@ body { font-family: Helvetica, Arial, sans-serif; }
 .second {
     top: -20px;
     left: 740px;
-    margin: .25em 0;
+    margin: 0 .25em;
 }
 .third{
     top: -50px;
     left: 880px;
-    margin: .25em 0;
+    margin: 0 .25em;
 }
 
 .draggable.-drop-possible { background-color: #42bd41; }
