@@ -21,7 +21,7 @@ def policy(request):
 
 def rank(request):
     tag_list = Tag.objects.order_by('text')
-    ids = str([t.tag_id for t in tag_list])[1:-1]
+    ids = str([str(t.tag_id) for t in tag_list])[1:-1]
     insert_list = []
     class_dict = {0: 'first', 1: 'second', 2: 'third'}
     i=0
