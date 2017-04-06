@@ -58,6 +58,10 @@ div#tags {
     /*background-color: lightyellow;/**/
 }
 
+.tag-properties {
+    min-width: 10px;
+}
+
 div#tutorial_buffer{
   float: left;
   width: 10%;
