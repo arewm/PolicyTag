@@ -33,10 +33,10 @@ def rank(request):
     #ids = re.sub(r'[\'"]', '', str(ids)[1:-1])
     #ids = [t.tag_id for t in tag_list]
     insert_list = []
-    class_dict = {0: 'first', 1: 'second', 2: 'third'}
+    class_dict = {0: 'first', 1: 'second', 2: 'third', 3: 'fourth'}
     i=0
     for t in tag_list:
-        insert_list.append((class_dict[i%3], t))
+        insert_list.append((class_dict[i%4], t))
         i += 1
     context = {'tags': insert_list, 'ids':ids}
     return render(request, 'survey/rank.html', context)

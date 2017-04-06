@@ -66,6 +66,10 @@ body { font-family: Helvetica, Arial, sans-serif; }
     /*left: 880px;/**/
     left: 280px;
 }
+.fourth{
+    /*left: 880px;/**/
+    left: 420px;
+}
 
 .draggable.-drop-possible { background-color: #42bd41; }
 /**/
