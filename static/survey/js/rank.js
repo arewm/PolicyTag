@@ -37,7 +37,7 @@
     // dropzone #2 accepts draggable #1 and #2
     //setupDropzone('#drop2', '#drag1, #drag2');
     // every dropzone accepts draggable #3
-    //setupDropzone('.js-drop', '#drag1, #drag2, #drag3, #drag4');
+    setupDropzone('.js-drop', '#drag1, #drag2, #drag3, #drag4');
     
 
 
