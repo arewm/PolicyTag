@@ -14,8 +14,10 @@
         </div>
         <div id="tags">
           <p class="title" >Tag Suggestions</p>
-            {% for t in tags %}
-                <div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" >{{ t.text }}</div>
+            {% for c, ta in tags %}
+                {% for t in ta %}
+                    <div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" >{{ t.text }}</div>
+                {% endfor %}
             {% endfor %}
         </div>
       </div>
