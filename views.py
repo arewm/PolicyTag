@@ -24,7 +24,7 @@ def policy(request):
 def rank(request):
     tag_list = Tag.objects.order_by('tag_class', 'text')
     for t in tag_list:
-        t.tag_id = str(t.tag_id).split('-')[0]
+        t.tag_id = 'a{}'.format(t.tag_id).split('-')[0]
     ids = re.sub(r'[\'"]', '',str(['#{}'.format(t.tag_id) for t in tag_list])[1:-1])
     #ids = ['#{}'.format(t.tag_id) for t in tag_list]
     #ids.extend(['#drag1', '#drag2', '#drag3', '#drag4'])
