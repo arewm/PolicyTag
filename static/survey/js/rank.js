@@ -39,9 +39,11 @@
     // dropzone #2 accepts draggable #1 and #2
     //setupDropzone('#drop2', '#drag1, #drag2');
     // every dropzone accepts draggable #3
-    for (var i=0; i<all_ids.arrayLength; i++){
+    var ids = document.getElementById('ids_to_drop').innerHTML;
+    setupDropzone('.js-drop', ids);
+    /*for (var i=0; i<all_ids.arrayLength; i++){
         setupDropzone('.js-drop', all_ids[i])
-    }
+    }*/
     //setupDropzone('.js-drop', '#drag1, #drag2, #drag3');
     
 
