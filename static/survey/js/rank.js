@@ -12,10 +12,12 @@
         .on('dragstart', function (event) {
             //var dx = parseInt(event.target.getAttribute('data-x'), 10);
             //var dy = parseInt(event.target.getAttribute('data-y'), 10);
-            event.target.setAttribute('blah-x', event.target.getAttribute('data-x'));
-            event.target.setAttribute('blah-y', event.target.getAttribute('data-y'));
-            event.interaction.x = event.target.getAttribute('data-x')  ? window.getComputedStyle(event.target).left.slice(0, -2) : parseInt(event.target.getAttribute('data-x'), 10);
-            event.interaction.y = event.target.getAttribute('data-y')  ? window.getComputedStyle(event.target).top.slice(0, -2) : parseInt(event.target.getAttribute('data-y'), 10);
+            //event.target.setAttribute('blah-x', event.target.getAttribute('data-x'));
+            //event.target.setAttribute('blah-y', event.target.getAttribute('data-y'));
+            //event.interaction.x = event.target.getAttribute('data-x') ? window.getComputedStyle(event.target).left.slice(0, -2) : parseInt(event.target.getAttribute('data-x'), 10);
+            //event.interaction.y = event.target.getAttribute('data-y') ? window.getComputedStyle(event.target).top.slice(0, -2) : parseInt(event.target.getAttribute('data-y'), 10);
+            event.interaction.x = window.getComputedStyle(event.target).left.slice(0, -2)
+            event.interaction.y = window.getComputedStyle(event.target).top.slice(0, -2)
         })
         .on('dragmove', function (event) {
             event.interaction.x += event.dx;
