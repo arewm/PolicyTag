@@ -47,7 +47,7 @@
     // every dropzone accepts draggable #3
     //setupDropzone('.js-drop', '#drag1, #drag2, #drag3, #drag4');
             {% for i in ids %}
-                setupDropzone('.js-drop', '#{{ i }}');
+                setupDropzone('.dropzone .js-drop', '#{{ i }}');
             {% endfor %}
     //setupDropzone('.js-drop', '{{ ids }}');
 
