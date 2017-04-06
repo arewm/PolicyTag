@@ -27,7 +27,8 @@ def rank(request):
     ids = ['#{}'.format(t.tag_id) for t in tag_list]
     ids.extend(['#drag1', '#drag2', '#drag3', '#drag4'])
     ids = (['#drag1', '#drag2', '#drag3', '#drag4'])
-    ids = str(ids)[1:-1]
+    #ids = str(ids)[1:-1]
+    ids = re.sub(r'[\'"]', '', str(ids)[1:-1])
     #ids = [t.tag_id for t in tag_list]
     insert_list = []
     class_dict = {0: 'first', 1: 'second', 2: 'third'}
