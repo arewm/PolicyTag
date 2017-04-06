@@ -27,8 +27,8 @@
             }
         })
         .on('dragend', function (event) {
-            //event.target.setAttribute('data-x', event.interaction.x);
-            //event.target.setAttribute('data-y', event.interaction.y);
+            event.target.setAttribute('data-x', event.interaction.x);
+            event.target.setAttribute('data-y', event.interaction.y);
         });
 
     // setup drop areas.
