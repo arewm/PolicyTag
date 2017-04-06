@@ -20,7 +20,7 @@ def policy(request):
     return render(request, 'survey/policy.html', context)
 
 def rank(request):
-    tag_list = Tag.objects.order_by('text')
+    tag_list = Tag.objects.order_by('tag_class', 'text')
     ids = str([str(t.tag_id) for t in tag_list])[1:-1]
     insert_list = []
     class_dict = {0: 'first', 1: 'second', 2: 'third'}
