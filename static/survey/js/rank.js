@@ -102,7 +102,7 @@
             })
             .on('dragleave', function (event) {
                 removeClass(event.target, '-drop-over');
-                event.relatedTarget.setAttribuet('valid', 'false');
+                event.relatedTarget.setAttribute('valid', 'false');
                 //event.relatedTarget.textContent = 'Drag me…';
             })
             .on('drop', function (event) {
