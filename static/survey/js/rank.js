@@ -95,7 +95,7 @@
             })
             .on('dragleave', function (event) {
                 removeClass(event.target, '-drop-over');
-                event.relatedTarget.textContent = 'Drag me…';
+                //event.relatedTarget.textContent = 'Drag me…';
             })
             .on('drop', function (event) {
                 removeClass(event.target, '-drop-over');
