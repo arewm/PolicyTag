@@ -55,13 +55,16 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .first {
-    left: 600px;
+    /*left: 600px;/**/
+    left: 0px;
 }
 .second {
-    left: 740px;
+    /*left: 740px;/**/
+    left: 140px;
 }
 .third{
-    left: 880px;
+    /*left: 880px;/**/
+    left: 280px;
 }
 
 .draggable.-drop-possible { background-color: #42bd41; }
