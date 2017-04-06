@@ -5,6 +5,7 @@
     <title>Tag Ranking</title>
     <link rel="stylesheet" href="/static/survey/css/rank.css">
     <link rel="stylesheet" href="/static/survey/css/tags.css">
+    <script src="/static/survey/js/interact.js"></script>
 </head>
 <body >
 <div id="ids_to_drop" style="display:none">{{ ids|safe }}</div>
@@ -34,14 +35,9 @@
         <div id= "{{ t.tag_id }}" class="draggable js-drag" >{{ t.text }}</div>
     {% endfor %}
 {% endif %}
-	<!--div id="drag1" class="draggable js-drag">Drag me…</div>
-	<div id="drag2" class="draggable js-drag">Drag me…</div>
-	<div id="drag3" class="draggable js-drag">Drag me…</div>
-	<div id="drag4" class="draggable js-drag">Drag me…</div-->
 </div>
 
 
-    <script src="/static/survey/js/interact.js"></script>
-    <script src="/static/survey/js/rank.js"></script>
+<script src="/static/survey/js/rank.js"></script>
 </body>
 </html>
