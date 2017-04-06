@@ -60,6 +60,8 @@ div#tags {
 
 .tag-properties {
     min-width: 10px;
+    float: left;
+    padding: 2px;
 }
 
 div#tutorial_buffer{
