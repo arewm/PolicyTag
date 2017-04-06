@@ -40,7 +40,7 @@
     for (var i=0; i<all_ids.arrayLength; i++){
         setupDropzone('.js-drop', all_ids[i])
     }
-    //setupDropzone('.js-drop', all_ids);
+    setupDropzone('.js-drop', '#drag1, #drag2, #drag3');
     
 
 
