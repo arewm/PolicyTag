@@ -61,9 +61,15 @@
                 accept: accept,
                 ondropactivate: function (event) {
                     addClass(event.relatedTarget, '-drop-possible');
+                    event.relatedTarget.setAttribute('valid', 'false')
                 },
                 ondropdeactivate: function (event) {
                     removeClass(event.relatedTarget, '-drop-possible');
+                    if (event.relatedTarget.getAttribute('valid') === 'false') {
+                        event.relatedTarget.style.left = "";
+                        event.relatedTarget.style.top = "";
+                    }
+                    event.relatedTarget.removeAttribute('valid');
                 }
             })
             .on('dropactivate', function (event) {
@@ -91,10 +97,12 @@
             })
             .on('dragenter', function (event) {
                 addClass(event.target, '-drop-over');
+                event.relatedTarget.setAttribute('valid', 'true');
                 //event.relatedTarget.textContent = 'I\'m in';
             })
             .on('dragleave', function (event) {
                 removeClass(event.target, '-drop-over');
+                event.relatedTarget.setAttribuet('valid', 'false');
                 //event.relatedTarget.textContent = 'Drag me…';
             })
             .on('drop', function (event) {
