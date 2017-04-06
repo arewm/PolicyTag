@@ -3,6 +3,8 @@ from django.http import HttpResponse
 
 from .models import Tag
 
+import re
+
 # Create your views here.
 
 def index(request):
@@ -21,7 +23,7 @@ def policy(request):
 
 def rank(request):
     tag_list = Tag.objects.order_by('tag_class', 'text')
-    ids = str([str(t.tag_id) for t in tag_list])[1:-1]
+    ids = re.sub(r'[\'"]', '',str([str(t.tag_id) for t in tag_list])[1:-1])
     insert_list = []
     class_dict = {0: 'first', 1: 'second', 2: 'third'}
     i=0
