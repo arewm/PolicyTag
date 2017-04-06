@@ -21,13 +21,14 @@ def policy(request):
 
 def rank(request):
     tag_list = Tag.objects.order_by('text')
+    ids = str([t.tag_id for t in tag_list])[1:-1]
     insert_list = []
     class_dict = {0: 'first', 1: 'second', 2: 'third'}
     i=0
     for t in tag_list:
         insert_list.append((class_dict[i%3], t))
         i += 1
-    context = {'tags': insert_list}
+    context = {'tags': insert_list, 'ids':ids}
     return render(request, 'survey/rank.html', context)
     #return HttpResponse('Hellow, you are at rank. {}'.format(request))
 
