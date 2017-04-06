@@ -1,4 +1,4 @@
-body { font-family: Helvetica, Arial, sans-serif; }
+/*body { font-family: Helvetica, Arial, sans-serif; }
 
 .heading {
   font-size: 130%;
@@ -29,7 +29,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
     width: 50%;
     left: 50px;
     top:10px;
-    /*overflow-y: scroll;/**/
+    /*overflow-y: scroll;/**//*
 }
 
 .dropzone.-drop-possible { border-color: #666; }
@@ -42,11 +42,11 @@ body { font-family: Helvetica, Arial, sans-serif; }
 .draggable {
     position: absolute;
     z-index: 10;
-    /*left: 1050px;/**/
+    /*left: 1050px;/**//*
     width: 100px;
     padding: 1em 1em;
     /*background-color: #29e;/**/
-    /*color: #fff;/**/
+    /*color: #fff;/**//*
     text-align: center;
 
     -ms-touch-action: none;
@@ -64,6 +64,63 @@ body { font-family: Helvetica, Arial, sans-serif; }
 .third{
     left: 880px;
     margin: 0 .25em;
+}
+
+.draggable.-drop-possible { background-color: #42bd41; }/**/
+body { font-family: Helvetica, Arial, sans-serif; }
+
+.heading {
+  font-size: 130%;
+}
+
+.dropzone-wrapper {
+    position: absolute;
+    top: 30px;
+    left: 10px;
+    right: 0;
+    width: 50%;
+}
+
+.dropzone {
+    overflow: hidden;
+    margin: 1em;
+    padding: 1em;
+    color: #666;
+    text-align: center;
+    background: #ccc;
+    line-height: 8em;
+    border: 4px dashed transparent;
+    transition: background .15s linear, border-color .15s linear;
+}
+
+.tags {
+  position: absolute;
+  width: 50%;
+  left: 50px;
+  top:10px;
+}
+
+.dropzone.-drop-possible { border-color: #666; }
+
+.dropzone.-drop-over {
+    background: #666;
+    color: #fff;
+}
+
+.draggable {
+    position: relative;
+    z-index: 10;
+    top: 30px;
+    left: 1050px;
+    width: 100px;
+    margin: .25em;
+    padding: 1em 2em;
+    background-color: #29e;
+    color: #fff;
+    text-align: center;
+
+    -ms-touch-action: none;
+        touch-action: none;
 }
 
 .draggable.-drop-possible { background-color: #42bd41; }
