@@ -12,6 +12,8 @@
         .on('dragstart', function (event) {
             event.interaction.x = parseInt(window.getComputedStyle(event.target).left.slice(0, -2), 10);
             event.interaction.y = parseInt(window.getComputedStyle(event.target).top.slice(0, -2), 10);
+            event.interaction.x = parseInt(event.target.getAttribute('data-x'), 10) || 1000;
+            event.interaction.y = parseInt(event.target.getAttribute('data-y'), 10) || 10;
         })
         .on('dragmove', function (event) {
             event.interaction.x += event.dx;
