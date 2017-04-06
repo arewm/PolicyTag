@@ -10,8 +10,8 @@
     interact('.js-drag')
         .draggable({ max: Infinity })
         .on('dragstart', function (event) {
-            var dx = parseInt(event.target.getAttribute('data-x'));
-            var dy = parseInt(event.target.getAttribute('data-y'));
+            var dx = parseInt(event.target.getAttribute('data-x'), 10);
+            var dy = parseInt(event.target.getAttribute('data-y'), 10);
             event.interaction.x = dx === null ? window.getComputedStyle(event.target).left.slice(0, -2) : dx;
             event.interaction.y = dy === null ? window.getComputedStyle(event.target).top.slice(0, -2) : dy;
         })
