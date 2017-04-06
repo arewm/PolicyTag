@@ -16,8 +16,8 @@
             //event.target.setAttribute('blah-y', event.target.getAttribute('data-y'));
             //event.interaction.x = event.target.getAttribute('data-x') ? window.getComputedStyle(event.target).left.slice(0, -2) : parseInt(event.target.getAttribute('data-x'), 10);
             //event.interaction.y = event.target.getAttribute('data-y') ? window.getComputedStyle(event.target).top.slice(0, -2) : parseInt(event.target.getAttribute('data-y'), 10);
-            event.interaction.x = window.getComputedStyle(event.target).left.slice(0, -2)
-            event.interaction.y = window.getComputedStyle(event.target).top.slice(0, -2)
+            event.interaction.x = parseInt(window.getComputedStyle(event.target).left.slice(0, -2), 10);
+            event.interaction.y = parseInt(window.getComputedStyle(event.target).top.slice(0, -2), 10);
         })
         .on('dragmove', function (event) {
             event.interaction.x += event.dx;
