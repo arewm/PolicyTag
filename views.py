@@ -18,6 +18,8 @@ def tutorial(request):
 
 def policy(request):
     tag_list = Tag.objects.order_by('text')
+    for t in tag_list:
+        t.tag_id = 'a{}'.format(t.tag_id)
     context = {'tags': tag_list}
     return render(request, 'survey/policy.html', context)
 
