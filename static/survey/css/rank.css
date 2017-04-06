@@ -27,8 +27,8 @@ body { font-family: Helvetica, Arial, sans-serif; }
 .tags {
     position: absolute;
     width: 50%;
-    left: 50px;
-    top:10px;
+    left: 50%;
+    top: 30px;
     /*overflow-y: scroll;/**/
 }
 
@@ -45,6 +45,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
     /*left: 1050px;/**/
     width: 100px;
     padding: 1em 1em;
+    margin: 0 .25em;
     /*background-color: #29e;/**/
     /*color: #fff;/**/
     text-align: center;
@@ -55,18 +56,16 @@ body { font-family: Helvetica, Arial, sans-serif; }
 
 .first {
     left: 600px;
-    margin: 0 .25em;
 }
 .second {
     left: 740px;
-    margin: 0 .25em;
 }
 .third{
     left: 880px;
-    margin: 0 .25em;
 }
 
-.draggable.-drop-possible { background-color: #42bd41; }/**/
+.draggable.-drop-possible { background-color: #42bd41; }
+/**/
 /*body { font-family: Helvetica, Arial, sans-serif; }
 
 .heading {
