@@ -110,6 +110,25 @@
         });
 
     </script>
+
+    <script>
+        function setToggles() {
+            state = $('#default-toggle').prop('checked') ? 'on' : 'off';
+            $('#toggle1').bootstrapToggle(state);
+            $('#toggle2').bootstrapToggle(state);
+            $('#toggle3').bootstrapToggle(state);
+            $('#toggle4').bootstrapToggle(state);
+            $('#toggle5').bootstrapToggle(state);
+        }
+        $(function() {
+            $('#default-toggle').change(function() {
+                setToggles()
+            })
+        })
+        function savePolicy() {
+            setToggles();
+        }
+    </script>
 </head>
 <body>
 <form id="policy_specification"></form>
@@ -161,7 +180,7 @@
     <div id="action_box">
         <div id="operation">
             <div class="buff"></div>
-            <i class="fa fa-check fa-3x" aria-hidden="true"></i>
+            <i class="fa fa-check fa-3x" aria-hidden="true" onclick="savePolicy()"></i>
         </div>
         <div id="action">
             <!--div id="default_action_toggle"-->
@@ -211,22 +230,6 @@
         </ul>
     </div>
 </div>
-
-<script>
-    function setToggles() {
-        state = $('#default-toggle').prop('checked') ? 'on' : 'off';
-        $('#toggle1').bootstrapToggle(state);
-        $('#toggle2').bootstrapToggle(state);
-        $('#toggle3').bootstrapToggle(state);
-        $('#toggle4').bootstrapToggle(state);
-        $('#toggle5').bootstrapToggle(state);
-    }
-    $(function() {
-        $('#default-toggle').change(function() {
-            setToggles()
-        })
-    })
-</script>
 <!--script src="/static/survey/js/rank.js"></script-->
 </body>
 </html>
