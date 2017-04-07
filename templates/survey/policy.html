@@ -57,17 +57,17 @@
                     }
                 },
                 drop: function (e, u) {
-                    var a = u.helper.clone();
-                    if (hasClass(a, 'move-me')) {
-                        a.removeClass('move-me');
-                        a.addClass('moved-me');
-                        console.log(a.attr('id'));
-                        a.attr('id', 'b' + a.attr('id'));
+                    tag = ui.draggable;
+                    tag.clone().attr("id", "drag-" + tag.attr("id"));
+                    if (hasClass(tag, 'move-me')) {
+                        tag.removeClass('move-me');
+                        tag.addClass('moved-me');
+                        console.log(tag.attr('id'));
                     }
-                    console.log("INFO: Accepted: ", a.attr("class"));
-                    a.css("z-index", 1000);
-                    a.appendTo("#workspace");
-                    a.draggable({
+                    console.log("INFO: Accepted: ", tag.attr("class"));
+                    tag.css("z-index", 1000);
+                    tag.appendTo("#workspace");
+                    tag.draggable({
                         containment: "#workspace"
                     }).dblclick(function () {
                         // Enabled Resize on element when double clicked
