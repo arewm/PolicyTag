@@ -92,6 +92,7 @@ div#workspace{
     width: var(--main-width);
     height: 99%;
     margin: 0;
+    z-index: 0;
     /*background-color: lightyellow;/**/
 }
 
