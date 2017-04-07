@@ -159,6 +159,7 @@ div#action {
 }
 
 div#operation{
+    float: left;
     display: table-cell;
     height: 100%;
     margin: 0;
