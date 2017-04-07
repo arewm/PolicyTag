@@ -16,13 +16,17 @@
     <script src="static/survey/js/bootstrap-toggle.min.js"></script>-->
     <script src="/static/survey/js/interact.js"></script>
     <script type="text/javascript">
-        function createTag(tag_id){
-            var input = document.createElement("input");
-            input.setAttribute("type", "hidden");
-            input.setAttribute("name", "tag");
-            input.setAttribute("value", tag_id);
+        function createTag(tag_id) {
+            new_id = 'b' + tag_id.slice(1);
+            if (document.getElementById(new_id) === null) {
 
-            document.getElementById("policy_specification").appendChild(input);
+                var input = document.createElement("input");
+                input.setAttribute("type", "hidden");
+                input.setAttribute("name", "tag");
+                input.setAttribute("value", new_id);
+
+                document.getElementById("policy_specification").appendChild(input);
+            }
         }
     </script>
 </head>
