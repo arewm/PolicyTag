@@ -114,6 +114,10 @@ div#operation{
     width: 10%;
     height: 99%;
     margin: 0;
+    line-height: 200px;
+}
+div#operation i{
+    vertical-align: middle;
 }
 
 div#action{
