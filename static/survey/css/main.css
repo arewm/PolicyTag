@@ -159,7 +159,7 @@ div#action {
 div#operation{
     float: left;/**/
     height: 100%;
-    margin: 0;
+    margin: 0 auto;
 }
 div#operation .buff{
     float: left;
