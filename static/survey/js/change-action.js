@@ -15,7 +15,9 @@ function setAction(action, state) {
         input.setAttribute("type", "hidden");
         input.setAttribute("name", "action");
         input.setAttribute("id", action);
+        console.log(input);
     }
+    console.log(input);
     input.setAttribute("value", state);
     document.getElementById('policy_specification').appendChild(input);
 }
