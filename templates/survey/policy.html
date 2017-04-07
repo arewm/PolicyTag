@@ -61,7 +61,8 @@
                     if (hasClass(a, 'move-me')) {
                         a.removeClass('move-me');
                         a.addClass('moved-me');
-                        a.attr('id', 'b' + a.attr('id').slice(1));
+                        console.log(a.attr('id'));
+                        a.attr('id', 'b' + a.attr('id'));
                     }
                     console.log("INFO: Accepted: ", a.attr("class"));
                     a.css("z-index", 1000);
