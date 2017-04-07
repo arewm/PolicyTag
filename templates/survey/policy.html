@@ -44,10 +44,17 @@
                 //var b = parseInt($(this).width());
                 //$(this).css('width', b + 5);
             });
+            $('.moved-me').draggable({
+
+            });
             $('#workspace').droppable({
                 accept: ".move-me",
                 drop: function (e, u) {
                     var a = u.helper.clone();
+                    if (a.classList.contains('move-me')) {
+                        a.classList.remove('move-me');
+                        a.addClass('moved-me');
+                    };
                     console.log("INFO: Accepted: ", a.attr("class"));
                     a.css("z-index", 1000);
                     a.appendTo("#workspace");
@@ -57,6 +64,13 @@
                         // Enabled Resize on element when double clicked
                         $(this).resizable();
                     });
+
+                }
+
+            });
+            $('#trash').droppable({
+                drop: function(event, ui) {
+                    ui.draggable.remove();
                 }
             });
             $(document).click(function () {
@@ -110,7 +124,7 @@
 <div id="mid_row" class="row">
     <div id="workspace" style="position: relative;">
         <p class="title">Workspace</p>
-        <i class="fa fa-trash fa-4x" style="position: absolute; bottom: 0; right: 0; " aria-hidden="true"></i>
+        <i id="trash" class="fa fa-trash fa-4x" style="position: absolute; bottom: 0; right: 0; " aria-hidden="true"></i>
     </div>
     <div id="action_box">
         <div id="operation">
