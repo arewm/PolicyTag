@@ -22,6 +22,9 @@
     <script src="static/survey/js/bootstrap-toggle.min.js"></script>-->
     <!--script src="/static/survey/js/interact.js"></script-->
     <script type="text/javascript">
+        function hasClass(element, cls) {
+            return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+        }
         function createTag(tag_id) {
             new_id = 'b' + tag_id.slice(1);
             if (document.getElementById(new_id) === null) {
@@ -51,7 +54,7 @@
                 accept: ".move-me",
                 drop: function (e, u) {
                     var a = u.helper.clone();
-                    if (a.classList.contains('move-me')) {
+                    if (hasClass(a, 'move-me')) {
                         a.classList.remove('move-me');
                         a.addClass('moved-me');
                     }
