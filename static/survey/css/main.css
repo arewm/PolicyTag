@@ -160,7 +160,7 @@ div#action_box {
 div#operation{
     float: left;
     width: 10%;
-    height: 99%;
+    /*height: 99%;*/
     margin: 0;
     cursor: pointer;
 }
