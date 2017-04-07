@@ -125,6 +125,7 @@ div#operation i{
     width: 50%;
     height: 30%;
     margin: auto;
+    cursor: pointer;
 }
 
 div#action{
@@ -132,7 +133,6 @@ div#action{
     width: 90%;
     height: 99%;
     margin: 0;
-    cursor: pointer;
     /*background-color: lightyellow;/**/
 }
 
