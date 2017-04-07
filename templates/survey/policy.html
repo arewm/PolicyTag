@@ -58,7 +58,11 @@
                 },
                 drop: function (e, u) {
                     src = u.draggable;
-                    if (hasClass(src, 'move-me')) {
+                    var drag_id = "#drag-" + src.attr("id");
+                    if ($(drag_id).length){
+
+                    }
+                    else if (hasClass(src, 'move-me')) {
                         var a = u.helper.clone().attr("id", "drag-" + src.attr("id"));
                         a.removeClass('move-me');
                         a.addClass('moved-me');
