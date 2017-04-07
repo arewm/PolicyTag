@@ -166,13 +166,13 @@ div#operation{
 }
 div#operation .buff{
     float: left;
-    /*height: 50%;*/
+    height: 50%;
     width: 100%;
     margin-bottom: -50px;
 }
 div#operation i{
     clear: both;
-    height: 100px;
+    /*height: 100px;*/
 }
 
 div#action{
