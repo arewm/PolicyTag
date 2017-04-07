@@ -144,6 +144,7 @@ div#workspace{
 .fa-check {
     padding: 5px 5px;
     color: green;
+    cursor: pointer;
 }
 
 div#default_action_toggle {
@@ -158,10 +159,10 @@ div#action_box {
 }
 
 div#operation{
-    float: left;
+    /*float: left;*/
+    overflow: hidden;
     height: 99%;
     margin: 0;
-    cursor: pointer;
 }
 div#operation .buff{
     float: left;
