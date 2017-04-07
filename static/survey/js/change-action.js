@@ -7,20 +7,16 @@ function setToggles() {
     $('#toggle5').bootstrapToggle(state);
 }
 function setAction(action, state) {
-    console.log("INFO: action: ", action, " state: ", state);
     var myId = "#" + action;
     var input;
-    console.log($(myId).length);
     if ($(myId).length) {
-        input = document.getElementById(myId);
-        console.log(input)
+        input = document.getElementById(action);
     } else {
         input = document.createElement("input");
         input.setAttribute("type", "hidden");
         input.setAttribute("name", "action");
         input.setAttribute("id", action);
     }
-    console.log(input);
     input.setAttribute("value", state);
     document.getElementById('policy_specification').appendChild(input);
 }
