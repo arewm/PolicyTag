@@ -23,7 +23,7 @@
     <!--script src="/static/survey/js/interact.js"></script-->
     <script type="text/javascript">
         function hasClass(element, cls) {
-            return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+            return (' ' + element.attr('class') + ' ').indexOf(' ' + cls + ' ') > -1;
         }
         function createTag(tag_id) {
             new_id = 'b' + tag_id.slice(1);
@@ -51,7 +51,7 @@
 
             });
             $('#workspace').droppable({
-                accept: ".move-me",
+                accept: ".move-me .moved-me",
                 drop: function (e, u) {
                     var a = u.helper.clone();
                     console.log(a.className);
@@ -60,6 +60,7 @@
                     if (hasClass(a, 'move-me')) {
                         a.classList.remove('move-me');
                         a.addClass('moved-me');
+                        a.id = 'b' + a.id.slice(1);
                     }
                     console.log("INFO: Accepted: ", a.attr("class"));
                     a.css("z-index", 1000);
