@@ -65,6 +65,15 @@
                         console.log("INFO: Accepted: ", a.attr("class"));
                         a.css("z-index", 1000);
                         a.appendTo("#workspace");
+                        var formId = "#pol-" + src.attr("id");
+                        var input = document.createElement("input");
+                        input.setAttribute("type", "hidden");
+                        input.setAttribute("name", "tag");
+                        input.setAttribute("id", formId);
+                        document.getElementById('policy_specification').appendChild(input);
+                        a.on("remove", function() {
+                            $(formId).remove();
+                        });
                         a.draggable({
                             containment: "#workspace"
                         }).dblclick(function () {
@@ -97,7 +106,6 @@
 </head>
 <body>
 <form id="policy_specification"></form>
-<div id="ids_to_drop" style="display:none">{{ ids|safe }}</div>
 <div id="top_row" class="row">
     <div id="suggestions">
         <div id="policy_suggestion">
@@ -185,6 +193,9 @@
 <div id="bottom_row" class="row">
     <div id="policies">
         <p class="title">Defined policies</p>
+        <ul>
+
+        </ul>
     </div>
 </div>
 
