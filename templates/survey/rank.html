@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="/static/survey/css/rank.css">
     <link rel="stylesheet" href="/static/survey/css/tags.css">
     <script src="/static/survey/js/interact.js"></script>
-    <script src="/static/survey/js/rank.js"></script>
 </head>
 <body >
+<div id="ids_to_drop" style="display:none">{{ ids|safe }}</div>
 <h2 class="heading">Tag Ranking</h2>
 
 <div class="dropzone-wrapper">
@@ -38,8 +38,6 @@
 </div>
 
 
-<script>
-    setupDropzone('.js-drop', '{{ ids|safe }}');
-</script>
+<script src="/static/survey/js/rank.js"></script>
 </body>
 </html>
