@@ -3,7 +3,7 @@ setupFunction = null;
 (function (interact) {
 
     'use strict';
-    var z_num = 5;
+    var z_num = 60;
 
     var transformProp;
 
@@ -64,9 +64,9 @@ setupFunction = null;
                 accept: accept,
                 ondropactivate: function (event) {
                     addClass(event.relatedTarget, '-drop-possible');
-                    event.relatedTarget.setAttribute('valid', 'false')
+                    event.relatedTarget.setAttribute('valid', 'false');
                     z_num++;
-                    event.relatedTarget.style = '' + z_num;
+                    event.relatedTarget.style.z = '' + z_num;
                 },
                 ondropdeactivate: function (event) {
                     removeClass(event.relatedTarget, '-drop-possible');
