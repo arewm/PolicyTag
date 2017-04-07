@@ -102,10 +102,9 @@ div#workspace{
 }
 
 #trashcompactor{
-    height: 90%;
+    height: 70%;
     width: 100%;
     vertical-align: bottom;
-    text-align: center;
 }
 
 #trash {
