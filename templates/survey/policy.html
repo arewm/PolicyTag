@@ -34,7 +34,7 @@
             $('.move-me').draggable({
                 helper: "clone",
                 revert: "invalid",
-                containment: $('#divmain')
+                appendto: "body"
             }).click(function() {
                 //var b = parseInt($(this).width());
                 //$(this).css('width', b + 5);
