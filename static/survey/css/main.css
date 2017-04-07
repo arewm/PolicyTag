@@ -90,6 +90,7 @@ div#tutorial {
 
 div#workspace{
     display: table-cell;
+    padding: 0px;
     width: var(--main-width);
     height: 99%;
     margin: 0;
