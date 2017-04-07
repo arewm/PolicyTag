@@ -157,7 +157,7 @@ div#action {
 }
 
 div#operation{
-    float: left;/**/
+    /*float: left;/**/
     min-width: 5%;
     height: 100%;
     margin: 0 auto;
