@@ -146,9 +146,12 @@
                     {{ c }}
                     {% for t in ta %}
                         <li class="list-group-item list-group-item-danger">
-                            <div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties move-me">{{ t.text }}</div>
+                            <div id="{{ t.tag_id }}" class="{{ c }} tag-properties move-me">{{ t.text }}</div>
                         </li>
                     {% endfor %}
+                        <li class="list-group-item list-group-item-danger">
+                            <div id="custom_{{ c }}" class="{{ c }} tag-properties move-me">_____________</div>
+                        </li>
                 </ul>
                 <br clear="all"/>
             {% endfor %}
