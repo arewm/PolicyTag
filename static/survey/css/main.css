@@ -114,6 +114,7 @@ div#operation{
     width: 10%;
     height: 99%;
     margin: 0;
+    vertical-align: center;
 }
 
 div#action{
