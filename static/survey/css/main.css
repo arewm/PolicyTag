@@ -100,15 +100,21 @@ div#workspace{
 }
 
 #trash {
+    border:1px solid red;
+    position:fixed;
+    bottom:0;
+    right:0;
+    width:250px;
+    height:150px;/*
     display:inline-block;
     font-size: 40px;
     line-height: 50px;
     /*background-color:black;
-    color:white;/**/
+    color:white;/**//*
     width: 50px;
     height: 50px;
     text-align: center;
-    vertical-align: bottom;
+    vertical-align: bottom;/**/
 }
 
 div#default_action_toggle {
