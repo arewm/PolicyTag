@@ -40,7 +40,7 @@
             </div>
             {% for c, ta in tags %}
                 {% for t in ta %}
-                    <div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" onclick="createTag('{{ t.tag_id }}'')">{{ t.text }}</div>
+                    <div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" onclick="createTag('{{ t.tag_id }}')">{{ t.text }}</div>
                 {% endfor %}
                 <br clear="all"/>
             {% endfor %}
