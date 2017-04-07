@@ -32,6 +32,7 @@ div#top_row {
 }
 
 div#mid_row {
+    display: table;
 }
 
 div#suggestions{
@@ -88,7 +89,7 @@ div#tutorial {
 }
 
 div#workspace{
-    float: left;
+    display: table-cell;
     width: var(--main-width);
     height: 99%;
     margin: 0;
@@ -152,15 +153,13 @@ div#default_action_toggle {
 }
 
 div#action_box {
-  float: right;
+    display: table-cell;
   width: 27%;
   height: 100%;
   margin: 0;
 }
 
 div#operation{
-    /*float: left;*/
-    overflow: hidden;
     height: 99%;
     margin: 0;
 }
