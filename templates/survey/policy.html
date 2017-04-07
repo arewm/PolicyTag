@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>Create policies</title>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/survey/css/main.css">
     <link rel="stylesheet" href="/static/survey/css/rank.css">
     <link rel="stylesheet" href="/static/survey/css/tags.css">
@@ -13,7 +14,10 @@
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/676d1f983a.js"></script>
     <!--<link href="static/survey/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="static/survey/js/bootstrap-toggle.min.js"></script>-->
     <!--script src="/static/survey/js/interact.js"></script-->
@@ -31,31 +35,31 @@
                 document.getElementById("policy_specification").appendChild(input);
             }
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.move-me').draggable({
                 helper: "clone",
                 revert: "invalid",
                 appendTo: "body"
-            }).click(function() {
+            }).click(function () {
                 //var b = parseInt($(this).width());
                 //$(this).css('width', b + 5);
             });
             $('#workspace').droppable({
                 accept: ".move-me",
-                drop: function(e, u) {
+                drop: function (e, u) {
                     var a = u.helper.clone();
                     console.log("INFO: Accepted: ", a.attr("class"));
                     a.css("z-index", 1000);
                     a.appendTo("#workspace");
                     a.draggable({
                         containment: "#workspace"
-                    }).dblclick(function() {
+                    }).dblclick(function () {
                         // Enabled Resize on element when double clicked
                         $(this).resizable();
                     });
                 }
             });
-            $(document).click(function() {
+            $(document).click(function () {
                 if ($(".dropped").length) {
                     // Disabled Resize on all elements when #drop
                     $(".ui-resizable").resizable("destroy");
@@ -66,86 +70,95 @@
     </script>
 </head>
 <body>
-    <form id="policy_specification"></form>
-    <div id="ids_to_drop" style="display:none">{{ ids|safe }}</div>
-    <div id="top_row" class="row">
-      <div id="suggestions">
+<form id="policy_specification"></form>
+<div id="ids_to_drop" style="display:none">{{ ids|safe }}</div>
+<div id="top_row" class="row">
+    <div id="suggestions">
         <div id="policy_suggestion">
-          <p class="title" >Policy Suggestions</p>
+            <p class="title">Policy Suggestions</p>
         </div>
         <div id="tags">
             <div>
-                <p class="title" >Tag Suggestions</p>
+                <p class="title">Tag Suggestions</p>
                 <label class="checkbox-inline"><input type="checkbox" checked value="">Properties</label>
                 <label class="checkbox-inline"><input type="checkbox" checked value="">Things</label>
                 <label class="checkbox-inline"><input type="checkbox" checked value="">Type</label>
             </div>
             {% for c, ta in tags %}
                 <ul class="list-group list-inline">
-                {{ c }}
-                {% for t in ta %}
-                    <li class="list-group-item list-group-item-danger"><div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties move-me" >{{ t.text }}</div></li>
-                {% endfor %}
+                    {{ c }}
+                    {% for t in ta %}
+                        <li class="list-group-item list-group-item-danger">
+                            <div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties move-me">{{ t.text }}</div>
+                        </li>
+                    {% endfor %}
                 </ul>
                 <br clear="all"/>
             {% endfor %}
         </div>
-      </div>
-      <div id="top_right">
+    </div>
+    <div id="top_right">
         <div id="tutorial_buffer">&nbsp;</div>
         <div id="tutorial">
-          Open tutorial
+            Open tutorial
         </div>
         <div id="tutorial_buffer">&nbsp;</div>
-      </div>
-
     </div>
 
-    <div id="mid_row" class="row">
-        <div id="workspace" >
-          <p class="title" >Workspace</p>
+</div>
+
+<div id="mid_row" class="row">
+    <div id="workspace">
+        <p class="title">Workspace</p>
+        <i class="fa fa-trash" aria-hidden="true"></i>
+    </div>
+    <div id="action_box">
+        <div id="operation">
+            <i class="fa fa-check" aria-hidden="true"></i>
         </div>
-        <div id="action_box">
-          <div id="operation">
-            &nbsp;
-          </div>
-          <div id="action">
+        <div id="action">
             <!--div id="default_action_toggle"-->
             <div>
-                <p class="header" ><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Allow" data-off="Deny"> Default action preference &nbsp;</p><br>
+                <p class="header"><input type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                                         data-offstyle="danger" data-on="Allow" data-off="Deny"> Default action
+                    preference &nbsp;</p><br>
             </div>
             <!--<p class="title" >&nbsp; Default action preference</p>-->
             <div class="checkbox">
-              <label>
-                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Allow" data-off="Deny"> Back up to cloud
-              </label><br>
-              <label>
-                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Allow" data-off="Deny">
-                  Share to Friends circle
-              </label><br>
-              <label>
-                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Allow" data-off="Deny">
-                  Share to Acquaintances circle
-              </label><br>
-              <label>
-                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Allow" data-off="Deny">
-                  Share to family circle
-              </label><br>
-              <label>
-                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="Allow" data-off="Deny">
-                  Share to public
-              </label><br>
+                <label>
+                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                           data-on="Allow" data-off="Deny"> Back up to cloud
+                </label><br>
+                <label>
+                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                           data-on="Allow" data-off="Deny">
+                    Share to Friends circle
+                </label><br>
+                <label>
+                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                           data-on="Allow" data-off="Deny">
+                    Share to Acquaintances circle
+                </label><br>
+                <label>
+                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                           data-on="Allow" data-off="Deny">
+                    Share to family circle
+                </label><br>
+                <label>
+                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                           data-on="Allow" data-off="Deny">
+                    Share to public
+                </label><br>
             </div>
-          </div>
         </div>
     </div>
+</div>
 
-    <div id="bottom_row" class="row">
-        <div id="policies">
-          <p class="title" >Defined policies</p>
-        </div>
+<div id="bottom_row" class="row">
+    <div id="policies">
+        <p class="title">Defined policies</p>
     </div>
-
+</div>
 
 
 <!--script src="/static/survey/js/rank.js"></script-->
