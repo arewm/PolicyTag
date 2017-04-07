@@ -20,12 +20,12 @@ p.title {
   border-bottom: 1px solid black;
   display: inline-block;
 }
-p.header {
+span.header {
   margin: 0;
   border: 0;
-  border-right: 5px solid lightblue;
+  /*border-right: 5px solid lightblue;*/
   border-bottom: 3px solid black;
-  display: inline-block;
+  /*display: inline-block;*/
 }
 
 div#top_row {
