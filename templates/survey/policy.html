@@ -15,6 +15,11 @@
     <!--<link href="static/survey/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="static/survey/js/bootstrap-toggle.min.js"></script>-->
     <script src="/static/survey/js/interact.js"></script>
+    <script type="text/javascript">
+        function createTag(tag_id){
+
+        }
+    </script>
 </head>
 <body>
     <div id="ids_to_drop" style="display:none">{{ ids|safe }}</div>
@@ -29,8 +34,9 @@
             </div>
             {% for c, ta in tags %}
                 {% for t in ta %}
-                    <div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" >{{ t.text }}</div>
+                    <div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" onclick="createTag({{ t.tag_id }})">{{ t.text }}</div>
                 {% endfor %}
+                <br clear="all"/>
             {% endfor %}
         </div>
       </div>
