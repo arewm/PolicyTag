@@ -35,6 +35,3 @@ $(function() {
         setAction("action4", $('#toggle4').prop('checked'))
     })
 });
-function savePolicy() {
-    setToggles();
-}
