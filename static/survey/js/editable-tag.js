@@ -1,6 +1,7 @@
-/**
- * Created by am on 4/7/17.
- */
+var lastTag = null;
+
+// save off last tag, get input entered, create a new tag before last tag with this input, create standard name/id
+
 function divClicked() {
     var divHtml = $(this).html();
     var editableText = $("<textarea />");
