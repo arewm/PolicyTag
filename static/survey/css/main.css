@@ -92,8 +92,7 @@ div#tutorial {
 
 div#workspace{
     display: table-cell;
-    float: left;
-    padding: 0px;
+    /*float: left;/**/
     width: 67%;
     height: 99%;
     margin: 0;
@@ -154,7 +153,7 @@ div#workspace{
 
 div#action {
     display: table-cell;
-    float: right;
+    /*float: right;/**/
     width: 27%;
     height: 100%;
     margin: 0;
@@ -162,6 +161,7 @@ div#action {
 
 div#operation{
     display: table-cell;
+    /*float: left;/**/
     height: 100%;
     margin: 0;
 }
