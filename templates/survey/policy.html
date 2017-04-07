@@ -81,7 +81,7 @@
                             $(removeId).remove();
                         });
                         a.draggable({
-                            containment: "#workspace"
+                            //containment: "#workspace"
                         }).dblclick(function () {
                             // Enabled Resize on element when double clicked
                             $(this).resizable();
@@ -99,6 +99,7 @@
                 drop: function(event, ui) {
                     ui.draggable.remove();
                 }
+
             });
             $(document).click(function () {
                 if ($(".dropped").length) {
