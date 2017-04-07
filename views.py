@@ -20,10 +20,10 @@ def policy(request):
     classes = Tag.objects.values('tag_class').distinct().order_by('tag_class')
     tag_list = []
     for c in classes:
-        tags = Tag.objects.filter(tag_class=c.tag_class).order_by('text')
+        tags = Tag.objects.filter(tag_class=c['tag_class']).order_by('text')
         for t in tags:
             t.tag_id = 'a{}'.format(t.tag_id)
-        tag_list.append((c.tag_class, tags))
+        tag_list.append((c['tag_class'], tags))
     #tag_list = Tag.objects.order_by('tag_class', 'text')
     context = {'classes': classes,'tags': tag_list}
     return render(request, 'survey/policy.html', context)
