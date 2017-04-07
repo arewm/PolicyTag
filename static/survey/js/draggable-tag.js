@@ -68,6 +68,4 @@ $(document).ready(function () {
             $(".ui-resizable").resizable("destroy");
         }
     });
-});/**
- * Created by am on 4/7/17.
- */
+});
