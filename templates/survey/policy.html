@@ -65,7 +65,7 @@
                         console.log("INFO: Accepted: ", a.attr("class"));
                         a.css("z-index", 1000);
                         a.appendTo("#workspace");
-                        var formId = "#pol-" + src.attr("id");
+                        var formId = "#pol-drag-" + src.attr("id");
                         var input = document.createElement("input");
                         input.setAttribute("type", "hidden");
                         input.setAttribute("name", "tag");
@@ -91,6 +91,7 @@
             $('#trash').droppable({
                 accept: '.removable',
                 drop: function(event, ui) {
+                    $(ui.draggable.arrt("id")).remove();
                     ui.draggable.remove();
                 }
             });
