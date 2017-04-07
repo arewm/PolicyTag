@@ -32,7 +32,7 @@ div#top_row {
 }
 
 div#mid_row {
-    display: block;
+    float: left;
     width: 100%;
 }
 
@@ -157,7 +157,8 @@ div#action {
 }
 
 div#operation{
-    /*float: left;/**/
+    float: left;/**/
+    min-width: 5%;
     height: 100%;
     margin: 0 auto;
 }
