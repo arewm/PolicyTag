@@ -15,7 +15,7 @@
         <div id="tags">
             <div>
                 <p class="title" >Tag Suggestions</p>
-            {/div>
+            </div>
             {% for c, ta in tags %}
                 {% for t in ta %}
                     <div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" >{{ t.text }}</div>
