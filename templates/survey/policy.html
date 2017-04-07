@@ -17,11 +17,17 @@
     <script src="/static/survey/js/interact.js"></script>
     <script type="text/javascript">
         function createTag(tag_id){
+            var input = document.createElement("input");
+            input.setAttribute("type", "hidden");
+            input.setAttribute("name", "tag");
+            input.setAttribute("value", tag_id);
 
+            document.getElementById("policy_specification").appendChild(input);
         }
     </script>
 </head>
 <body>
+    <form id="policy_specification"></form>
     <div id="ids_to_drop" style="display:none">{{ ids|safe }}</div>
     <div id="top_row" class="row">
       <div id="suggestions">
