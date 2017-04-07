@@ -95,6 +95,7 @@ div#workspace{
     z-index: 0;
     background-color: #ccc;
     color: #666;
+    overflow: hidden;
     /*background-color: lightyellow;/**/
 }
 
@@ -114,6 +115,7 @@ div#operation{
     width: 10%;
     height: 99%;
     margin: 0;
+    cursor: pointer;
 }
 div#operation .buff{
     float: left;
