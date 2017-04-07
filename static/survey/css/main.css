@@ -33,7 +33,6 @@ div#top_row {
 
 div#mid_row {
     float: left;
-    display: table;
     width: 100%;
 }
 
@@ -91,8 +90,7 @@ div#tutorial {
 }
 
 div#workspace{
-    display: table-cell;
-    /*float: left;/**/
+    float: left;/**/
     width: 67%;
     height: 99%;
     margin: 0;
@@ -152,16 +150,14 @@ div#workspace{
 }
 
 div#action {
-    display: table-cell;
-    /*float: right;/**/
+    float: right;/**/
     width: 27%;
     height: 100%;
     margin: 0;
 }
 
 div#operation{
-    display: table-cell;
-    /*float: left;/**/
+    float: left;/**/
     height: 100%;
     margin: 0;
 }
