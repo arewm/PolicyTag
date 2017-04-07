@@ -32,6 +32,7 @@ div#top_row {
 }
 
 div#mid_row {
+    float: left;
     display: table;
 }
 
