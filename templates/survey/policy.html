@@ -213,18 +213,18 @@
 </div>
 
 <script>
-  $(function() {
-    $('#default-toggle').change(function() {
-        function makeSwap(ts) {
-            $('#toggle1').bootstrapToggle(ts);
-            $('#toggle2').bootstrapToggle(ts);
-            $('#toggle3').bootstrapToggle(ts);
-            $('#toggle4').bootstrapToggle(ts);
-            $('#toggle5').bootstrapToggle(ts);
-        }
-        $(this).prop('checked') ? makeSwap('on') : makeSwap('off')
+    function setToggles(state) {
+        $('#toggle1').bootstrapToggle(state);
+        $('#toggle2').bootstrapToggle(state);
+        $('#toggle3').bootstrapToggle(state);
+        $('#toggle4').bootstrapToggle(state);
+        $('#toggle5').bootstrapToggle(state);
+    }
+    $(function() {
+        $('#default-toggle').change(function() {
+            $(this).prop('checked') ? setToggles('on') : setToggles('off')
+        })
     })
-  })
 </script>
 <!--script src="/static/survey/js/rank.js"></script-->
 </body>
