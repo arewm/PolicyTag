@@ -107,6 +107,10 @@ div#workspace{
     vertical-align: bottom;
 }
 
+#compactedtrash{
+    text-align: center;
+}
+
 #trash {
     margin: 0 auto;
     min-width: 10px;
