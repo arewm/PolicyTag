@@ -30,9 +30,12 @@ $(function() {
         setAction("action2", $('#toggle2').prop('checked'))
     });
     $('#toggle3').change(function(){
-        setAction("taction3", $('#toggle3').prop('checked'))
+        setAction("action3", $('#toggle3').prop('checked'))
     });
     $('#toggle4').change(function(){
         setAction("action4", $('#toggle4').prop('checked'))
+    });
+    $('#toggle5').change(function(){
+        setAction("action5", $('#toggle5').prop('checked'))
     })
 });
