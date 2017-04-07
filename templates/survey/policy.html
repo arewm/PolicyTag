@@ -51,14 +51,15 @@
 
             });
             $('#workspace').droppable({
-                accept: ".move-me .moved-me",
+                accept: function(d) {
+                    if(d.hasClass("move-me")||(d.hasClass("moved-me"))) {
+                        return true;
+                    }
+                },
                 drop: function (e, u) {
                     var a = u.helper.clone();
-                    console.log(a.className);
-                    console.log(a.classList);
-                    console.log(hasClass(a, 'move-me'));
                     if (hasClass(a, 'move-me')) {
-                        a.classList.remove('move-me');
+                        a.removeClass('move-me');
                         a.addClass('moved-me');
                         a.id = 'b' + a.id.slice(1);
                     }
