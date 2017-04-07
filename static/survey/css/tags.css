@@ -42,3 +42,7 @@
     float: left;
     padding: 2px;/**/
 }
+
+.write-in-me {
+    cursor: text;
+}
