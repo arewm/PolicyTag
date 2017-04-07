@@ -41,10 +41,11 @@
 
     <script>
         function savePolicy() {
+            // only continue if we have some tags
             setToggles();
         }
         $(document).ready(function() {
-            setToggles();
+            savePolicy();
         });
     </script>
 </head>
