@@ -153,14 +153,15 @@ div#workspace{
 
 div#action {
     display: table-cell;
+    float: right;
     width: 27%;
     height: 100%;
     margin: 0;
 }
 
 div#operation{
-    float: left;
     display: table-cell;
+    float: left;
     height: 100%;
     margin: 0;
 }
