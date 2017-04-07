@@ -41,7 +41,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
 
 .draggable {
     position: absolute;
-    z-index: 10;
+    /*z-index: 10;
     /*left: 1050px;/**/
     width: 100px;
     padding: 1em 1em;
