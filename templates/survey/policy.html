@@ -24,6 +24,7 @@
                 input.setAttribute("type", "hidden");
                 input.setAttribute("name", "tag");
                 input.setAttribute("value", new_id);
+                input.setAttribute("id", new_id);
 
                 document.getElementById("policy_specification").appendChild(input);
             }
@@ -43,7 +44,7 @@
                 <p class="title" >Tag Suggestions</p>
             </div>
             {% for c, ta in tags %}
-                <ul class="list-group">
+                <ul class="list-group list-inline">
                 {{ c }}
                 {% for t in ta %}
                     <li class="list-group-item"><div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" onclick="createTag('{{ t.tag_id }}')">{{ t.text }}</div></li>
