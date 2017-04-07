@@ -162,7 +162,6 @@ div#action {
 
 div#operation{
     display: table-cell;
-    float: left;
     height: 100%;
     margin: 0;
 }
