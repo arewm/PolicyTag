@@ -132,7 +132,7 @@ div#action{
     width: 90%;
     height: 99%;
     margin: 0;
-    cursor: hand;
+    cursor: pointer;
     /*background-color: lightyellow;/**/
 }
 
