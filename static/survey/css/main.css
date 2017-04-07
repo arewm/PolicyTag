@@ -93,7 +93,7 @@ div#workspace{
     display: table-cell;
     float: left;
     padding: 0px;
-    width: var(--main-width);
+    width: 67%;
     height: 99%;
     margin: 0;
     z-index: 0;
