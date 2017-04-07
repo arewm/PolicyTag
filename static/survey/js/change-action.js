@@ -9,8 +9,8 @@ function setToggles() {
 function setAction(action, state) {
     console.log("INFO: action: ", action, " state: ", state);
     var mydiv = "#" + action;
-    var input;
-    if (!$(mydiv).length) {
+    var input = $(mydiv);
+    if (!input.length) {
         input = document.createElement("input");
         input.setAttribute("type", "hidden");
         input.setAttribute("name", "action");
