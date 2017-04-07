@@ -47,7 +47,7 @@
                     console.log("INFO: Accepted: ", a.attr("class"));
                     a.css("z-index", 1000);
                     a.appendTo("#workspace");
-                    a.attr('class', 'dropped').draggable({
+                    a.draggable({
                         containment: "#workspace"
                     }).dblclick(function() {
                         // Enabled Resize on element when double clicked
