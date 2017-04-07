@@ -56,7 +56,7 @@
                         return true;
                     }
                 },
-                drop: function (e, u) {
+                drop: function (e, ui) {
                     tag = ui.draggable;
                     tag.clone().attr("id", "drag-" + tag.attr("id"));
                     if (hasClass(tag, 'move-me')) {
