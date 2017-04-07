@@ -16,19 +16,47 @@
     <script src="static/survey/js/bootstrap-toggle.min.js"></script>-->
     <script src="/static/survey/js/interact.js"></script>
     <script type="text/javascript">
-        function createTag(tag_id) {
-            new_id = 'b' + tag_id.slice(1);
-            if (document.getElementById(new_id) === null) {
+        $(document).ready(function() {
+            $('.clone-drag').draggable({
+                helper: "clone",
+                revert: "invalid"
+                }).click(function() {
+                var b = parseInt($(this).width());
+                $(this).css('width', b + 5);
+                });
+                $('#drop').droppable({
+                accept: ".test",
+                drop: function(e, u) {
+                  new_id = 'b' + $(this).getAttribute('id').slice(1);
+                  if (document.getElementById(new_id) === null) {
 
-                var input = document.createElement("input");
-                input.setAttribute("type", "hidden");
-                input.setAttribute("name", "tag");
-                input.setAttribute("value", new_id);
-                input.setAttribute("id", new_id);
+                      var input = document.createElement("input");
+                      input.setAttribute("type", "hidden");
+                      input.setAttribute("name", "tag");
+                      input.setAttribute("value", new_id);
+                      input.setAttribute("id", new_id);
 
-                document.getElementById("policy_specification").appendChild(input);
-            }
-        }
+                      document.getElementById("policy_specification").appendChild(input);
+                  }
+                  var a = u.helper.clone();
+                  console.log("INFO: Accepted: ", a.attr("class"));
+                  a.css("z-index", 1000);
+                  a.appendTo("#drop");
+                  a.attr('class', 'dropped').draggable({
+                    containment: "#drop"
+                  }).dblclick(function() {
+                    // Enabled Resize on element when double clicked
+                    $(this).resizable();
+                  });
+                }
+            });
+            $(document).click(function() {
+                if ($(".dropped").length) {
+                  // Disabled Resize on all elements when #drop
+                  $(".ui-resizable").resizable("destroy");
+                }
+            });
+        });
     </script>
 </head>
 <body>
@@ -50,7 +78,7 @@
                 <ul class="list-group list-inline">
                 {{ c }}
                 {% for t in ta %}
-                    <li class="list-group-item list-group-item-danger"><div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" onclick="createTag('{{ t.tag_id }}')">{{ t.text }}</div></li>
+                    <li class="list-group-item list-group-item-danger"><div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties clone-drag draggable js-drag">{{ t.text }}</div></li>
                 {% endfor %}
                 </ul>
                 <br clear="all"/>
