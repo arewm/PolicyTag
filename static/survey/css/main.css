@@ -127,7 +127,6 @@ div#workspace{
 }
 
 .fa {
-    padding: 5px 10px;
     display: inline-block;
     -moz-border-radius: 100px;
     -webkit-border-radius: 100px;
@@ -135,6 +134,16 @@ div#workspace{
     -moz-box-shadow: 0px 0px 2px #888;
     -webkit-box-shadow: 0px 0px 2px #888;
     box-shadow: 0px 0px 2px #888;
+}
+
+.fa-trash {
+    padding: 5px 10px;
+    color: red;
+}
+
+.fa-check {
+    padding: 5px 5px;
+    color: green;
 }
 
 div#default_action_toggle {
