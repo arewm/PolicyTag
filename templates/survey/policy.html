@@ -5,8 +5,10 @@
     <title>Create policies</title>
     <link rel="stylesheet" href="/static/survey/css/main.css">
     <link rel="stylesheet" href="/static/survey/css/tags.css">
+    <script src="/static/survey/js/interact.js"></script>
 </head>
 <body>
+    <div id="ids_to_drop" style="display:none">{{ ids|safe }}</div>
     <div id="top_row" class="row">
       <div id="suggestions">
         <div id="policy_suggestion">
@@ -56,5 +58,6 @@
 
 
 
+<script src="/static/survey/js/rank.js"></script>
 </body>
 </html>

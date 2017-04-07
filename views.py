@@ -25,7 +25,7 @@ def policy(request):
             t.tag_id = 'a{}'.format(t.tag_id)
         tag_list.append((c['tag_class'], tags))
     #tag_list = Tag.objects.order_by('tag_class', 'text')
-    context = {'classes': classes,'tags': tag_list}
+    context = {'classes': classes,'tags': tag_list, 'ids': ''}
     return render(request, 'survey/policy.html', context)
 
 def rank(request):
