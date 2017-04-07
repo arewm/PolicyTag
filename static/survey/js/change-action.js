@@ -7,6 +7,7 @@ function setToggles() {
     $('#toggle5').bootstrapToggle(state);
 }
 function setAction(action, state) {
+    console.log("INFO: action: ", action, " state: ", state);
     var myId = "#" + action;
     var input = $(myId);
     if (!input.length) {
@@ -15,8 +16,9 @@ function setAction(action, state) {
         input.setAttribute("name", "action");
         input.setAttribute("id", action);
     } else {
-        input = document.getElementById(myId)
+        input = document.getElementById(myId);
     }
+    console.log(input);
     input.setAttribute("value", state);
     document.getElementById('policy_specification').appendChild(input);
 }
