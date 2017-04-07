@@ -47,7 +47,7 @@
                 <ul class="list-group list-inline">
                 {{ c }}
                 {% for t in ta %}
-                    <li class="list-group-item"><div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" onclick="createTag('{{ t.tag_id }}')">{{ t.text }}</div></li>
+                    <li class="list-group-item {{ t.tag_class }}"><div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties" onclick="createTag('{{ t.tag_id }}')">{{ t.text }}</div></li>
                 {% endfor %}
                 </ul>
                 <br clear="all"/>
