@@ -126,6 +126,17 @@ div#workspace{
     vertical-align: bottom;/**/
 }
 
+.fa {
+    padding: 5px 10px;
+    display: inline-block;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    -moz-box-shadow: 0px 0px 2px #888;
+    -webkit-box-shadow: 0px 0px 2px #888;
+    box-shadow: 0px 0px 2px #888;
+}
+
 div#default_action_toggle {
   float: left;
 }
