@@ -81,10 +81,7 @@
                             $(removeId).remove();
                         });
                         a.draggable({
-                            //containment: "#workspace"
-                        }).dblclick(function () {
-                            // Enabled Resize on element when double clicked
-                            $(this).resizable();
+                            containment: "#workspace"
                         });
                     } else if (hasClass(src, 'moved-me')) {
                         src.removeClass('moved-me');
@@ -135,12 +132,10 @@
 <div id="top_row" class="row">
     <div id="suggestions">
         <div id="policy_suggestion">
-            <!--<p class="title">Policy Suggestions</p>-->
             <span class="label label-default" style="font-size: 100%;">Policy Suggestions</span>
         </div>
         <div id="tags">
             <div>
-                <!--<p class="title">Tag Suggestions</p>-->
                 <span class="label label-default" style="font-size: 100%;">Tag Suggestions</span>
                 <label class="checkbox-inline"><input type="checkbox" checked value="">Properties</label>
                 <label class="checkbox-inline"><input type="checkbox" checked value="">Things</label>
@@ -171,10 +166,11 @@
 
 <div id="mid_row" class="row">
     <div id="workspace" >
-        <!--<p class="title">Workspace</p>-->
         <span class="label label-default" style="font-size: 100%;">Workspace</span>
         <div id="trashcompactor">
-            <i id="trash" class="fa fa-trash fa-4x" aria-hidden="true"></i>
+            <div id="trash">
+                <i class="fa fa-trash fa-4x" aria-hidden="true"></i>
+            </div>
         </div>
     </div>
     <div id="action_box">
@@ -183,37 +179,34 @@
             <i class="fa fa-check fa-3x" aria-hidden="true" onclick="savePolicy()"></i>
         </div>
         <div id="action">
-            <!--div id="default_action_toggle"-->
             <div>
                 <input id="default-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
-                                         data-offstyle="danger" data-on="Allow" data-off="Deny"> <!--Default action
-                    preference &nbsp;-->
-                    <span class="label label-default" style="font-size: 100%;">Default action preference</span>
+                       data-offstyle="danger" data-on="Allow" data-off="Deny">
+                <span class="label label-default" style="font-size: 100%;">Default action preference</span>
             </div>
-            <!--<p class="title" >&nbsp; Default action preference</p>-->
             <div class="checkbox">
                 <label>
-                    <input id="toggle1" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
-                           data-on="Allow" data-off="Deny"> Back up to cloud
+                    <input id="toggle1" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                           data-offstyle="danger" data-on="Allow" data-off="Deny"> Back up to cloud
                 </label><br>
                 <label>
-                    <input id="toggle2" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
-                           data-on="Allow" data-off="Deny">
+                    <input id="toggle2" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                           data-offstyle="danger" data-on="Allow" data-off="Deny">
                     Share to Friends circle
                 </label><br>
                 <label>
-                    <input id="toggle3" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
-                           data-on="Allow" data-off="Deny">
+                    <input id="toggle3" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                           data-offstyle="danger" data-on="Allow" data-off="Deny">
                     Share to Acquaintances circle
                 </label><br>
                 <label>
-                    <input id="toggle4" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
-                           data-on="Allow" data-off="Deny">
+                    <input id="toggle4" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                           data-offstyle="danger" data-on="Allow" data-off="Deny">
                     Share to family circle
                 </label><br>
                 <label>
-                    <input id="toggle5" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
-                           data-on="Allow" data-off="Deny">
+                    <input id="toggle5" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                           data-offstyle="danger" data-on="Allow" data-off="Deny">
                     Share to public
                 </label><br>
             </div>
@@ -223,13 +216,11 @@
 
 <div id="bottom_row" class="row">
     <div id="policies">
-        <!--<p class="title">Defined policies</p>-->
         <span class="label label-default" style="font-size: 100%;">Defined Policies</span>
         <ul>
 
         </ul>
     </div>
 </div>
-<!--script src="/static/survey/js/rank.js"></script-->
 </body>
 </html>
