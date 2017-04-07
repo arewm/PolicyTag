@@ -10,8 +10,10 @@ function setAction(action, state) {
     console.log("INFO: action: ", action, " state: ", state);
     var myId = "#" + action;
     var input;
+    console.log($(myId).length);
     if ($(myId).length) {
         input = document.getElementById(myId);
+        console.log(input)
     } else {
         input = document.createElement("input");
         input.setAttribute("type", "hidden");
