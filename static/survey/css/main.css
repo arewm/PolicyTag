@@ -143,21 +143,9 @@ div#workspace{
     color: red;
 }
 
-.fa-check {
-    padding: 5px 5px;
-    color: green;
-    cursor: pointer;
-}
-
-div#action {
-    float: right;/**/
-    width: 27%;
-    height: 100%;
-    margin: 0;
-}
 
 div#operation{
-    /*float: left;/**/
+    float: left;/**/
     min-width: 5%;
     height: 100%;
     margin: 0 auto;
@@ -168,9 +156,19 @@ div#operation .buff{
     width: 100%;
     margin-bottom: -50px;
 }
-div#operation i{
+
+.fa-check {
     clear: both;
-    /*height: 100px;*/
+    padding: 5px 5px;
+    color: green;
+    cursor: pointer;
+}
+
+div#action {
+    float: right;/**/
+    width: 27%;
+    height: 100%;
+    margin: 0;
 }
 
 /*div#action{
