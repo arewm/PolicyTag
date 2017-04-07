@@ -166,7 +166,7 @@
         <div id="action">
             <!--div id="default_action_toggle"-->
             <div>
-                <input type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                <input id="default-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
                                          data-offstyle="danger" data-on="Allow" data-off="Deny"> <!--Default action
                     preference &nbsp;-->
                     <span class="label label-default" style="font-size: 100%;">Default action preference</span>
@@ -174,26 +174,26 @@
             <!--<p class="title" >&nbsp; Default action preference</p>-->
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                    <input id="toggle1" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
                            data-on="Allow" data-off="Deny"> Back up to cloud
                 </label><br>
                 <label>
-                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                    <input id="toggle1" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
                            data-on="Allow" data-off="Deny">
                     Share to Friends circle
                 </label><br>
                 <label>
-                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                    <input id="toggle1" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
                            data-on="Allow" data-off="Deny">
                     Share to Acquaintances circle
                 </label><br>
                 <label>
-                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                    <input id="toggle1" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
                            data-on="Allow" data-off="Deny">
                     Share to family circle
                 </label><br>
                 <label>
-                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                    <input id="toggle1" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
                            data-on="Allow" data-off="Deny">
                     Share to public
                 </label><br>
@@ -212,7 +212,20 @@
     </div>
 </div>
 
-
+<script>
+  $(function() {
+    $('#default-toggle').change(function() {
+        function makeSwap(ts) {
+            $('#toggle1').bootstrapToggle(ts);
+            $('#toggle2').bootstrapToggle(ts);
+            $('#toggle3').bootstrapToggle(ts);
+            $('#toggle4').bootstrapToggle(ts);
+            $('#toggle5').bootstrapToggle(ts);
+        }
+        $(this).prop('checked') ? makeSwap('on') : makeSwap('off')
+    })
+  })
+</script>
 <!--script src="/static/survey/js/rank.js"></script-->
 </body>
 </html>
