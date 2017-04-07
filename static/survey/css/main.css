@@ -96,9 +96,12 @@ div#workspace{
     background-color: #ccc;
     color: #666;
     overflow: hidden;
+    /*background-color: lightyellow;/**/
+}
+
+#trashcompactor{
     vertical-align: bottom;
     text-align: center;
-    /*background-color: lightyellow;/**/
 }
 
 #trash {
