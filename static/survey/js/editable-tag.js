@@ -21,5 +21,5 @@ function editableTextBlurred() {
 }
 
 $(document).ready(function() {
-    $("div").click(divClicked);
+    $(".write-in-me").click(divClicked);
 });
