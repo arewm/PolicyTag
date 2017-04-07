@@ -7,6 +7,7 @@ function setToggles() {
     $('#toggle5').bootstrapToggle(state);
 }
 function setAction(action, state) {
+    console.log("INFO: action: ", action, " state: ", state);
     var mydiv = "#" + action;
     var input;
     if (!$(mydiv).length) {
