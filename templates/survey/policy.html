@@ -54,6 +54,9 @@
                 accept: ".move-me",
                 drop: function (e, u) {
                     var a = u.helper.clone();
+                    console.log(a.className);
+                    console.log(a.classList);
+                    console.log(hasClass(a, 'move-me'));
                     if (hasClass(a, 'move-me')) {
                         a.classList.remove('move-me');
                         a.addClass('moved-me');
