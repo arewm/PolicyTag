@@ -52,14 +52,14 @@
             });
             $('#workspace').droppable({
                 accept: function(d) {
-                    if(d.hasClass("move-me")||(d.hasClass("moved-me"))) {
+                    if(d.hasClass("move-me")||(d.hasClass("moved-me"))||d.hasClass("removable")) {
                         return true;
                     }
                 },
                 drop: function (e, u) {
                     src = u.draggable;
-                    var a = u.helper.clone().attr("id", "drag-" + src.attr("id"));
-                    if (hasClass(a, 'move-me')) {
+                    if (hasClass(src, 'move-me')) {
+                        var a = u.helper.clone().attr("id", "drag-" + src.attr("id"));
                         a.removeClass('move-me');
                         a.addClass('moved-me');
                         console.log("INFO: Accepted: ", a.attr("class"));
@@ -71,15 +71,18 @@
                             // Enabled Resize on element when double clicked
                             $(this).resizable();
                         });
+                    } else if (hasClass(src, 'moved-me')) {
+                        src.removeClass('moved-me');
+                        src.addClass('removable');
                     }
 
                 }
 
             });
             $('#trash').droppable({
-                accept: '.moved-me',
+                accept: '.removable',
                 drop: function(event, ui) {
-                    $(this).remove();
+                    ui.draggable.remove();
                 }
             });
             $(document).click(function () {
