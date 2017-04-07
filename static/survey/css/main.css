@@ -151,15 +151,11 @@ div#workspace{
     cursor: pointer;
 }
 
-div#default_action_toggle {
-  float: left;
-}
-
-div#action_box {
+div#action {
     display: table-cell;
-  width: 27%;
-  height: 100%;
-  margin: 0;
+    width: 27%;
+    height: 100%;
+    margin: 0;
 }
 
 div#operation{
@@ -177,13 +173,13 @@ div#operation i{
     /*height: 100px;*/
 }
 
-div#action{
+/*div#action{
     float: left;
     width: 100%;
     height: 99%;
     margin: 0;
-    /*background-color: lightyellow;/**/
-}
+    /*background-color: lightyellow;/**//*
+}/**/
 
 div#policies{
     float: left;
