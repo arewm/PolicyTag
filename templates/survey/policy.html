@@ -79,7 +79,7 @@
             $('#trash').droppable({
                 accept: '.moved-me',
                 drop: function(event, ui) {
-                    ui.draggable.remove();
+                    $(this).remove();
                 }
             });
             $(document).click(function () {
