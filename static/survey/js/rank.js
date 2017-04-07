@@ -3,7 +3,6 @@ setupFunction = null;
 (function (interact) {
 
     'use strict';
-    var z_num = 60;
 
     var transformProp;
 
@@ -64,17 +63,13 @@ setupFunction = null;
                 accept: accept,
                 ondropactivate: function (event) {
                     addClass(event.relatedTarget, '-drop-possible');
-                    event.relatedTarget.setAttribute('valid', 'false');
-                    z_num++;
-                    event.relatedTarget.style.z = '' + z_num;
+                    event.relatedTarget.setAttribute('valid', 'false')
                 },
                 ondropdeactivate: function (event) {
                     removeClass(event.relatedTarget, '-drop-possible');
                     if (event.relatedTarget.getAttribute('valid') === 'false') {
                         event.relatedTarget.style.left = "";
                         event.relatedTarget.style.top = "";
-                        event.relatedTarget.style.z = "";
-                        z_num--;
                     }
                     event.relatedTarget.removeAttribute('valid');
                 }
