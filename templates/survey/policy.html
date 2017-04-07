@@ -58,8 +58,8 @@
                 },
                 drop: function (e, u) {
                     src = u.draggable;
-                    var drag_id = "#drag-" + src.attr("id");
-                    if ($(drag_id).length){
+                    var testId = "#drag-" + src.attr("id");
+                    if ($(testId).length){
 
                     }
                     else if (hasClass(src, 'move-me')) {
@@ -74,9 +74,11 @@
                         input.setAttribute("type", "hidden");
                         input.setAttribute("name", "tag");
                         input.setAttribute("id", formId);
+                        input.setAttribute("value", src.attr("id"));
                         document.getElementById('policy_specification').appendChild(input);
                         a.on("remove", function() {
-                            $(formId).remove();
+                            var removeId = "#" + formId
+                            $(removeId).remove();
                         });
                         a.draggable({
                             containment: "#workspace"
