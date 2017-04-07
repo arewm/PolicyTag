@@ -9,14 +9,14 @@ function setToggles() {
 function setAction(action, state) {
     console.log("INFO: action: ", action, " state: ", state);
     var myId = "#" + action;
-    var input = $(myId);
-    if (!input.length) {
+    var input;
+    if ($(myId).length) {
+        input = document.getElementById(myId);
+    } else {
         input = document.createElement("input");
         input.setAttribute("type", "hidden");
         input.setAttribute("name", "action");
         input.setAttribute("id", action);
-    } else {
-        input = document.getElementById(myId);
     }
     console.log(input);
     input.setAttribute("value", state);
