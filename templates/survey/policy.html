@@ -213,7 +213,8 @@
 </div>
 
 <script>
-    function setToggles(state) {
+    function setToggles() {
+        state = $('#default-toggle').prop('checked') ? 'on' : 'off';
         $('#toggle1').bootstrapToggle(state);
         $('#toggle2').bootstrapToggle(state);
         $('#toggle3').bootstrapToggle(state);
@@ -222,7 +223,7 @@
     }
     $(function() {
         $('#default-toggle').change(function() {
-            $(this).prop('checked') ? setToggles('on') : setToggles('off')
+            setToggles()
         })
     })
 </script>
