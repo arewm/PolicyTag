@@ -129,3 +129,10 @@ div#policies{
     overflow-y: scroll;
     /*background-color: lightyellow;/**/
 }
+
+
+.dropped {
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+}
