@@ -22,8 +22,8 @@ function editableTextBlurred() {
         $(this).replaceWith(viewableText);
         // setup the click event for this new div
         viewableText.click(divClicked);
+        $(this).parentElement.appendChild(lastTag);
     }
-    $(this).parentElement().append(lastTag)
     lastTag = null;
 }
 
