@@ -1,11 +1,10 @@
 var lastTag = null;
+var customCount = 0;
 
 // save off last tag, get input entered, create a new tag before last tag with this input, create standard name/id
 
 function divClicked() {
-    console.log($(this));
     lastTag = $(this);
-    console.log(lastTag);
     var editableText = $("<textarea />");
     editableText.val("");
     $(this).replaceWith(editableText);
@@ -19,16 +18,13 @@ function editableTextBlurred() {
     var viewableText = lastTag;
     // setup the click event for this new div
     viewableText.click(divClicked);
-    //console.log(lastTag);
-    //console.log(html);
     if (html !== "") {
-        var newId = viewableText.attr("id") + "-" + guid();
+        var newId = viewableText.attr("id") + "-" + customCount++;
         viewableText.html(html);
         viewableText.removeClass("write-in-me");
         viewableText.addClass("move-me");
         viewableText.attr("id", newId);
         $(this).replaceWith(viewableText);
-        console.log($(this).parent())
         $(this).parent().appendChild(lastTag);
     } else {
         $(this).replaceWith(lastTag);
