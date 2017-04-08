@@ -41,7 +41,7 @@ function makeDraggable() {
                 input.setAttribute("value", src.attr("id"));
                 document.getElementById('policy_specification').appendChild(input);
                 a.on("remove", function() {
-                    var removeId = "#" + formId
+                    var removeId = "#" + formId;
                     $(removeId).remove();
                 });
                 a.draggable({
