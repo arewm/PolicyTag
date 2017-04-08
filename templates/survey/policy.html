@@ -40,9 +40,19 @@
     </script>
 
     <script>
+        function clearPolicy() {
+            // remove all tags from the workspace
+            $('#workspace').children('.ui-draggable').each(function () {
+                this.remove(); // "this" is the current element in the loop
+            });
+            // reset all toggles to default
+            setToggles();
+        }
         function savePolicy() {
             // only continue if we have some tags
-            setToggles();
+
+            // and now reset the policy
+            clearPolicy();
         }
         $(document).ready(function() {
             savePolicy();
@@ -101,7 +111,7 @@
     <div id="operation">
         <div class="buff"></div>
         <i class="fa fa-check fa-3x" aria-hidden="true" onclick="savePolicy()"></i>
-        <i class="fa fa-times fa-3x" aria-hidden="true"></i>
+        <i class="fa fa-times fa-3x" aria-hidden="true" onclick="clearPolicy()"></i>
     </div>
     <div id="action">
         <div>
