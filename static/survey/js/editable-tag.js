@@ -32,6 +32,7 @@ function editableTextBlurred() {
         // append the elements in the proper location
         $(this).parent().parent().append(nextLI);
         $(this).replaceWith(viewableText);
+        makeDraggable();
     } else {
         $(this).replaceWith(lastTag);
     }

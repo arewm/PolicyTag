@@ -2,7 +2,7 @@
 function hasClass(element, cls) {
     return (' ' + element.attr('class') + ' ').indexOf(' ' + cls + ' ') > -1;
 }
-$(document).ready(function () {
+function makeDraggable() {
     $('.move-me').draggable({
         helper: "clone",
         revert: "invalid",
@@ -68,4 +68,7 @@ $(document).ready(function () {
             $(".ui-resizable").resizable("destroy");
         }
     });
+}
+$(document).ready(function () {
+    makeDraggable();
 });
