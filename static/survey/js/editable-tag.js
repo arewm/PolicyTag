@@ -22,11 +22,14 @@ function editableTextBlurred() {
     //console.log(lastTag);
     //console.log(html);
     if (html !== "") {
+        var newId = viewableText.getAttribute("id") + "-" + guid();
         viewableText.html(html);
         viewableText.removeClass("write-in-me");
         viewableText.addClass("move-me");
+        viewableText.setAttribute("id", newId);
         $(this).replaceWith(viewableText);
-        $(this).parentElement.appendChild(lastTag);
+        console.log($(this).parent())
+        $(this).parent().appendChild(lastTag);
     } else {
         $(this).replaceWith(lastTag);
     }
