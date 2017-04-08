@@ -17,15 +17,15 @@ function divClicked() {
 function editableTextBlurred() {
     var html = $(this).val();
     var viewableText = lastTag;
-    console.log(lastTag);
-    console.log(html);
+    // setup the click event for this new div
+    viewableText.click(divClicked);
+    //console.log(lastTag);
+    //console.log(html);
     if (html !== "") {
         viewableText.html(html);
         viewableText.removeClass("write-in-me");
         viewableText.addClass("move-me");
         $(this).replaceWith(viewableText);
-        // setup the click event for this new div
-        viewableText.click(divClicked);
         $(this).parentElement.appendChild(lastTag);
     } else {
         $(this).replaceWith(lastTag);
