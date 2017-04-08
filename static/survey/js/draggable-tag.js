@@ -30,7 +30,7 @@ function makeDraggable() {
                 var a = u.helper.clone().attr("id", "drag-" + src.attr("id"));
                 a.removeClass('move-me');
                 a.addClass('moved-me');
-                console.log("INFO: Accepted: ", a.attr("class"));
+                //console.log("INFO: Accepted: ", a.attr("class"));
                 a.css("z-index", 1000);
                 a.appendTo("#workspace");
                 var formId = "pol-" + src.attr("id");
