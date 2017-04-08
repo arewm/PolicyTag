@@ -167,6 +167,13 @@ div#operation .buff{
     cursor: pointer;
 }
 
+.fa-times {
+    clear: both;
+    padding: 5px 5px;
+    color: red;
+    cursor: pointer;
+}
+
 div#action {
     float: right;/**/
     width: 27%;
