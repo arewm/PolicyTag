@@ -27,8 +27,10 @@ function editableTextBlurred() {
         console.log(viewableText);
         console.log(lastTag);
         console.log($(this).parent());
-        $(this).parent().append(lastTag);
         $(this).replaceWith(viewableText);
+        var next = $(this).parent().clone();
+        next.first().replaceWit(lastTag);
+        $(this).parent().append(next);
     } else {
         $(this).replaceWith(lastTag);
     }
