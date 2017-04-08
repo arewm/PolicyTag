@@ -15,7 +15,7 @@ function divClicked() {
 
 function editableTextBlurred() {
     var html = $(this).val();
-    var viewableText = lastTag.copy();
+    var viewableText = lastTag;
     // setup the click event for this new div
     viewableText.click(divClicked);
     if (html !== "") {
@@ -24,6 +24,9 @@ function editableTextBlurred() {
         viewableText.removeClass("write-in-me");
         viewableText.addClass("move-me");
         viewableText.attr("id", newId);
+        console.log(viewableText);
+        console.log(lastTag);
+        console.log($(this).parent());
         $(this).replaceWith(viewableText);
         $(this).parent().append(lastTag);
     } else {
