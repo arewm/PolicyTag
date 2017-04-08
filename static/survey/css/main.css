@@ -169,7 +169,7 @@ div#operation .buff{
 
 .fa-times {
     clear: both;
-    padding: 5px 5px;
+    padding: 5px 10px;
     color: red;
     cursor: pointer;
 }
