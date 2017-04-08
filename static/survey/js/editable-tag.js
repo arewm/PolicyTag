@@ -19,19 +19,17 @@ function editableTextBlurred() {
     // setup the click event for this new div
     lastTag.click(divClicked);
     if (html !== "") {
+        // change the properties of the node we are adding
         var newId = viewableText.attr("id") + "-" + customCount++;
         viewableText.html(html);
         viewableText.removeClass("write-in-me");
-        viewableText.addClass("move-me");
+        viewableText.addClass("move-me ui-draggable ui-draggable-handle");
         viewableText.attr("id", newId);
-        console.log(viewableText);
-        console.log(lastTag);
-        console.log($(this).parent());
+        // get the proper list nesting
         var nextLI = $(this).parent().clone();
-        console.log(nextLI);
         nextLI.empty();
         nextLI.append(lastTag);
-        console.log(nextLI);
+        // append the elements in the proper location
         $(this).parent().parent().append(nextLI);
         $(this).replaceWith(viewableText);
     } else {
