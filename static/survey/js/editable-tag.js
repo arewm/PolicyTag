@@ -15,7 +15,7 @@ function divClicked() {
 
 function editableTextBlurred() {
     var html = $(this).val();
-    var viewableText = lastTag;
+    var viewableText = lastTag.copy();
     // setup the click event for this new div
     viewableText.click(divClicked);
     if (html !== "") {
