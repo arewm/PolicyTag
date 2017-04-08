@@ -17,7 +17,7 @@ function editableTextBlurred() {
     var html = $(this).val();
     var viewableText = lastTag.clone();
     // setup the click event for this new div
-    viewableText.click(divClicked);
+    lastTag.click(divClicked);
     if (html !== "") {
         var newId = viewableText.attr("id") + "-" + customCount++;
         viewableText.html(html);
