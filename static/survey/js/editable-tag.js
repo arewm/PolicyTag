@@ -25,7 +25,7 @@ function editableTextBlurred() {
         viewableText.addClass("move-me");
         viewableText.attr("id", newId);
         $(this).replaceWith(viewableText);
-        $(this).parent().appendChild(lastTag);
+        $(this).parent().append(lastTag);
     } else {
         $(this).replaceWith(lastTag);
     }
