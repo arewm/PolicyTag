@@ -3,7 +3,9 @@ var lastTag = null;
 // save off last tag, get input entered, create a new tag before last tag with this input, create standard name/id
 
 function divClicked() {
+    console.log($(this));
     lastTag = $(this);
+    console.log(lastTag);
     var editableText = $("<textarea />");
     editableText.val("");
     $(this).replaceWith(editableText);
