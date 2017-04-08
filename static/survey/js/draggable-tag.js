@@ -38,7 +38,7 @@ function makeDraggable() {
                 input.setAttribute("type", "hidden");
                 input.setAttribute("name", "tag");
                 input.setAttribute("id", formId);
-                input.setAttribute("value", src.attr("id"));
+                input.setAttribute("value", src.val());
                 document.getElementById('policy_specification').appendChild(input);
                 a.on("remove", function() {
                     var removeId = "#" + formId;
