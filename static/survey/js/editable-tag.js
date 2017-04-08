@@ -1,8 +1,6 @@
 var lastTag = null;
 var customCount = 0;
 
-// save off last tag, get input entered, create a new tag before last tag with this input, create standard name/id
-
 function divClicked() {
     lastTag = $(this);
     var editableText = $("<textarea />");
