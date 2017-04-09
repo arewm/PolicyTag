@@ -39,7 +39,7 @@
         function copyPolicy() {
             var tagArray = $('<ul id="' + policyNumber++ + '" class="list-group list-inline"/>');
             tagArray = $('<div id="' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body" style="padding:5px;"/>'));
-            workspaceTags.each(function () {
+            $('#workspace').children('.ui-draggable').each(function () {
                 var tempTag = $(this).clone();
                 tempTag.removeClass('ui-draggable').removeClass('ui-draggable-dragging').removeClass('ui-draggable-handle');
                 tempTag.removeClass('moved-me').removeClass('removable');
@@ -51,8 +51,7 @@
         }
         function savePolicy() {
             // only continue if we have some tags
-            var workspaceTags = $('#workspace').children('.ui-draggable');
-            if (workspaceTags.length) {
+            if ($('#workspace').children('.ui-draggable').length) {
                 // submit form to store in database
                 $('#policy_specification').submit();
             }
