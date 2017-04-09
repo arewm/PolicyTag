@@ -68,15 +68,14 @@
         function toggleLinked(linked){
                 linked = '#' + linked;
                 console.log(linked);
-                $(linked).toggle(!this.checked);
+                if ($(linked).offsetParent === null) {
+                    // we are hidden
+                    $(linked).show()
+                } else {
+                    $(linked).hide()
+                }
+                /*$(linked).toggle(!this.checked);
         }
-        $(function () {
-            $('.toggler').change(function () {
-                linked = '#' + $(this).attr('linked');
-                console.log(linked);
-                $(linked).toggle(!this.checked);
-            }).change(); //ensure visible state matches initially
-        });
     </script>
 </head>
 <body>
