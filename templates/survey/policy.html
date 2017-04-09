@@ -23,22 +23,6 @@
     <script src="/static/survey/js/change-action.js"></script>
     <script src="/static/survey/js/draggable-tag.js"></script>
     <script src="/static/survey/js/editable-tag.js"></script>
-    <script type="text/javascript">
-        function createTag(tag_id) {
-            new_id = 'b' + tag_id.slice(1);
-            if (document.getElementById(new_id) === null) {
-
-                var input = document.createElement("input");
-                input.setAttribute("type", "hidden");
-                input.setAttribute("name", "tag");
-                input.setAttribute("value", new_id);
-                input.setAttribute("id", new_id);
-
-                document.getElementById("policy_specification").appendChild(input);
-            }
-        }
-    </script>
-
     <script>
         var policyNumber = 0;
         function clearPolicy() {
@@ -58,8 +42,9 @@
             var workspaceTags = $('#workspace').children('.ui-draggable');
             if (workspaceTags.length) {
                 // submit form to store in database
+
                 // put policy into bottom div
-                var tagArray = $('<ul class="list-group list-inline"/>');
+                var tagArray = $('<ul id="' + policyNumber++ + '"class="list-group list-inline"/>');
                 workspaceTags.each(function() {
                     var tempTag = $(this).clone();
                     tempTag.removeClass('ui-draggable').removeClass('ui-draggable-dragging').removeClass('ui-draggable-handle');
