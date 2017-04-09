@@ -42,12 +42,14 @@
             if (workspaceTags.length) {
                 // submit form to store in database
                 var frm = $('#policy_specification');
+                console.log('intercepted');
                 frm.submit(function () {
                     $.ajax({
                         type: frm.attr('method'),
                         url: frm.attr('action'),
                         data: frm.serialize(),
                         success: function (data) {
+                            console.log('success');
                             // we have successfully submitted, so put policy into bottom div
                             var tagArray = $('<ul id="' + policyNumber++ + '" class="list-group list-inline"/>');
                             tagArray = $('<div id="' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body" style="padding:5px;"/>'));
@@ -63,6 +65,7 @@
                             alert(data);
                         },
                         error: function (data) {
+                            console.log('error');
                             alert("Something went wrong!" + data);
                         }
                     });
