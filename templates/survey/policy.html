@@ -31,7 +31,7 @@
                 this.remove(); // "this" is the current element in the loop
             });
             // remove all tags from the policy specification
-            $('#policy_specification').children("input[name='tag']").each(function() {
+            $('#policy_specification').children("input[name='tag']").each(function () {
                 this.remove();
             });
             // reset all toggles to default
@@ -46,14 +46,12 @@
                 // put policy into bottom div
                 var tagArray = $('<ul id="' + policyNumber++ + '" class="list-group list-inline"/>');
                 tagArray = $('<div id="' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body" style="padding:5px;"/>'));
-                //tagArray.append($('<div class="panel-heading">Policy #' + policyNumber++ + '</div>'));
-                workspaceTags.each(function() {
+                workspaceTags.each(function () {
                     var tempTag = $(this).clone();
                     tempTag.removeClass('ui-draggable').removeClass('ui-draggable-dragging').removeClass('ui-draggable-handle');
                     tempTag.removeClass('moved-me').removeClass('removable');
                     tempTag.attr('style', '');
                     tempTag.attr('id', src.attr('id').slice(5));
-                    //tagArray.append($('<li class="list-group-item list-group-item-danger"/>').append(tempTag[0]));
                     tagArray.children()[0].append(tempTag[0]);
                 });
                 $('#policies').append(tagArray);
@@ -61,18 +59,17 @@
             // and now reset the policy
             clearPolicy();
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
             savePolicy();
         });
         // function to hide linked tags
-        function toggleLinked(linked){
-                if ($('#' + linked + "-check").is(":checked")) {
-                    // we want to show if we are checked
-                    $('#' + linked + "-group").show()
-                } else {
-                    $('#' + linked + "-group").hide()
-                }
-                //$(linked).toggle(!this.checked);
+        function toggleLinked(linked) {
+            if ($('#' + linked + "-check").is(":checked")) {
+                // we want to show if we are checked
+                $('#' + linked + "-group").show()
+            } else {
+                $('#' + linked + "-group").hide()
+            }
         }
     </script>
 </head>
@@ -87,28 +84,23 @@
             <div>
                 <span class="label label-default" style="font-size: 100%;">Tag Suggestions</span>
                 {% for c in classes %}
-                    <label class="checkbox-inline"><input id="{{ c.tag_class }}-check" type="checkbox" checked value="" onchange="toggleLinked('{{ c.tag_class }}')">{{ c.tag_class }}</label>
+                    <label class="checkbox-inline"><input id="{{ c.tag_class }}-check" type="checkbox" checked value=""
+                                                          onchange="toggleLinked('{{ c.tag_class }}')">{{ c.tag_class }}
+                    </label>
                 {% endfor %}
             </div>
             {% for c, ta in tags %}
-                <!--ul class="list-group list-inline"-->
                 <div id="{{ c }}-group" class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">{{ c }}</h3>
                     </div>
                     <div class="panel-body">
-                    {% for t in ta %}
-                        <!--li class="list-group-item list-group-item-danger"-->
+                        {% for t in ta %}
                             <div id="{{ t.tag_id }}" class="{{ c }} tag-properties move-me">{{ t.text }}</div>
-                        <!--/li-->
-                    {% endfor %}
-                        <!--li class="list-group-item list-group-item-danger"-->
-                            <div id="custom-{{ c }}" class="{{ c }} tag-properties write-in-me">_____________</div>
-                        <!--/li-->
+                        {% endfor %}
+                        <div id="custom-{{ c }}" class="{{ c }} tag-properties write-in-me">_____________</div>
+                    </div>
                 </div>
-                </div>
-                <!--/ul-->
-                <!--br clear="all"/-->
             {% endfor %}
         </div>
     </div>
@@ -123,7 +115,7 @@
 </div>
 
 <div id="mid_row" class="row">
-    <div id="workspace" >
+    <div id="workspace">
         <div id="trashcompactor">
             <span class="label label-default" style="font-size: 100%;">Workspace</span>
         </div>

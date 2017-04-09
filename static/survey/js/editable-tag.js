@@ -23,13 +23,9 @@ function editableTextBlurred() {
         viewableText.removeClass("write-in-me");
         viewableText.addClass("move-me ui-draggable ui-draggable-handle");
         viewableText.attr("id", newId);
-        // get the proper list nesting
-        //var nextLI = $(this).parent().clone();
-        //nextLI.empty();
-        //nextLI.append(lastTag);
+
+        // append the custom tag element and replace the current custom tag with the new one
         $(this).parent().append(lastTag);
-        // append the elements in the proper location
-        //$(this).parent().parent().append(nextLI);
         $(this).replaceWith(viewableText);
         makeDraggable();
     } else {
