@@ -29,7 +29,8 @@ def policy(request):
     return render(request, 'survey/policy.html', context)
 
 def submit_policy(request):
-    return(request)
+    content = {'text': request.POST}
+    return render(request, 'survey/index.html', context)
 
 def rank(request):
     tag_list = Tag.objects.order_by('tag_class', 'text')
