@@ -66,13 +66,12 @@
         });
         // function to hide linked tags
         function toggleLinked(linked){
-                linked = '#' + linked + "-group";
                 console.log(linked);
                 if ($('#' + linked + "-check").is(":checked")) {
                     // we want to show if we are checked
-                    $(linked).show()
+                    $('#' + linked + "-group").show()
                 } else {
-                    $(linked).hide()
+                    $('#' + linked + "-group").hide()
                 }
                 //$(linked).toggle(!this.checked);
         }
