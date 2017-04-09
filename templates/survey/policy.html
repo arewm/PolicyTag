@@ -60,8 +60,8 @@
             clearPolicy();
         }
         $(document).ready(function () {
-            var frm = $('#policy_specification');
-            frm.submit(function () {
+            $('#policy_specification').submit(function () {
+                var frm = $('#policy_specification');
                 $.ajax({
                     type: frm.attr('method'),
                     url: frm.attr('action'),
