@@ -45,7 +45,7 @@
 
                 // put policy into bottom div
                 var tagArray = $('<ul id="' + policyNumber++ + '" class="list-group list-inline"/>');
-                tagArray = $('<div id="' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body"/>'));
+                tagArray = $('<div id="' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body-sm" style="padding:5px;"/>'));
                 //tagArray.append($('<div class="panel-heading">Policy #' + policyNumber++ + '</div>'));
                 workspaceTags.each(function() {
                     var tempTag = $(this).clone();
