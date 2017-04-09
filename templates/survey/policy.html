@@ -66,10 +66,10 @@
         });
         // function to hide linked tags
         function toggleLinked(linked){
-                linked = '#' + linked;
+                linked = '#' + linked + "-group";
                 console.log(linked);
-                if ($(linked).offsetParent === null) {
-                    // we are hidden
+                if ($('#' + linked + "-check").is(":checked")) {
+                    // we want to show if we are checked
                     $(linked).show()
                 } else {
                     $(linked).hide()
@@ -89,7 +89,7 @@
             <div>
                 <span class="label label-default" style="font-size: 100%;">Tag Suggestions</span>
                 {% for c in classes %}
-                    <label class="checkbox-inline"><input type="checkbox" checked value="" onchange="toggleLinked('{{ c.tag_class }}-group')">{{ c.tag_class }}</label>
+                    <label class="checkbox-inline"><input id="{{ c.tag_class }}-check" type="checkbox" checked value="" onchange="toggleLinked('{{ c.tag_class }}')">{{ c.tag_class }}</label>
                 {% endfor %}
             </div>
             {% for c, ta in tags %}
