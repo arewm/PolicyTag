@@ -63,14 +63,6 @@
         }
         $(document).ready(function() {
             savePolicy();
-            // function to hide linked tags
-            $(function () {
-                $('.toggler').change(function () {
-                    linked = '#' + $(this).attr('linked');
-                    console.log(linked);
-                    $(linked).toggle(!this.checked);
-                }).change(); //ensure visible state matches initially
-            });
         });
     </script>
 </head>
@@ -175,5 +167,16 @@
         <ul></ul>
     </div>
 </div>
+<script>
+
+        // function to hide linked tags
+        $(function () {
+            $('.toggler').change(function () {
+                linked = '#' + $(this).attr('linked');
+                console.log(linked);
+                $(linked).toggle(!this.checked);
+            }).change(); //ensure visible state matches initially
+        });
+</script>
 </body>
 </html>
