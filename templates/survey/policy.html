@@ -61,7 +61,7 @@
                 // put policy into bottom div
                 var tagArray = $('<ul class="list-group list-inline"/>');
                 workspaceTags.each(function() {
-                    var tempTag = this.clone();
+                    var tempTag = $(this).clone();
                     tempTag.removeClass('ui-draggable');
                     tempTag.removeClass('ui-draggable-handle');
                     tempTag.attr('id', src.attr('id').slice(5));
