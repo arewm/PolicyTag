@@ -55,8 +55,6 @@
                 // submit form to store in database
                 $('#policy_specification').submit();
             }
-            // and now reset the policy
-            clearPolicy();
         }
         $(document).ready(function () {
             var frm = $('#policy_specification');
@@ -76,6 +74,8 @@
                         alert("Something went wrong!" + data);
                     }
                 });
+                // and now reset the policy
+                clearPolicy();
                 return false;
             });
             savePolicy();
