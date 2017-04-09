@@ -67,8 +67,9 @@
         // function to hide linked tags
         $(function () {
             $('.toggler').change(function () {
-                linked = $(this).attr('linked');
-                $('#' + linked).toggle(!this.checked);
+                linked = '#' + $(this).attr('linked');
+                console.log(linked);
+                $(linked).toggle(!this.checked);
             }).change(); //ensure visible state matches initially
         });
     </script>
