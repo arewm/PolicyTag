@@ -40,6 +40,7 @@
     </script>
 
     <script>
+        var policyNumber = 0;
         function clearPolicy() {
             // remove all tags from the workspace
             $('#workspace').children('.ui-draggable').each(function () {
@@ -54,7 +55,21 @@
         }
         function savePolicy() {
             // only continue if we have some tags
+            var workspaceTags = $('#workspace').children('.ui-draggable');
+            if (workspaceTags.length) {
+                // submit form to store in database
+                // put policy into bottom div
+                var tagArray = $('<ul class="list-group list-inline"/>');
+                workspaceTags.each(function() {
+                    var tempTag = this.clone();
+                    tempTag.removeClass('ui-draggable');
+                    tempTag.removeClass('ui-draggable-handle');
+                    tempTag.attr('id', src.attr('id').slice(5));
+                    items.append($('<li class="list-group-item list-group-item-danger"/>').text(tempTag));
 
+                });
+                $('#policies').append(tagArray);
+            }
             // and now reset the policy
             clearPolicy();
         }
@@ -155,9 +170,7 @@
 <div id="bottom_row" class="row">
     <div id="policies">
         <span class="label label-default" style="font-size: 100%;">Defined Policies</span>
-        <ul>
-
-        </ul>
+        <ul></ul>
     </div>
 </div>
 </body>
