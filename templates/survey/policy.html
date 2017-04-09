@@ -65,9 +65,7 @@
                     tempTag.removeClass('ui-draggable');
                     tempTag.removeClass('ui-draggable-handle');
                     tempTag.attr('id', src.attr('id').slice(5));
-                    console.log(tempTag);
-                    console.log($('<li class="list-group-item list-group-item-danger"/>').text(tempTag));
-                    tagArray.append($('<li class="list-group-item list-group-item-danger"/>').text(tempTag));
+                    tagArray.append($('<li class="list-group-item list-group-item-danger"/>').text([0]));
 
                 });
                 $('#policies').append(tagArray);
