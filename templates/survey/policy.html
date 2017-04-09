@@ -54,14 +54,14 @@
             var workspaceTags = $('#workspace').children('.ui-draggable');
             if (workspaceTags.length) {
                 // submit form to store in database
-                frm.submit();
+                $('#policy_specification').submit();
             }
             // and now reset the policy
             clearPolicy();
         }
         $(document).ready(function () {
-            $('#policy_specification').submit(function () {
-                var frm = $('#policy_specification');
+            var frm = $('#policy_specification');
+            frm.submit(function () {
                 $.ajax({
                     type: frm.attr('method'),
                     url: frm.attr('action'),
