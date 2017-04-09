@@ -16,6 +16,8 @@ function editableTextBlurred() {
     var viewableText = lastTag.clone();
     // setup the click event for this new div
     lastTag.click(divClicked);
+    console.log(html);
+    console.log(html.trim());
     if (html !== "") {
         // change the properties of the node we are adding
         var newId = viewableText.attr("id") + "-" + customCount++;
