@@ -44,10 +44,6 @@ function makeDraggable() {
                     var removeId = "#" + formId;
                     $(removeId).remove();
                 });
-                a.bind("destroyed", function() {
-                    var removeId = "#" + formId;
-                    $(removeId).remove();
-                });
                 a.draggable({
                     containment: "#workspace"
                 });
