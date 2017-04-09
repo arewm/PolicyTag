@@ -7,13 +7,20 @@
 <body>
 <form>
     <input name="person" type="hidden" value="{{ person_id }}"/>
+
     {% for q in questions %}
-        <p class="question">{{ q.question }}</p>
-        <ul class="answers">
-            {% for a in q.answers %}
-                <input type="radio" name="{{ q.name }}" value="{{ a.value }}">{{ a.text }}<br />
-            {% endfor %}
-        </ul>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ q.question }}</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+            <ul class="answers">
+                {% for a in q.answers %}
+                    <input type="radio" name="{{ q.name }}" value="{{ a.value }}" id="{{ q.name }}{{ a.value }}"><label for="{{ a.value }}" id="{{ q.name }}{{ a.value }}">{{ a.text }}</label><br/>
+                {% endfor %}
+            </ul>
+        </div>
     {% endfor %}
 </form>
 
