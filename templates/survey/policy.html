@@ -45,7 +45,7 @@
 
                 // put policy into bottom div
                 var tagArray = $('<ul id="' + policyNumber++ + '" class="list-group list-inline"/>');
-                tagArray = $('<div id="' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body-sm" style="padding:5px;"/>'));
+                tagArray = $('<div id="' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body" style="padding:5px;"/>'));
                 //tagArray.append($('<div class="panel-heading">Policy #' + policyNumber++ + '</div>'));
                 workspaceTags.each(function() {
                     var tempTag = $(this).clone();
@@ -81,18 +81,24 @@
                 <label class="checkbox-inline"><input type="checkbox" checked value="">Type</label>
             </div>
             {% for c, ta in tags %}
-                <ul class="list-group list-inline">
-                    {{ c }}
+                <!--ul class="list-group list-inline"-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ c }}</h3>
+                    </div>
+                    <div class="panel-body">
                     {% for t in ta %}
-                        <li class="list-group-item list-group-item-danger">
+                        <!--li class="list-group-item list-group-item-danger"-->
                             <div id="{{ t.tag_id }}" class="{{ c }} tag-properties move-me">{{ t.text }}</div>
-                        </li>
+                        <!--/li-->
                     {% endfor %}
-                        <li class="list-group-item list-group-item-danger">
+                        <!--li class="list-group-item list-group-item-danger"-->
                             <div id="custom-{{ c }}" class="{{ c }} tag-properties write-in-me">_____________</div>
-                        </li>
-                </ul>
-                <br clear="all"/>
+                        <!--/li-->
+                </div>
+                </div>
+                <!--/ul-->
+                <!--br clear="all"/-->
             {% endfor %}
         </div>
     </div>
