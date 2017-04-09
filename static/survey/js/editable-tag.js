@@ -12,7 +12,7 @@ function divClicked() {
 }
 
 function editableTextBlurred() {
-    var html = $(this).val();
+    var html = $(this).val().trim();
     var viewableText = lastTag.clone();
     // setup the click event for this new div
     lastTag.click(divClicked);
