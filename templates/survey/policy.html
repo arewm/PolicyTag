@@ -64,11 +64,11 @@
                                 tagArray.children()[0].append(tempTag[0]);
                             });
                             $('#policies').append(tagArray);
-                            alert(data.html);
+                            alert(data);
                         },
                         error: function (data) {
                             console.log('error');
-                            alert("Something went wrong!" + data.html);
+                            alert("Something went wrong!" + data);
                         }
                     });
                     return false;
