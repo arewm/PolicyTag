@@ -45,7 +45,8 @@
 
                 // put policy into bottom div
                 var tagArray = $('<ul id="' + policyNumber++ + '" class="list-group list-inline"/>');
-                tagArray = $('<div id="' + policyNumber++ + '" class="panel panel-default"/>');
+                tagArray = $('<div id="' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body"/>'));
+                //tagArray.append($('<div class="panel-heading">Policy #' + policyNumber++ + '</div>'));
                 workspaceTags.each(function() {
                     var tempTag = $(this).clone();
                     tempTag.removeClass('ui-draggable').removeClass('ui-draggable-dragging').removeClass('ui-draggable-handle');
@@ -53,7 +54,7 @@
                     tempTag.attr('style', '');
                     tempTag.attr('id', src.attr('id').slice(5));
                     //tagArray.append($('<li class="list-group-item list-group-item-danger"/>').append(tempTag[0]));
-                    tagArray.append(tempTag[0]);
+                    tagArray.children()[0].append(tempTag[0]);
                 });
                 $('#policies').append(tagArray);
             }
