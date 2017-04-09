@@ -90,7 +90,7 @@
             <div>
                 <span class="label label-default" style="font-size: 100%;">Tag Suggestions</span>
                 {% for c in classes %}
-                    <label class="checkbox-inline"><input type="checkbox" checked value="" ontoggle="toggleLinked('{{ c.tag_class }}-group')">{{ c.tag_class }}</label>
+                    <label class="checkbox-inline"><input type="checkbox" checked value="" onchange="toggleLinked('{{ c.tag_class }}-group')">{{ c.tag_class }}</label>
                 {% endfor %}
             </div>
             {% for c, ta in tags %}
