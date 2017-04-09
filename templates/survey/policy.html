@@ -64,6 +64,19 @@
         $(document).ready(function() {
             savePolicy();
         });
+        // function to hide linked tags
+        function toggleLinked(linked){
+                linked = '#' + linked;
+                console.log(linked);
+                $(linked).toggle(!this.checked);
+        }
+        $(function () {
+            $('.toggler').change(function () {
+                linked = '#' + $(this).attr('linked');
+                console.log(linked);
+                $(linked).toggle(!this.checked);
+            }).change(); //ensure visible state matches initially
+        });
     </script>
 </head>
 <body>
@@ -77,7 +90,7 @@
             <div>
                 <span class="label label-default" style="font-size: 100%;">Tag Suggestions</span>
                 {% for c in classes %}
-                    <label class="checkbox-inline"><input type="checkbox" checked value="" linked="{{ c.tag_class }}-group" class=="toggler">{{ c.tag_class }}</label>
+                    <label class="checkbox-inline"><input type="checkbox" checked value="" ontoggle="toggleLinked('{{ c.tag_class }}-group')">{{ c.tag_class }}</label>
                 {% endfor %}
             </div>
             {% for c, ta in tags %}
@@ -167,16 +180,5 @@
         <ul></ul>
     </div>
 </div>
-<script>
-
-        // function to hide linked tags
-        $(function () {
-            $('.toggler').change(function () {
-                linked = '#' + $(this).attr('linked');
-                console.log(linked);
-                $(linked).toggle(!this.checked);
-            }).change(); //ensure visible state matches initially
-        });
-</script>
 </body>
 </html>
