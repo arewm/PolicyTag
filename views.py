@@ -29,7 +29,7 @@ def policy(request):
     return render(request, 'survey/policy.html', context)
 
 def submit_policy(request):
-    context = {'text': request.GET}
+    context = {'text': request.POST}
     return render(request, 'survey/index.html', context)
 
 def rank(request):
