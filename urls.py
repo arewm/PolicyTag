@@ -6,6 +6,7 @@ urlpatterns = [
 	url(r'^consent', views.index, name='consent'),
 	url(r'^tutorial', views.tutorial, name='tutorial'),
 	url(r'^policy', views.policy, name='policy'),
+    url(r'^submit_policy', views.submit_policy, name='submit_policy'),
 	url(r'^rank', views.rank, name='rank'),
 	url(r'^gen', views.gen, name='generator'),
 	url(r'^questions', views.survey, name='survey'),

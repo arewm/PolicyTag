@@ -41,19 +41,33 @@
             var workspaceTags = $('#workspace').children('.ui-draggable');
             if (workspaceTags.length) {
                 // submit form to store in database
-
-                // put policy into bottom div
-                var tagArray = $('<ul id="' + policyNumber++ + '" class="list-group list-inline"/>');
-                tagArray = $('<div id="' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body" style="padding:5px;"/>'));
-                workspaceTags.each(function () {
-                    var tempTag = $(this).clone();
-                    tempTag.removeClass('ui-draggable').removeClass('ui-draggable-dragging').removeClass('ui-draggable-handle');
-                    tempTag.removeClass('moved-me').removeClass('removable');
-                    tempTag.attr('style', '');
-                    tempTag.attr('id', src.attr('id').slice(5));
-                    tagArray.children()[0].append(tempTag[0]);
+                var frm = $('#policy_specification');
+                frm.submit(function () {
+                    $.ajax({
+                        type: frm.attr('method'),
+                        url: frm.attr('action'),
+                        data: frm.serialize(),
+                        success: function (data) {
+                            // we have successfully submitted, so put policy into bottom div
+                            var tagArray = $('<ul id="' + policyNumber++ + '" class="list-group list-inline"/>');
+                            tagArray = $('<div id="' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body" style="padding:5px;"/>'));
+                            workspaceTags.each(function () {
+                                var tempTag = $(this).clone();
+                                tempTag.removeClass('ui-draggable').removeClass('ui-draggable-dragging').removeClass('ui-draggable-handle');
+                                tempTag.removeClass('moved-me').removeClass('removable');
+                                tempTag.attr('style', '');
+                                tempTag.attr('id', src.attr('id').slice(5));
+                                tagArray.children()[0].append(tempTag[0]);
+                            });
+                            $('#policies').append(tagArray);
+                            alert(data);
+                        },
+                        error: function (data) {
+                            alert("Something went wrong!" + data);
+                        }
+                    });
+                    return false;
                 });
-                $('#policies').append(tagArray);
             }
             // and now reset the policy
             clearPolicy();
@@ -73,7 +87,7 @@
     </script>
 </head>
 <body>
-<form id="policy_specification"></form>
+<form id="policy_specification" action="{% url 'submit_policy' %}" method="post"></form>
 <div id="top_row" class="row">
     <div id="suggestions">
         <div id="policy_suggestion">

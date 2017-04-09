@@ -28,6 +28,9 @@ def policy(request):
     context = {'classes': classes,'tags': tag_list, 'ids': ''}
     return render(request, 'survey/policy.html', context)
 
+def submit_policy(request):
+    pass
+
 def rank(request):
     tag_list = Tag.objects.order_by('tag_class', 'text')
     for t in tag_list:
