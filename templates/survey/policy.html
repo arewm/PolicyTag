@@ -42,8 +42,10 @@
             if (workspaceTags.length) {
                 // submit form to store in database
                 var frm = $('#policy_specification');
-                console.log('intercepted');
                 frm.submit(function () {
+                    console.log(frm.arrt('method'));
+                    console.log(frm.attr('action'));
+                    console.log(frm.serialize());
                     $.ajax({
                         type: frm.attr('method'),
                         url: frm.attr('action'),
@@ -91,7 +93,7 @@
     </script>
 </head>
 <body>
-<form id="policy_specification" action="{% url 'submit_policy' %}" method="post"></form>
+<form id="policy_specification" action="{% url 'submit_policy' %}" method="get"></form>
 <div id="top_row" class="row">
     <div id="suggestions">
         <div id="policy_suggestion">
