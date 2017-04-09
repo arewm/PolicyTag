@@ -57,6 +57,27 @@
             }
         }
         $(document).ready(function () {
+            var frm = $('#policy_specification');
+            frm.submit(function () {
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        console.log('success');
+                        // we have successfully submitted, so put policy into bottom div
+                        copyPolicy();
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log('error');
+                        alert("Something went wrong!" + data);
+                    }
+                });
+                // and now reset the policy
+                //clearPolicy();
+                return false;
+            });
             setToggles();
         });
         // function to hide linked tags
@@ -168,29 +189,5 @@
         <ul></ul>
     </div>
 </div>
-<script>
-
-        var frm = $('#policy_specification');
-        frm.submit(function () {
-            $.ajax({
-                type: frm.attr('method'),
-                url: frm.attr('action'),
-                data: frm.serialize(),
-                success: function (data) {
-                    console.log('success');
-                    // we have successfully submitted, so put policy into bottom div
-                    copyPolicy();
-                    console.log(data);
-                },
-                error: function (data) {
-                    console.log('error');
-                    alert("Something went wrong!" + data);
-                }
-            });
-            // and now reset the policy
-            clearPolicy();
-            return false;
-        });
-</script>
 </body>
 </html>
