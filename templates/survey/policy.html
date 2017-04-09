@@ -64,6 +64,13 @@
         $(document).ready(function() {
             savePolicy();
         });
+        // function to hide linked tags
+        $(function () {
+            $('.toggler').change(function () {
+                linked = $(this).attr('linked');
+                $('#' + linked).toggle(!this.checked);
+            }).change(); //ensure visible state matches initially
+        });
     </script>
 </head>
 <body>
@@ -76,13 +83,13 @@
         <div id="tags">
             <div>
                 <span class="label label-default" style="font-size: 100%;">Tag Suggestions</span>
-                <label class="checkbox-inline"><input type="checkbox" checked value="">Properties</label>
-                <label class="checkbox-inline"><input type="checkbox" checked value="">Things</label>
-                <label class="checkbox-inline"><input type="checkbox" checked value="">Type</label>
+                {% for c in classes %}
+                    <label class="checkbox-inline"><input type="checkbox" checked value="" linked="{{ c }}-group" class=="toggler">{{ c }}</label>
+                {% endfor %}
             </div>
             {% for c, ta in tags %}
                 <!--ul class="list-group list-inline"-->
-                <div class="panel panel-default">
+                <div id="{{ c }}-group" class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">{{ c }}</h3>
                     </div>
