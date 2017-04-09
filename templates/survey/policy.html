@@ -64,18 +64,19 @@
                     url: frm.attr('action'),
                     data: frm.serialize(),
                     success: function (data) {
-                        console.log('success');
                         // we have successfully submitted, so put policy into bottom div
                         copyPolicy();
                         console.log(data);
+                        // and now reset the policy
+                        clearPolicy();
                     },
                     error: function (data) {
                         console.log('error');
                         alert("Something went wrong!" + data);
+                        // and now reset the policy
+                        clearPolicy();
                     }
                 });
-                // and now reset the policy
-                //clearPolicy();
                 return false;
             });
             setToggles();
