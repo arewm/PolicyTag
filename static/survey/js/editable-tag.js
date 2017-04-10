@@ -73,7 +73,7 @@ function editableTextBlurred() {
     lastTag.click(divClicked);
     if (html !== "") {
         // determine what category we are in
-        var category = lastTag.attr('id').splice(7);
+        var category = lastTag.attr('id').slice(7);
         submitCustomTag(category, html);
 
         // append the custom tag element and replace the current custom tag with the new one
