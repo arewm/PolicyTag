@@ -21,8 +21,8 @@ $(document).ready(function () {
                 viewableText.attr("id", resp.id);
                 console.log(viewableText);
                 var customTag = $('#custom-' + resp.category);
-                console.log(customTag);
-                console.log(customTag.parent());
+                console.log(customTag[0]);
+                console.log(customTag.parent()[0]);
                 customTag.parent().append(lastTag);
                 customTag.replaceWith(viewableText);
                 makeDraggable();
