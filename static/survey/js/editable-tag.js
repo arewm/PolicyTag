@@ -3,8 +3,6 @@ var customCount = 0;
 
 $(document).ready(function () {
     var frm = $('#custom_tag');
-    console.log('submit #custom_tag');
-    console.log(frm);
     frm.submit(function () {
         $.ajax({
             type: frm.attr('method'),
@@ -21,6 +19,7 @@ $(document).ready(function () {
                 viewableText.removeClass("write-in-me");
                 viewableText.addClass("move-me ui-draggable ui-draggable-handle");
                 viewableText.attr("id", resp.id);
+                console.log(viewableText);
                 var customTag = $('#custom-' + resp.category);
                 customTag.parent().append(lastTag);
                 customTag.replaceWith(viewableText);
