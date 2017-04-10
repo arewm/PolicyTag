@@ -68,14 +68,12 @@ function submitCustomTag(category, text) {
 
 function editableTextBlurred() {
     var html = $(this).val().trim();
-    var viewableText = lastTag.clone();
+    //var viewableText = lastTag.clone();
     // setup the click event for this new div
     lastTag.click(divClicked);
     if (html !== "") {
-        // change the properties of the node we are adding
-
         // determine what category we are in
-        var category = '';
+        var category = lastTag.attr('id').splice(7);
         submitCustomTag(category, html);
 
         // append the custom tag element and replace the current custom tag with the new one
