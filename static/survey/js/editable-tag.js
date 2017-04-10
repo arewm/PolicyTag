@@ -64,7 +64,12 @@ function submitCustomTag(category, text) {
     document.getElementById('custom_tag').appendChild(cat);
     document.getElementById('custom_tag').appendChild(per);
     frm = $('#custom_tag').submit();
-    frm[0].reset();
+    frm.children().each( function() {
+        if ($(this).attr('name') !== 'csrfmiddlewaretoken') {
+            $(this).remove();
+        }
+    })
+    //frm[0].reset();
 }
 
 function editableTextBlurred() {
