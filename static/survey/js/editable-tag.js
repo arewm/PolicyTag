@@ -63,8 +63,8 @@ function submitCustomTag(category, text) {
     document.getElementById('custom_tag').appendChild(tag);
     document.getElementById('custom_tag').appendChild(cat);
     document.getElementById('custom_tag').appendChild(per);
-    $('custom_tag').submit();
-    $('custom_tag')[0].reset();
+    frm = $('custom_tag').submit();
+    frm[0].reset();
 }
 
 function editableTextBlurred() {
