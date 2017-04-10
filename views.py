@@ -30,7 +30,8 @@ def policy(request):
 
 def submit_policy(request):
     context = {'text': request.POST}
-    return render(request, 'survey/index.html', context)
+    return JsonResponse(context)
+    #return render(request, 'survey/index.html', context)
 
 def custom_tag(request):
     response = {'id': 'a_test_tag_id', 'text': request.POST['tag'], 'category': request.POST['category']}
