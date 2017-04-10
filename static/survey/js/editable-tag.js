@@ -25,6 +25,7 @@ $(document).ready(function () {
                 customTag.parent().append(lastTag);
                 customTag.replaceWith(viewableText);
                 makeDraggable();
+                lastTag = null;
             },
             error: function (data) {
                 console.log('error');
@@ -90,7 +91,6 @@ function editableTextBlurred() {
     } else {
         $(this).replaceWith(lastTag);
     }
-    lastTag = null;
 }
 
 $(document).ready(function() {
