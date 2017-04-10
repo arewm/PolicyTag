@@ -63,7 +63,7 @@ function submitCustomTag(category, text) {
     document.getElementById('custom_tag').appendChild(tag);
     document.getElementById('custom_tag').appendChild(cat);
     document.getElementById('custom_tag').appendChild(per);
-    frm = $('custom_tag').submit();
+    frm = $('custom_tag')[0].submit();
     frm[0].reset();
 }
 
