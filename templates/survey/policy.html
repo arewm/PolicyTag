@@ -96,6 +96,9 @@
 <form id="policy_specification" action="{% url 'submit_policy' %}" method="post">
     {% csrf_token %}
 </form>
+<form id="custom_tag" action="{% url 'custom_tag' %}" method="post">
+    {% csrf_token %}
+</form>
 <div id="top_row" class="row">
     <div id="suggestions">
         <div id="policy_suggestion">

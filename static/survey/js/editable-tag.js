@@ -1,6 +1,38 @@
 var lastTag = null;
 var customCount = 0;
 
+$(document).ready(function () {
+    var frm = $('#custom_tag');
+    frm.submit(function () {
+        $.ajax({
+            type: frm.attr('method'),
+            url: frm.attr('action'),
+            data: frm.serialize(),
+            success: function (data) {
+                // we have successfully submitted, so make the policy tag
+                // TODO finish this!
+                // TODO will have to move code up from lower down to create the policy tag
+                console.log(data);
+                var resp = json.parse(data);
+                viewableText.html(resp.text);
+                viewableText.removeClass("write-in-me");
+                viewableText.addClass("move-me ui-draggable ui-draggable-handle");
+                viewableText.attr("id", resp.id);
+                var customTag = $('#custom-' + resp.category);
+                customTag.parent().append(lastTag);
+                customTag.replaceWith(viewableText);
+                makeDraggable();
+            },
+            error: function (data) {
+                console.log('error');
+                alert("Something went wrong!" + data);
+                // and now reset the policy
+            }
+        });
+        return false;
+    });
+});
+
 function divClicked() {
     lastTag = $(this);
     var editableText = $("<textarea />");
@@ -11,6 +43,24 @@ function divClicked() {
     editableText.blur(editableTextBlurred);
 }
 
+function submitCustomTag(category, text) {
+    var tag = document.createElement("input");
+    tag.setAttribute("type", "hidden");
+    var cat = tag.clone();
+    var per = tag.clone();
+    tag.setAttribute("name", "tag");
+    tag.setAttribute("value", text);
+
+    cat.setAttribute("name", "category");
+    cat.setAttribute("value", category);
+
+    per.setAttribute("name", "person");
+    per.setAttribute("value", '');
+    document.getElementById('custom_tag').appendChild(tag);
+    document.getElementById('custom_tag').appendChild(cat);
+    document.getElementById('custom_tag').appendChild(per);
+}
+
 function editableTextBlurred() {
     var html = $(this).val().trim();
     var viewableText = lastTag.clone();
@@ -18,16 +68,15 @@ function editableTextBlurred() {
     lastTag.click(divClicked);
     if (html !== "") {
         // change the properties of the node we are adding
-        var newId = viewableText.attr("id") + "-" + customCount++;
-        viewableText.html(html);
-        viewableText.removeClass("write-in-me");
-        viewableText.addClass("move-me ui-draggable ui-draggable-handle");
-        viewableText.attr("id", newId);
+
+        // determine what category we are in
+        var category = '';
+        submitCustomTag(category, html);
 
         // append the custom tag element and replace the current custom tag with the new one
-        $(this).parent().append(lastTag);
-        $(this).replaceWith(viewableText);
-        makeDraggable();
+        //$(this).parent().append(lastTag);
+        //$(this).replaceWith(viewableText);
+        //makeDraggable();
     } else {
         $(this).replaceWith(lastTag);
     }

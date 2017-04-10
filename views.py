@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse
 
 from .models import Tag
 
@@ -31,6 +31,11 @@ def policy(request):
 def submit_policy(request):
     context = {'text': request.POST}
     return render(request, 'survey/index.html', context)
+
+def custom_tag(request):
+    response = {'id': 'a_test_tag_id', 'text': request.POST['tag'], 'category': request.POST['category']}
+    return JsonResponse(response)
+
 
 def rank(request):
     tag_list = Tag.objects.order_by('tag_class', 'text')
