@@ -3,6 +3,8 @@ var customCount = 0;
 
 $(document).ready(function () {
     var frm = $('#custom_tag');
+    console.log('submit #custom_tag');
+    console.log(frm);
     frm.submit(function () {
         $.ajax({
             type: frm.attr('method'),
@@ -61,6 +63,7 @@ function submitCustomTag(category, text) {
     document.getElementById('custom_tag').appendChild(tag);
     document.getElementById('custom_tag').appendChild(cat);
     document.getElementById('custom_tag').appendChild(per);
+    document.getElementById('custom_tag').submit()
 }
 
 function editableTextBlurred() {
