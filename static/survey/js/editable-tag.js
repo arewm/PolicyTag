@@ -16,6 +16,7 @@ $(document).ready(function () {
                 // TODO will have to move code up from lower down to create the policy tag
                 console.log(data);
                 var resp = data;
+                var viewableText = lastTag.clone();
                 viewableText.html(resp.text);
                 viewableText.removeClass("write-in-me");
                 viewableText.addClass("move-me ui-draggable ui-draggable-handle");
