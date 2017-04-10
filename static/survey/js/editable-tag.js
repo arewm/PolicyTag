@@ -15,7 +15,7 @@ $(document).ready(function () {
                 // TODO finish this!
                 // TODO will have to move code up from lower down to create the policy tag
                 console.log(data);
-                var resp = json.parse(data);
+                var resp = jQuery.parseJSON(data);
                 viewableText.html(resp.text);
                 viewableText.removeClass("write-in-me");
                 viewableText.addClass("move-me ui-draggable ui-draggable-handle");
