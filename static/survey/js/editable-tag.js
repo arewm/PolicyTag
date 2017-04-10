@@ -45,15 +45,17 @@ function divClicked() {
 
 function submitCustomTag(category, text) {
     var tag = document.createElement("input");
+    var cat = document.createElement("input");
+    var per = document.createElement("input");
     tag.setAttribute("type", "hidden");
-    var cat = tag.clone();
-    var per = tag.clone();
     tag.setAttribute("name", "tag");
     tag.setAttribute("value", text);
 
+    cat.setAttribute("type", "hidden");
     cat.setAttribute("name", "category");
     cat.setAttribute("value", category);
 
+    per.setAttribute("type", "hidden");
     per.setAttribute("name", "person");
     per.setAttribute("value", '');
     document.getElementById('custom_tag').appendChild(tag);
