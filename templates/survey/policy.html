@@ -43,7 +43,7 @@
             console.log($(myId).length);
             if (state === true) {
                 if ($(myId).length) {
-                    input = document.getElementById(action);
+                    input = document.getElementById(myId.slice(1));
                 } else {
                     input = document.createElement("input");
                     input.setAttribute("type", "hidden");
