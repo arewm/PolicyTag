@@ -48,7 +48,7 @@
                     input = document.createElement("input");
                     input.setAttribute("type", "hidden");
                     input.setAttribute("name", "action");
-                    input.setAttribute("id", myId);
+                    input.setAttribute("id", myId.slice(1));
                 }
                 input.setAttribute("value", action);
                 document.getElementById('policy_specification').appendChild(input);

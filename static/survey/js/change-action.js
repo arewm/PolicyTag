@@ -9,35 +9,22 @@ function setToggles() {
 function setAction(action, state) {
     var myId = "#" + action;
     var input;
-    if (state === true) {
-        if ($(myId).length) {
-            input = document.getElementById(action);
-        } else {
-            input = document.createElement("input");
-            input.setAttribute("type", "hidden");
-            input.setAttribute("name", "action");
-            input.setAttribute("id", action);
-        }
-        input.setAttribute("value", action);
-        document.getElementById('policy_specification').appendChild(input);
+    if ($(myId).length) {
+        input = document.getElementById(action);
     } else {
-        if ($(myId).length) {
-            $(myId).remove();
-        }
+        input = document.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", "action");
+        input.setAttribute("id", action);
     }
-
+    input.setAttribute("value", state);
+    document.getElementById('policy_specification').appendChild(input);
 }
 $(function() {
     $('#default-toggle').change(function() {
         setToggles()
     });
-    $('.toggle.btn.btn-success').each(function() {
-        var toggle = $(this).find('input');
-        if (toggle.attr('id') !== 'default-toggle') {
-            setAction(toggle.attr('id'), toggle.prop('checked'))
-        }
-    });
-    /*$('#toggle1').change(function(){
+    $('#toggle1').change(function(){
         setAction("action1", $('#toggle1').prop('checked'))
     });
     $('#toggle2').change(function(){
@@ -51,5 +38,5 @@ $(function() {
     });
     $('#toggle5').change(function(){
         setAction("action5", $('#toggle5').prop('checked'))
-    })*/
+    })
 });
