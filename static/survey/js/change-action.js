@@ -32,8 +32,9 @@ $(function() {
         setToggles()
     });
     $('.toggle.btn.btn-success').each(function() {
-        if ($(this).attr('id') !== 'default-toggle') {
-            setAction($(this).attr('id'), $(this).prop('checked'))
+        var toggle = $(this).find('input');
+        if (toggle.attr('id') !== 'default-toggle') {
+            setAction(toggle.attr('id'), toggle.prop('checked'))
         }
     });
     /*$('#toggle1').change(function(){
