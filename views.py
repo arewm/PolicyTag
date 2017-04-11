@@ -18,15 +18,15 @@ def tutorial(request):
     return render(request, 'survey/tutorial.html', context)
 
 def policy(request):
-    p = None
-    if request.METHOD == "GET":
-        if request.GET['person'] == '':
+    p = request.GET.get('person', None)
+
+    if p is None:
             p = Person.objects.get(person_id='4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
-        else:
-            expert = request.GET['e'].lower() == 't'
-            consent = request.GET['c'].lower() == 'c'
-            p = Person(expert_class=expert, consent_accepted=consent)
-            p.save()
+    else:
+        expert = request.GET.get('e', '').lower() == 't'
+        consent = request.GET.get('c', '').lower() == 'c'
+        p = Person(expert_class=expert, consent_accepted=consent)
+        p.save()
     actions = Action.objects.all()
     action_list = []
     for a in actions:
