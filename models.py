@@ -52,8 +52,8 @@ class PolicyAction(models.Model):
 
 
 class PolicyTag(models.Model):
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-    owner = models.ForeignKey(Person, on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, default=None)
+    owner = models.ForeignKey(Person, on_delete=models.CASCADE, default=None)
     priority = models.IntegerField(default=-1)
 
 
@@ -61,6 +61,6 @@ class Policies(models.Model):
     policy_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     tags = models.ManyToManyField(PolicyTag)
     actions = models.ManyToManyField(PolicyAction)
-    owner = models.ForeignKey(Person, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Person, on_delete=models.CASCADE, default=None)
     time_to_generate = models.FloatField()
     generated = models.BooleanField(default=False)
