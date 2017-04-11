@@ -31,7 +31,7 @@ $(function() {
     $('#default-toggle').change(function() {
         setToggles()
     });
-    $('.toggle,.btn,.btn-success').each(function() {
+    $('.toggle.btn.btn-success').each(function() {
         if ($(this).attr('id') !== 'default-toggle') {
             setAction($(this).attr('id'), $(this).prop('checked'))
         }

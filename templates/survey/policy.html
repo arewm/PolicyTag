@@ -24,7 +24,7 @@
     <script src="/static/survey/js/editable-tag.js"></script>
     <script>
         var policyNumber = 0;
-        var seconds = Date.now() / 1000;
+        var seconds = Date.now();
         function clearPolicy() {
             // remove all tags from the workspace
             $('#workspace').children('.ui-draggable').each(function () {
@@ -54,9 +54,9 @@
             // only continue if we have some tags
             if ($('#workspace').children('.ui-draggable').length) {
                 // submit form to store in database
-                $('#policy_time').attr('value', seconds - Date.now()/1000 );
+                $('#policy_time').attr('value', (Date.now() - seconds)/1000 );
                 $('#policy_specification').submit();
-                seconds = Date.now()/1000;
+                seconds = Date.now();
             }
         }
         $(document).ready(function () {
