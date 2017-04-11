@@ -10,28 +10,24 @@ $(document).ready(function () {
             data: frm.serialize(),
             success: function (data) {
                 // we have successfully submitted, so make the policy tag
-                // TODO finish this!
-                // TODO will have to move code up from lower down to create the policy tag
-                console.log(data);
                 var resp = data;
                 var viewableText = lastTag.clone();
                 viewableText.html(resp.text);
                 viewableText.removeClass("write-in-me");
                 viewableText.addClass("move-me ui-draggable ui-draggable-handle");
                 viewableText.attr("id", resp.id);
-                console.log(viewableText);
                 var customTag = $('#custom-' + resp.category);
-                console.log(customTag[0]);
-                console.log(customTag.parent()[0]);
+                // append the custom tag element and replace the current custom tag with the new one
                 customTag.parent().append(lastTag);
                 customTag.replaceWith(viewableText);
                 makeDraggable();
                 lastTag = null;
             },
             error: function (data) {
-                console.log('error');
                 alert("Something went wrong!" + data);
-                // and now reset the policy
+                var customTag = $('#custom-' + resp.category);
+                customTag.parent().append(lastTag);
+                lastTag = null;
             }
         });
         return false;
@@ -84,12 +80,8 @@ function editableTextBlurred() {
     if (html !== "") {
         // determine what category we are in
         var category = lastTag.attr('id').slice(7);
+        // submit the custom tag
         submitCustomTag(category, html);
-
-        // append the custom tag element and replace the current custom tag with the new one
-        //$(this).parent().append(lastTag);
-        //$(this).replaceWith(viewableText);
-        //makeDraggable();
     } else {
         $(this).replaceWith(lastTag);
     }
