@@ -1,4 +1,4 @@
-import logging
+import sys
 
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -8,7 +8,6 @@ from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
 import re
 
-logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -47,12 +46,13 @@ def policy(request):
     return render(request, 'survey/policy.html', context)
 
 def submit_policy(request):
-    logger.error(request)
+    print(request, file=sys.stderr)
+    print(request.POST, file=sys.stderr)
     p = Person.objects.get(person_id=request.POST['person'])
     new_policy = Policies(owner=p, time_to_generate=request.POST['time'])
 
     # get GUIDs by removing the first character
-    logger.error(request.POST['action'])
+    print(request.POST.get('action', []), file=sys.stderr)
     actions = request.POST.get('action', [])
     action_list = [a[1:] for a in actions]
     for a in Action.objects.all():
