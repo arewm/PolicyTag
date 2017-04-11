@@ -53,7 +53,8 @@ def submit_policy(request):
 
     # get GUIDs by removing the first character
     logger.error(request.POST['action'])
-    action_list = [a[1:] for a in request.POST['action']]
+    actions = request.POST.get('action', [])
+    action_list = [a[1:] for a in actions]
     for a in Action.objects.all():
         allowed = str(a.action_id) in action_list
         act = PolicyAction(a, allow=allowed)
