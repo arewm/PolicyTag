@@ -1,3 +1,5 @@
+import logging
+
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
@@ -5,6 +7,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
 import re
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -47,6 +51,7 @@ def submit_policy(request):
     new_policy = Policies(owner=p, time_to_generate=request.POST['time'])
 
     # get GUIDs by removing the first character
+    logger.error(request.POST['action'])
     action_list = [a[1:] for a in request.POST['action']]
     for a in Action.objects.all():
         allowed = str(a.action_id) in action_list
