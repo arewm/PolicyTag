@@ -47,6 +47,7 @@ def policy(request):
     return render(request, 'survey/policy.html', context)
 
 def submit_policy(request):
+    logger.error(request)
     p = Person.objects.get(person_id=request.POST['person'])
     new_policy = Policies(owner=p, time_to_generate=request.POST['time'])
 
