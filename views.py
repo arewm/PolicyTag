@@ -30,7 +30,7 @@ def policy(request):
     actions = Action.objects.all()
     action_list = []
     for a in actions:
-        action_list.append(('a{}'.format(a.action_id, a.text)))
+        action_list.append(('a{}'.format(a.action_id), a.text))
     classes = Tag.objects.values('tag_class').distinct().order_by('tag_class')
     tag_list = []
     for c in classes:
