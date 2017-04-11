@@ -37,7 +37,7 @@
         function setAction(action, state) {
             console.log(action);
             console.log(state);
-            var myId = "#" + action;
+            var myId = "#submit-" + action;
             var input;
             console.log($(myId));
             console.log($(myId).length);
@@ -48,7 +48,7 @@
                     input = document.createElement("input");
                     input.setAttribute("type", "hidden");
                     input.setAttribute("name", "action");
-                    input.setAttribute("id", action);
+                    input.setAttribute("id", myId);
                 }
                 input.setAttribute("value", action);
                 document.getElementById('policy_specification').appendChild(input);
