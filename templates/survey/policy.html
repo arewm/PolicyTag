@@ -39,6 +39,8 @@
             console.log(state);
             var myId = "#" + action;
             var input;
+            console.log($(myId));
+            console.log($(myId).length);
             if (state === true) {
                 if ($(myId).length) {
                     input = document.getElementById(action);
