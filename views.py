@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
 
-from .models import Tag
+from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
 import re
 
@@ -17,20 +18,56 @@ def tutorial(request):
     return render(request, 'survey/tutorial.html', context)
 
 def policy(request):
+    p = None
+    if request.METHOD == "GET":
+        if request.GET['person'] == '':
+            p = Person.objects.get(person_id='4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
+        else:
+            expert = request.GET['e'].lower() == 't'
+            consent = request.GET['c'].lower() == 'c'
+            p = Person(expert_class=expert, consent_accepted=consent)
+            p.save()
+    actions = Action.objects.all()
+    action_list = []
+    for a in actions:
+        action_list.append(('a{}'.format(a.action_id, a.text)))
     classes = Tag.objects.values('tag_class').distinct().order_by('tag_class')
     tag_list = []
     for c in classes:
         tags = Tag.objects.filter(tag_class=c['tag_class']).order_by('text')
         for t in tags:
-            t.tag_id = 'a{}'.format(t.tag_id)
+            t.tag_id = 't{}'.format(t.tag_id)
         tag_list.append((c['tag_class'], tags))
     #tag_list = Tag.objects.order_by('tag_class', 'text')
-    context = {'classes': classes,'tags': tag_list, 'ids': ''}
+    context = {'person': p.person_id, 'actions': action_list, 'classes': classes,'tags': tag_list, 'ids': ''}
     return render(request, 'survey/policy.html', context)
 
 def submit_policy(request):
-    context = {'text': request.POST}
-    return render(request, 'survey/index.html', context)
+    p = Person.objects.get(person_id=request.POST['person'])
+    new_policy = Policies(owner=p, time_to_generate=request.POST['time'])
+
+    # get GUIDs by removing the first character
+    action_list = [a[1:] for a in request.POST['action']]
+    for a in Action.objects.all():
+        allowed = str(a.action_id) in action_list
+        act = PolicyAction(a, allow=allowed)
+        act.save()
+        new_policy.actions.add(act)
+
+    my_tags = PolicyTag.objects.get(owner=p)
+    for t in request.POST['tag']:
+        tag = Tag.objects.get(tag_id=t[1:])[0]
+
+        try:
+            pt = my_tags.filter(tag=tag).get()
+        except ObjectDoesNotExist:
+            pt = PolicyTag(tag=tag, owner=p)
+            pt.save()
+        new_policy.tags.add(pt)
+    new_policy.save()
+
+    response = {}
+    return JsonResponse(response)
 
 def custom_tag(request):
     response = {'id': 'a_test_tag_id', 'text': request.POST['tag'], 'category': request.POST['category']}

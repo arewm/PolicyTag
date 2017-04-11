@@ -53,7 +53,8 @@ class PolicyAction(models.Model):
 
 class PolicyTag(models.Model):
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-    priority = models.IntegerField()
+    owner = models.ForeignKey(Person, on_delete=models.CASCADE)
+    priority = models.IntegerField(default=-1)
 
 
 class Policies(models.Model):

@@ -24,6 +24,7 @@
     <script src="/static/survey/js/editable-tag.js"></script>
     <script>
         var policyNumber = 0;
+        var seconds = Date.now() / 1000;
         function clearPolicy() {
             // remove all tags from the workspace
             $('#workspace').children('.ui-draggable').each(function () {
@@ -53,7 +54,9 @@
             // only continue if we have some tags
             if ($('#workspace').children('.ui-draggable').length) {
                 // submit form to store in database
+                $('#policy_time').attr('value', seconds - Date.now()/1000 );
                 $('#policy_specification').submit();
+                seconds = Date.now()/1000;
             }
         }
         $(document).ready(function () {
@@ -95,9 +98,12 @@
 <body>
 <form id="policy_specification" action="{% url 'submit_policy' %}" method="post">
     {% csrf_token %}
+    <input type="hidden" name="person" value="{{ person }}">
+    <input id="policy_time" type="hidden" name="time" value="">
 </form>
 <form id="custom_tag" action="{% url 'custom_tag' %}" method="post">
     {% csrf_token %}
+    <input type="hidden" name="person" value="{{ person }}">
 </form>
 <div id="top_row" class="row">
     <div id="suggestions">
@@ -159,7 +165,13 @@
             <span class="label label-default" style="font-size: 100%;">Default action preference</span>
         </div>
         <div class="checkbox">
-            <label>
+            {% for action_id, action_text in actions %}
+                <label>
+                <input id="{{ action_id }}" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                       data-offstyle="danger" data-on="Allow" data-off="Deny"> {{ action_text }}
+            </label><br>
+            {% endfor %}
+            <!--label>
                 <input id="toggle1" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
                        data-offstyle="danger" data-on="Allow" data-off="Deny"> Back up to cloud
             </label><br>
@@ -182,7 +194,7 @@
                 <input id="toggle5" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
                        data-offstyle="danger" data-on="Allow" data-off="Deny">
                 Share to public
-            </label><br>
+            </label><br-->
         </div>
     </div>
 </div>
