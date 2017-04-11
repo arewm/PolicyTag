@@ -41,7 +41,7 @@ $(document).ready(function () {
 function divClicked() {
     lastTag = $(this);
     var editableText = $("<textarea />");
-    editableText.id(lastTag.attr("id"));
+    editableText.attr("id", lastTag.attr("id"));
     editableText.val("");
     $(this).replaceWith(editableText);
     editableText.focus();
