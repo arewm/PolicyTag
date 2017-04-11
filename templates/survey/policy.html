@@ -24,69 +24,71 @@
     <script src="/static/survey/js/editable-tag.js"></script>
     <script>
         function setToggles() {
-    state = $('#default-toggle').prop('checked') ? 'on' : 'off';
+            state = $('#default-toggle').prop('checked') ? 'on' : 'off';
             {% for action_id, action_text in actions %}
                 $('#{{ action_id }}').bootstrapToggle(state);
             {% endfor %}
-    /*$('#toggle1').bootstrapToggle(state);
-    $('#toggle2').bootstrapToggle(state);
-    $('#toggle3').bootstrapToggle(state);
-    $('#toggle4').bootstrapToggle(state);
-    $('#toggle5').bootstrapToggle(state);*/
-}
-function setAction(action, state) {
-    var myId = "#" + action;
-    var input;
-    if (state === true) {
-        if ($(myId).length) {
-            input = document.getElementById(action);
-        } else {
-            input = document.createElement("input");
-            input.setAttribute("type", "hidden");
-            input.setAttribute("name", "action");
-            input.setAttribute("id", action);
+            /*$('#toggle1').bootstrapToggle(state);
+             $('#toggle2').bootstrapToggle(state);
+             $('#toggle3').bootstrapToggle(state);
+             $('#toggle4').bootstrapToggle(state);
+             $('#toggle5').bootstrapToggle(state);*/
         }
-        input.setAttribute("value", action);
-        document.getElementById('policy_specification').appendChild(input);
-    } else {
-        if ($(myId).length) {
-            $(myId).remove();
-        }
-    }
+        function setAction(action, state) {
+            console.log(action);
+            console.log(state);
+            var myId = "#" + action;
+            var input;
+            if (state === true) {
+                if ($(myId).length) {
+                    input = document.getElementById(action);
+                } else {
+                    input = document.createElement("input");
+                    input.setAttribute("type", "hidden");
+                    input.setAttribute("name", "action");
+                    input.setAttribute("id", action);
+                }
+                input.setAttribute("value", action);
+                document.getElementById('policy_specification').appendChild(input);
+            } else {
+                if ($(myId).length) {
+                    $(myId).remove();
+                }
+            }
 
-}
-$(function() {
-    $('#default-toggle').change(function() {
-        setToggles()
-    });
-    $('.toggle.btn.btn-success').each(function() {
-        var toggle = $(this).find('input');
-        if (toggle.attr('id') !== 'default-toggle') {
-            setAction(toggle.attr('id'), toggle.prop('checked'))
         }
-    });
+        $(function() {
+            $('#default-toggle').change(function() {
+                setToggles()
+            });
+            $('.toggle.btn.btn-success').each(function() {
+                var toggle = $(this).find('input');
+                if (toggle.attr('id') !== 'default-toggle') {
+                    setAction(toggle.attr('id'), toggle.prop('checked'))
+                }
+            });
 
-    {% for action_id, action_text in actions %}
-    $('#{{ action_id }}').change(function() {
-        setAction("{{ action_id }}", $('#{{ action_id }}').prop('checked'))
-    });
-    {% endfor %}
-    /*$('#toggle1').change(function(){
-        setAction("action1", $('#toggle1').prop('checked'))
-    });
-    $('#toggle2').change(function(){
-        setAction("action2", $('#toggle2').prop('checked'))
-    });
-    $('#toggle3').change(function(){
-        setAction("action3", $('#toggle3').prop('checked'))
-    });
-    $('#toggle4').change(function(){
-        setAction("action4", $('#toggle4').prop('checked'))
-    });
-    $('#toggle5').change(function(){
-        setAction("action5", $('#toggle5').prop('checked'))
-    })*/
-});
+            {% for action_id, action_text in actions %}
+                $('#{{ action_id }}').change(function() {
+                    setAction("{{ action_id }}", $('#{{ action_id }}').prop('checked'))
+                });
+            {% endfor %}
+            /*$('#toggle1').change(function(){
+             setAction("action1", $('#toggle1').prop('checked'))
+             });
+             $('#toggle2').change(function(){
+             setAction("action2", $('#toggle2').prop('checked'))
+             });
+             $('#toggle3').change(function(){
+             setAction("action3", $('#toggle3').prop('checked'))
+             });
+             $('#toggle4').change(function(){
+             setAction("action4", $('#toggle4').prop('checked'))
+             });
+             $('#toggle5').change(function(){
+             setAction("action5", $('#toggle5').prop('checked'))
+             })*/
+        });
     </script>
     <script>
         var policyNumber = 0;
@@ -233,9 +235,9 @@ $(function() {
         <div class="checkbox">
             {% for action_id, action_text in actions %}
                 <label>
-                <input id="{{ action_id }}" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
-                       data-offstyle="danger" data-on="Allow" data-off="Deny"> {{ action_text }}
-            </label><br>
+                    <input id="{{ action_id }}" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                           data-offstyle="danger" data-on="Allow" data-off="Deny"> {{ action_text }}
+                </label><br>
             {% endfor %}
             <!--label>
                 <input id="toggle1" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
