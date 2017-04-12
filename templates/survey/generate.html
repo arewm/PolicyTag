@@ -3,8 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <title>Policy generator</title>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/static/survey/css/main.css">
+    <link rel="stylesheet" href="/static/survey/css/rank.css">
+    <link rel="stylesheet" href="/static/survey/css/tags.css">
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/676d1f983a.js"></script>
+
+    <!--script src="/static/survey/js/change-action.js"></script-->
+    <script src="/static/survey/js/draggable-tag.js"></script>
+    <script src="/static/survey/js/editable-tag.js"></script>
+    <script>
+        function setToggles() {
+            state = $('#default-toggle').prop('checked') ? 'on' : 'off';
+            {% for action_id, action_text in actions %}
+                $('#{{ action_id }}').bootstrapToggle(state);
+            {% endfor %}
+            /*$('#toggle1').bootstrapToggle(state);
+             $('#toggle2').bootstrapToggle(state);
+             $('#toggle3').bootstrapToggle(state);
+             $('#toggle4').bootstrapToggle(state);
+             $('#toggle5').bootstrapToggle(state);*/
+        }
+        function setAction(action, state) {
+            console.log(action);
+            console.log(state);
+            var myId = "#submit-" + action;
+            var input;
+            console.log($(myId));
+            console.log($(myId).length);
+            if (state === true) {
+                if ($(myId).length) {
+                    input = document.getElementById(myId.slice(1));
+                } else {
+                    input = document.createElement("input");
+                    input.setAttribute("type", "hidden");
+                    input.setAttribute("name", "action");
+                    input.setAttribute("id", myId.slice(1));
+                }
+                input.setAttribute("value", action);
+                document.getElementById('policy_specification').appendChild(input);
+            } else {
+                if ($(myId).length) {
+                    $(myId).remove();
+                }
+            }
+
+        }
+        $(function() {
+            $('#default-toggle').change(function() {
+                setToggles()
+            });
+            $('.toggle.btn.btn-success').each(function() {
+                var toggle = $(this).find('input');
+                if (toggle.attr('id') !== 'default-toggle') {
+                    setAction(toggle.attr('id'), toggle.prop('checked'))
+                }
+            });
+
+            {% for action_id, action_text in actions %}
+                $('#{{ action_id }}').change(function() {
+                    setAction("{{ action_id }}", $('#{{ action_id }}').prop('checked'))
+                });
+            {% endfor %}
+            /*$('#toggle1').change(function(){
+             setAction("action1", $('#toggle1').prop('checked'))
+             });
+             $('#toggle2').change(function(){
+             setAction("action2", $('#toggle2').prop('checked'))
+             });
+             $('#toggle3').change(function(){
+             setAction("action3", $('#toggle3').prop('checked'))
+             });
+             $('#toggle4').change(function(){
+             setAction("action4", $('#toggle4').prop('checked'))
+             });
+             $('#toggle5').change(function(){
+             setAction("action5", $('#toggle5').prop('checked'))
+             })*/
+        });
+    </script>
+    <script>
+        var policyNumber = 0;
+        var seconds = Date.now();
+        function clearPolicy() {
+            // remove all tags from the workspace
+            $('#workspace').children('.ui-draggable').each(function () {
+                this.remove(); // "this" is the current element in the loop
+            });
+            // remove all tags from the policy specification
+            $('#policy_specification').children("input[name='tag']").each(function () {
+                this.remove();
+            });
+            // reset all toggles to default
+            setToggles();
+        }
+        function copyPolicy() {
+            var tagArray = $('<ul id="policy-' + policyNumber++ + '" class="list-group list-inline"/>');
+            tagArray = $('<div id="policy-' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body" style="padding:5px;"/>'));
+            $('#workspace').children('.ui-draggable').each(function () {
+                var tempTag = $(this).clone();
+                tempTag.removeClass('ui-draggable').removeClass('ui-draggable-dragging').removeClass('ui-draggable-handle');
+                tempTag.removeClass('moved-me').removeClass('removable');
+                tempTag.attr('style', '');
+                tempTag.attr('id', $(this).attr('id').slice(5));
+                tagArray.children()[0].append(tempTag[0]);
+            });
+            $('#policies').append(tagArray);
+        }
+        function savePolicy() {
+            // only continue if we have some tags
+            if ($('#workspace').children('.ui-draggable').length) {
+                // submit form to store in database
+                $('#policy_time').attr('value', (Date.now() - seconds)/1000 );
+                $('#policy_specification').submit();
+                seconds = Date.now();
+            }
+        }
+        $(document).ready(function () {
+            var frm = $('#policy_specification');
+            frm.submit(function () {
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        // we have successfully submitted, so put policy into bottom div
+                        copyPolicy();
+                        console.log(data);
+                        // and now reset the policy
+                        clearPolicy();
+                    },
+                    error: function (data) {
+                        console.log('error');
+                        alert("Something went wrong!" + data);
+                        // and now reset the policy
+                        clearPolicy();
+                    }
+                });
+                return false;
+            });
+            setToggles();
+        });
+        // function to hide linked tags
+        function toggleLinked(linked) {
+            if ($('#' + linked + "-check").is(":checked")) {
+                // we want to show if we are checked
+                $('#' + linked + "-group").show()
+            } else {
+                $('#' + linked + "-group").hide()
+            }
+        }
+    </script>
 </head>
 <body>
+<form id="policy_specification" action="{% url 'submit_policy' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="person" value="{{ person }}">
+    <input id="policy_time" type="hidden" name="time" value="">
+</form>
+<form id="custom_tag" action="{% url 'custom_tag' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="person" value="{{ person }}">
+</form>
+<div id="top_row" class="row">
+    <p> In order to continue to understand how your tags might interact in policies, please tell us how you
+    would specify the acions on the defined policy. We will only use tags that you included in your policies.</p>
 
+</div>
+
+<div id="mid_row" class="row">
+    <div id="workspace">
+        <div id="trashcompactor">
+            <span class="label label-default" style="font-size: 100%;">Workspace</span>
+        </div>
+        <div id="compactedtrash">
+            <i id="trash" class="fa fa-trash fa-4x" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div id="operation">
+        <div class="buff"></div>
+        <i class="fa fa-check fa-3x" aria-hidden="true" onclick="savePolicy()"></i>
+        <i class="fa fa-times fa-3x" aria-hidden="true" onclick="clearPolicy()"></i>
+    </div>
+    <div id="action">
+        <div class="checkbox">
+            <input id="default-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                   data-offstyle="danger" data-on="Allow" data-off="Deny">
+            <span class="label label-default" style="font-size: 100%;">Default action preference</span>
+        </div>
+        <div class="checkbox">
+            {% for action_id, action_text in actions %}
+                <label>
+                    <input id="{{ action_id }}" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                           data-offstyle="danger" data-on="Allow" data-off="Deny"> {{ action_text }}
+                </label><br>
+            {% endfor %}
+            <!--label>
+                <input id="toggle1" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                       data-offstyle="danger" data-on="Allow" data-off="Deny"> Back up to cloud
+            </label><br>
+            <label>
+                <input id="toggle2" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                       data-offstyle="danger" data-on="Allow" data-off="Deny">
+                Share to Friends circle
+            </label><br>
+            <label>
+                <input id="toggle3" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                       data-offstyle="danger" data-on="Allow" data-off="Deny">
+                Share to Acquaintances circle
+            </label><br>
+            <label>
+                <input id="toggle4" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                       data-offstyle="danger" data-on="Allow" data-off="Deny">
+                Share to family circle
+            </label><br>
+            <label>
+                <input id="toggle5" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                       data-offstyle="danger" data-on="Allow" data-off="Deny">
+                Share to public
+            </label><br-->
+        </div>
+    </div>
+</div>
+
+<div id="bottom_row" class="row">
+    <div id="policies">
+        <span class="label label-default" style="font-size: 100%;">Defined Policies</span>
+        <ul></ul>
+    </div>
+</div>
 </body>
 </html>
