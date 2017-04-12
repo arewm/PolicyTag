@@ -95,7 +95,7 @@ div#workspace{
     float: left;/**/
     width: 67%;
     height: 99%;
-    margin: 0;
+    margin: 0 1%;
     z-index: 0;
     background-color: #ccc;
     color: #666;
@@ -195,6 +195,7 @@ div#policies{
     float: left;
     width: 99%;
     height: 100%;
+    margin: 0 1%;
 
     overflow-y: scroll;
     /*background-color: lightyellow;/**/
