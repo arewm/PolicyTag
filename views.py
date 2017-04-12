@@ -84,6 +84,7 @@ def submit_policy(request):
 def custom_tag(request):
     print('\n\ncustom_tag', file=sys.stderr)
     print(request, file=sys.stderr)
+    print(request.POST, file=sys.stderr)
     p = Person.objects.get(person_id=request.POST['person'])
     print(p, file=sys.stderr)
     tag = Tag(text=request.POST['text'], category=request.POST['category'], custom=True, creator=p)
