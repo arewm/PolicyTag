@@ -48,7 +48,7 @@ function divClicked() {
 function submitCustomTag(category, text) {
     var tag = document.createElement("input");
     var cat = document.createElement("input");
-    var per = document.createElement("input");
+    //var per = document.createElement("input");
     tag.setAttribute("type", "hidden");
     tag.setAttribute("name", "tag");
     tag.setAttribute("value", text);
@@ -57,12 +57,12 @@ function submitCustomTag(category, text) {
     cat.setAttribute("name", "category");
     cat.setAttribute("value", category);
 
-    per.setAttribute("type", "hidden");
-    per.setAttribute("name", "person");
-    per.setAttribute("value", '');
+    //per.setAttribute("type", "hidden");
+    //per.setAttribute("name", "person");
+    //per.setAttribute("value", );
     document.getElementById('custom_tag').appendChild(tag);
     document.getElementById('custom_tag').appendChild(cat);
-    document.getElementById('custom_tag').appendChild(per);
+    //document.getElementById('custom_tag').appendChild(per);
     frm = $('#custom_tag').submit();
     frm.children().each( function() {
         if ($(this).attr('name') !== 'csrfmiddlewaretoken') {
