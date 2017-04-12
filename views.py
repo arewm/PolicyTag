@@ -1,7 +1,7 @@
 import sys
 
-from django.shortcuts import render
-from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse, Http404
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
@@ -59,8 +59,8 @@ def submit_policy(request):
         # Create the necessary PolicyAction if it does not exist
         allowed = str(a.action_id) in action_list
         try:
-            act = PolicyAction.objects.get(action_id=a, allow=allowed)
-        except ObjectDoesNotExist:
+            act = get_object_or_404(PolicyAction, action_id=a, allow=allowed)
+        except Http404:
             act = PolicyAction(action_id=a, allow=allowed)
             act.save()
         # add the policy actions to the new policy
@@ -69,11 +69,11 @@ def submit_policy(request):
     my_tags = PolicyTag.objects.get(owner=p)
     print(request.POST.getlist('tag'), file=sys.stderr)
     for t in request.POST.getlist('tag'):
-        tag = Tag.objects.get(tag_id=t[1:])[0]
+        tag = get_object_or_404(Tag, tag_id=t[1:])
 
         try:
             pt = my_tags.filter(tag=tag).get()
-        except ObjectDoesNotExist:
+        except Http404:
             pt = PolicyTag(tag=tag, owner=p)
             pt.save()
         new_policy.tags.add(pt)
