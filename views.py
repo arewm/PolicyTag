@@ -65,20 +65,16 @@ def submit_policy(request):
         # add the policy actions to the new policy
         new_policy.actions.add(act)
 
-    try:
-        my_tags = get_object_or_404(PolicyTag, owner=p)
-    except Http404:
-        my_tags = PolicyTag.objects.none()
-    #my_tags = PolicyTag.objects.get(owner=p)
+    my_tags = PolicyTag.objects.filter(owner=p)
     print(request.POST.getlist('tag'), file=sys.stderr)
     for t in request.POST.getlist('tag'):
         tag = get_object_or_404(Tag, tag_id=t[1:])
 
-        try:
-            pt = my_tags.filter(tag=tag).get()
-        except ObjectDoesNotExist:
+        if not my_tags.filter(tag=tag):
             pt = PolicyTag(tag=tag, owner=p)
             pt.save()
+        else:
+            pt = my_tags.filter(tag=tag).get()
         new_policy.tags.add(pt)
     new_policy.save()
 
