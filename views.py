@@ -36,7 +36,7 @@ def policy(request):
         tags = Tag.objects.filter(tag_class=c['tag_class']).order_by('text')
         for t in tags:
             t.tag_id = 't{}'.format(t.tag_id)
-        tag_list.append((c['tag_class'], tags))
+        tag_list.extend([(c['tag_class'], t) for t in tags if t.creator is None])
     #tag_list = Tag.objects.order_by('tag_class', 'text')
     context = {'person': p.person_id, 'actions': action_list, 'classes': classes,'tags': tag_list, 'ids': ''}
     return render(request, 'survey/policy.html', context)
