@@ -74,10 +74,22 @@ def submit_policy(request):
     return JsonResponse(response)
 
 def custom_tag(request):
+    # create a custom tag as long as it does not already exist as a system or this-user tag
+    response = {'new': 'false', 'category': request.POST['category']}
     p = Person.objects.get(person_id=request.POST['person'])
-    tag = Tag(text=request.POST['tag'], tag_class=request.POST['category'], custom=True, creator=p)
-    tag.save()
-    response = {'id': 't{}'.format(tag.tag_id), 'text': request.POST['tag'], 'category': request.POST['category']}
+    try:
+        get_object_or_404(Tag, text=request.POST['tag'].strip(), tag_class=request.POST['category'], creator=None)
+    except Http404:
+        # we could not find the tag as a system tag
+        try:
+            get_object_or_404(Tag, text=request.POST['tag'].strip(), tag_class=request.POST['category'], creator=p)
+        except Http404:
+            # we could not find the tag in those owned by this user
+            tag = Tag(text=request.POST['tag'].strip(), tag_class=request.POST['category'], custom=True, creator=p)
+            tag.save()
+            response['new'] = 'true'
+            response['id'] = 't{}'.format(tag.tag_id)
+            response['text'] = tag.text
     return JsonResponse(response)
 
 

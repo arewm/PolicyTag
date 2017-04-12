@@ -11,22 +11,27 @@ $(document).ready(function () {
             success: function (data) {
                 // we have successfully submitted, so make the policy tag
                 var resp = data;
-                var viewableText = lastTag.clone();
-                viewableText.html(resp.text);
-                viewableText.removeClass("write-in-me");
-                viewableText.addClass("move-me ui-draggable ui-draggable-handle");
-                viewableText.attr("id", resp.id);
                 var customTag = $('#custom-' + resp.category);
-                // append the custom tag element and replace the current custom tag with the new one
-                customTag.parent().append(lastTag);
-                customTag.replaceWith(viewableText);
-                makeDraggable();
+                if (resp.new) {
+                    var viewableText = lastTag.clone();
+                    viewableText.html(resp.text);
+                    viewableText.removeClass("write-in-me");
+                    viewableText.addClass("move-me ui-draggable ui-draggable-handle");
+                    viewableText.attr("id", resp.id);
+                    // append the custom tag element and replace the current custom tag with the new one
+                    customTag.parent().append(lastTag);
+                    customTag.replaceWith(viewableText);
+                    makeDraggable();
+                } else {
+                    alert("This tag already exists!");
+                    customTag.replaceWith(lastTag);
+                }
                 lastTag = null;
             },
             error: function (data) {
                 alert("Something went wrong!" + data);
                 var customTag = $('#custom-' + resp.category);
-                customTag.parent().append(lastTag);
+                customTag.replaceWith(lastTag);
                 lastTag = null;
             }
         });
