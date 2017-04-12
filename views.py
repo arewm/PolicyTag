@@ -1,6 +1,6 @@
 import sys
 
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404, _get_queryset
 from django.http import JsonResponse, Http404
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -8,6 +8,7 @@ from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
 import re
 
+policy_tag_queryset = _get_queryset(PolicyTag)
 
 # Create your views here.
 
@@ -77,7 +78,7 @@ def submit_policy(request):
 
         try:
             pt = my_tags.filter(tag=tag).get()
-        except ObjectDoesNotExist:
+        except policy_tag_queryset.models.DoesNotExist:
             pt = PolicyTag(tag=tag, owner=p)
             pt.save()
         new_policy.tags.add(pt)
