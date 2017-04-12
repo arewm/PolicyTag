@@ -74,8 +74,6 @@ def submit_policy(request):
     return JsonResponse(response)
 
 def custom_tag(request):
-    import sys
-    print(request.POST, file=sys.stderr)
     # create a custom tag as long as it does not already exist as a system or this-user tag
     response = {'new': 'false', 'category': request.POST['category']}
     p = Person.objects.get(person_id=request.POST['person'])
