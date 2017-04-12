@@ -1,8 +1,5 @@
-import sys
-
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, Http404
-from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
@@ -45,15 +42,11 @@ def policy(request):
     return render(request, 'survey/policy.html', context)
 
 def submit_policy(request):
-    print(request, file=sys.stderr)
-    print(request.POST, file=sys.stderr)
     p = Person.objects.get(person_id=request.POST['person'])
     new_policy = Policies(owner=p, time_to_generate=request.POST['time'])
 
     # get GUIDs by removing the first character
-    print(request.POST.getlist('action'), file=sys.stderr)
     action_list = [a[1:] for a in request.POST.getlist('action')]
-    print(action_list, file=sys.stderr)
     for a in Action.objects.all():
         # Create the necessary PolicyAction if it does not exist
         allowed = str(a.action_id) in action_list
@@ -66,7 +59,6 @@ def submit_policy(request):
         new_policy.actions.add(act)
 
     my_tags = PolicyTag.objects.filter(owner=p)
-    print(request.POST.getlist('tag'), file=sys.stderr)
     for t in request.POST.getlist('tag'):
         tag = get_object_or_404(Tag, tag_id=t[1:])
 
@@ -82,13 +74,8 @@ def submit_policy(request):
     return JsonResponse(response)
 
 def custom_tag(request):
-    print('\n\ncustom_tag', file=sys.stderr)
-    print(request, file=sys.stderr)
-    print(request.POST, file=sys.stderr)
     p = Person.objects.get(person_id=request.POST['person'])
-    print(p, file=sys.stderr)
     tag = Tag(text=request.POST['tag'], tag_class=request.POST['category'], custom=True, creator=p)
-    print(tag, file=sys.stderr)
     tag.save()
     response = {'id': 't{}'.format(tag.tag_id), 'text': request.POST['tag'], 'category': request.POST['category']}
     return JsonResponse(response)
