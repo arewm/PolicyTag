@@ -70,7 +70,7 @@ function submitCustomTag(category, text) {
     //document.getElementById('custom_tag').appendChild(per);
     frm = $('#custom_tag').submit();
     frm.children().each( function() {
-        if ($(this).attr('name') !== 'csrfmiddlewaretoken') {
+        if ($(this).attr('name') !== 'csrfmiddlewaretoken' && $(this).attr('name') !== 'person') {
             $(this).remove();
         }
     })
