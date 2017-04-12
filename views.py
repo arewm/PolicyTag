@@ -87,7 +87,7 @@ def custom_tag(request):
     print(request.POST, file=sys.stderr)
     p = Person.objects.get(person_id=request.POST['person'])
     print(p, file=sys.stderr)
-    tag = Tag(text=request.POST['tag'], category=request.POST['category'], custom=True, creator=p)
+    tag = Tag(text=request.POST['tag'], tag_class=request.POST['category'], custom=True, creator=p)
     print(tag, file=sys.stderr)
     tag.save()
     response = {'id': 't{}'.format(tag.tag_id), 'text': request.POST['tag'], 'category': request.POST['category']}
