@@ -82,7 +82,10 @@ def submit_policy(request):
     return JsonResponse(response)
 
 def custom_tag(request):
-    response = {'id': 'a_test_tag_id', 'text': request.POST['tag'], 'category': request.POST['category']}
+    p = Person.objects.get(person_id=request.POST['person'])
+    tag = Tag(text=request.POST['text'], category=request.POST['category'], custom=True, creator=p)
+    tag.save()
+    response = {'id': tag.tag_id, 'text': request.POST['tag'], 'category': request.POST['category']}
     return JsonResponse(response)
 
 
