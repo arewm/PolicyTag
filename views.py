@@ -52,8 +52,8 @@ def submit_policy(request):
     new_policy = Policies(owner=p, time_to_generate=request.POST['time'])
 
     # get GUIDs by removing the first character
-    print(request.POST.get('action', []), file=sys.stderr)
-    action_list = [a[1:] for a in request.POST.get('action', [])]
+    print(request.POST.getlist('action'), file=sys.stderr)
+    action_list = [a[1:] for a in request.POST.getlist('action')]
     print(action_list, file=sys.stderr)
     for a in Action.objects.all():
         # Create the necessary PolicyAction if it does not exist
@@ -67,8 +67,8 @@ def submit_policy(request):
         new_policy.actions.add(act)
 
     my_tags = PolicyTag.objects.get(owner=p)
-    print(request.POST.get('tag', []), file=sys.stderr)
-    for t in request.POST['tag']:
+    print(request.POST.getlist('tag'), file=sys.stderr)
+    for t in request.POST.getlist('tag'):
         tag = Tag.objects.get(tag_id=t[1:])[0]
 
         try:
