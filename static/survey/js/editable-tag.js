@@ -12,7 +12,7 @@ $(document).ready(function () {
                 // we have successfully submitted, so make the policy tag
                 var resp = data;
                 var customTag = $('#custom-' + resp.category);
-                if (resp.new) {
+                if (resp.new === 'true') {
                     var viewableText = lastTag.clone();
                     viewableText.html(resp.text);
                     viewableText.removeClass("write-in-me");
