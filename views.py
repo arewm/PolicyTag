@@ -102,7 +102,21 @@ def rank(request):
     #return HttpResponse('Hellow, you are at rank. {}'.format(request))
 
 def gen(request):
-    context = {}
+    p = request.GET.get('person', None)
+
+    if p is None:
+            p = Person.objects.get(person_id='4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
+    else:
+        expert = request.GET.get('e', '').lower() == 't'
+        consent = request.GET.get('c', '').lower() == 'c'
+        p = Person(expert_class=expert, consent_accepted=consent)
+        p.save()
+    actions = Action.objects.all()
+    action_list = []
+    for a in actions:
+        action_list.append(('a{}'.format(a.action_id), a.text))
+      #tag_list = Tag.objects.order_by('tag_class', 'text')
+    context = {'person': p.person_id, 'actions': action_list, 'ids': ''}
     return render(request, 'survey/generate.html', context)
 
 def survey(request):
