@@ -151,9 +151,8 @@ div#workspace{
 
 div#operation{
     float: left;/**/
-    width: 4%;
+    width: 6%;
     height: 100%;
-    margin: 0 1%;
     text-align: center;
 }
 div#operation .buff{
