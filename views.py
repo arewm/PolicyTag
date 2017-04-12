@@ -53,7 +53,7 @@ def submit_policy(request):
 
     # get GUIDs by removing the first character
     print(request.POST.get('action', []), file=sys.stderr)
-    action_list = request.POST.get('action', [])
+    action_list = [a[1:] for a in request.POST.get('action', [])]
     for a in Action.objects.all():
         # Create the necessary PolicyAction if it does not exist
         allowed = str(a.action_id) in action_list
