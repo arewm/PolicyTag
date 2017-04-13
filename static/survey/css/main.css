@@ -207,7 +207,7 @@ div#policies{
 }
 
 #next_button {
-    position: absolute;
-    bottom: 2%;
-    right: 2%;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
 }
