@@ -71,7 +71,7 @@
     <input type="hidden" name="rank" value="-1" id="saver_form_rank">
 </form>
 
-<form id="next_page" action="{% url 'generate' %}" method="post">
+<form id="next_page" action="{% url 'generator' %}" method="post">
     {% csrf_token %}
     <input type="hidden" name="person" value="{{ person }}">
       <input type="submit" name="button" id="next_button" value="Next" disabled/>
