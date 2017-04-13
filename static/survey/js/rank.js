@@ -37,7 +37,7 @@ setupFunction = null;
                         event.relatedTarget.style.left = "";
                         event.relatedTarget.style.top = "";
             }
-            event.relatedTarget.removeAttribute('valid');
+            event.target.removeAttribute('valid');
             var frm = $('#rank_saver');
             $.ajax({
                 type: frm.attr('method'),
