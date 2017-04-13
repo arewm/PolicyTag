@@ -12,7 +12,6 @@ setupFunction = null;
     interact('.js-drag')
         .draggable({max: Infinity})
         .on('dragstart', function (event) {
-            console.log('enter', num_policies);
             event.interaction.x = parseInt(window.getComputedStyle(event.target).left.slice(0, -2), 10);
             event.interaction.y = parseInt(window.getComputedStyle(event.target).top.slice(0, -2), 10);
             //event.interaction.x = parseInt(event.target.getAttribute('data-x'), 10) || 1000;

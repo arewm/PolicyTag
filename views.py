@@ -118,6 +118,8 @@ def rank(request):
 
 
 def save_rank(request):
+    import sys
+    print(request.POST, file=sys.stderr)
     p = request.POST.get('person', test_id)
     p = Person.objects.get(person_id=p)
 
