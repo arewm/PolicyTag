@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/static/survey/css/main.css">
+    <link rel="stylesheet" href="/static/survey/css/policy.css">
     <link rel="stylesheet" href="/static/survey/css/rank.css">
     <link rel="stylesheet" href="/static/survey/css/tags.css">
 
@@ -249,5 +249,11 @@
         <ul></ul>
     </div>
 </div>
+
+<form id="next_page" action="{% url 'rank' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="person" value="{{ person }}">
+    <input type="submit" name="button" id="next_button" value="Next" disabled/>
+</form>
 </body>
 </html>
