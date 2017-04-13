@@ -135,7 +135,7 @@ def save_rank(request):
     tag = get_object_or_404(Tag, tag_id=request.POST.get('tag')[1:])
 
     my_tag = get_object_or_404(PolicyTag, owner=p, tag=tag)
-    my_tag.priority = int(request.POST.get('rank'))
+    my_tag.priority = int(request.POST.get('rank', '-1'))
     my_tag.save()
     return HttpResponse('')
 
