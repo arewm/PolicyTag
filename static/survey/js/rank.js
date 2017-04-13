@@ -76,20 +76,7 @@ setupFunction = null;
                         document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
                     }
                     event.relatedTarget.removeAttribute('valid');
-                    //$('#rank_saver').submit()
-                    var frm = $('#rank_saver');
-                    $.ajax({
-                        type: frm.attr('method'),
-                        url: frm.attr('action'),
-                        data: frm.serialize(),
-                        success: function (data) {
-                            console.log('success')
-                        },
-                        error: function (data) {
-                            alert("Something went wrong!" + data);
-                        }
-                    });
-                    return false;
+                    document.getElementById('rank_saver').submit()
                 }
             })
             .on('dropactivate', function (event) {
