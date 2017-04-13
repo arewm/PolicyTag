@@ -111,7 +111,7 @@ def rank(request):
         insert_list.append((class_dict[i % 4], t))
         i += 1
     context = {'person': p.person_id, 'tags': insert_list, 'ids': ids}
-    context['end_div'] = '</div>' if len(tag_list) % 4 == 0 else ''
+    context['end_div'] = '' if len(tag_list) % 4 == 0 else '</div>'
     return render(request, 'survey/rank.html', context)
 
 
