@@ -32,53 +32,55 @@
 </head>
 <body>
 <div class="main">
-<!--<h2 class="heading">Tag Ranking</h2>-->
-<div style="width:100%">
-    <span class="label label-default" style="font-size: 150%;float:left;margin: 0 16px;">Tag Ranking</span>
-    <p> All of the tags that you used to generate your policies are on the right. In order to ensure that we can
-        understand
-        the relationship between all tags, please drag them into the relevant priority.</p>
-</div>
+    <!--<h2 class="heading">Tag Ranking</h2>-->
+    <div style="width:100%">
+        <span class="label label-default" style="font-size: 150%;float:left;margin: 0 16px;">Tag Ranking</span>
+        <p> All of the tags that you used to generate your policies are on the right. In order to ensure that we can
+            understand
+            the relationship between all tags, please drag them into the relevant priority.</p>
+    </div>
 
-<div class="dropzone-wrapper">
-    <div id="priority1" class="dropzone js-drop">Highest Priority</div>
-    <div id="priority2" class="dropzone js-drop">High Priority</div>
-    <div id="priority3" class="dropzone js-drop">Low Priority</div>
-    <div id="priority4" class="dropzone js-drop">Lowest Priority</div>
-</div>
+    <div class="dropzone-wrapper">
+        <div id="priority1" class="dropzone js-drop">Highest Priority</div>
+        <div id="priority2" class="dropzone js-drop">High Priority</div>
+        <div id="priority3" class="dropzone js-drop">Low Priority</div>
+        <div id="priority4" class="dropzone js-drop">Lowest Priority</div>
+    </div>
 
 
-<div class="tags">
-    {% if True %}
-        {% for c, t in tags %}
-            {% if c == 'first' %}
-                <div style="position:relative; height: 62px;">
+    <div class="tags">
+        {% if True %}
+            {% for c, t in tags %}
+                {% if c == 'first' %}
+                    <div style="position:relative; height: 62px;">
+                {% endif %}
+            <div id="{{ t.tag_id }}" class="draggable js-drag {{ t.tag_class }} {{ c }}">{{ t.text }}</div>
+            {% if c == 'fourth' %}
+                </div>
             {% endif %}
-        <div id="{{ t.tag_id }}" class="draggable js-drag {{ t.tag_class }} {{ c }}">{{ t.text }}</div>
-        {% if c == 'fourth' %}
-            </div>
+            {% endfor %}
+            {{ end_div }}
+        {% else %}
+            {% for c,t in tags %}
+                <div id="{{ t.tag_id }}" class="draggable js-drag">{{ t.text }}</div>
+            {% endfor %}
         {% endif %}
-        {% endfor %}
-        {{ end_div }}
-    {% else %}
-        {% for c,t in tags %}
-            <div id="{{ t.tag_id }}" class="draggable js-drag">{{ t.text }}</div>
-        {% endfor %}
-    {% endif %}
-</div>
+    </div>
 
-    <form id="rank_saver" action="{% url 'save_rank' %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="person" value="{{ person }}">
-        <input type="hidden" name="tag" value="" id="saver_form_tag">
-        <input type="hidden" name="rank" value="-1" id="saver_form_rank">
-    </form>
+    <div id="next_form">
+        <form id="rank_saver" action="{% url 'save_rank' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="person" value="{{ person }}">
+            <input type="hidden" name="tag" value="" id="saver_form_tag">
+            <input type="hidden" name="rank" value="-1" id="saver_form_rank">
+        </form>
 
-    <form id="next_page" action="{% url 'generator' %}" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="person" value="{{ person }}">
-        <input type="submit" name="button" id="next_button" value="Next" disabled/>
-    </form>
+        <form id="next_page" action="{% url 'generator' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="person" value="{{ person }}">
+            <input type="submit" name="button" id="next_button" value="Next" disabled/>
+        </form>
+    </div>
 </div>
 <script type="text/javascript">
     setupFunction('.js-drop', '{{ ids|safe }}')
