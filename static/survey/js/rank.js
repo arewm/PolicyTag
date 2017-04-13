@@ -64,19 +64,19 @@ setupFunction = null;
                 ondropactivate: function (event) {
                     addClass(event.relatedTarget, '-drop-possible');
                     event.relatedTarget.setAttribute('valid', 'false');
-                    $('#saver_form_tag').setAttribute('value', event.relatedTarget.getAttribute('id'));
+                    document.getElementById('saver_form_tag').setAttribute('value', event.relatedTarget.getAttribute('id'));
                 },
                 ondropdeactivate: function (event) {
                     removeClass(event.relatedTarget, '-drop-possible');
                     if (event.relatedTarget.getAttribute('valid') === 'false') {
                         event.relatedTarget.style.left = "";
                         event.relatedTarget.style.top = "";
-                        $('#saver_form_rank').setAttribute('value', '-1');
+                        document.getElementById('saver_form_rank').setAttribute('value', '-1');
                     } else {
-                        $('#saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(9));
+                        document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(9));
                     }
                     event.relatedTarget.removeAttribute('valid');
-                    $('#rank_saver').submit()
+                    document.getElementById('rank_saver').submit()
                 }
             })
             .on('dropactivate', function (event) {
