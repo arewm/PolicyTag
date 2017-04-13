@@ -201,8 +201,9 @@ div#policies{
     /*background-color: lightyellow;/**/
 }
 
-#next_button {
-    position: fixed;
+#next_form {
+    position: absolute;
+    width: 5%;
+    left: 95%;
     bottom: 0px;
-    right: 0px;
 }
