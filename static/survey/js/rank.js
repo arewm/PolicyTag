@@ -42,12 +42,8 @@ var start_valid = false;
                 if (start_valid) {
                     num_policies++;
                 }
-                console.log('invalid drop', num_policies)
-            } else {
-                if (!start_valid) {
-                    num_policies--;
-                }
-                console.log('valid drop', num_policies)
+            } else if (!start_valid) {
+                num_policies--;
             }
             document.getElementById('next_button').disabled = num_policies !== 0;
             event.target.removeAttribute('valid');
@@ -113,16 +109,12 @@ var start_valid = false;
                 addClass(event.target, '-drop-over');
                 event.relatedTarget.setAttribute('valid', 'true');
                 document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
-                //num_policies --;
-                //console.log('leave', num_policies)
                 //event.relatedTarget.textContent = 'I\'m in';
             })
             .on('dragleave', function (event) {
                 removeClass(event.target, '-drop-over');
                 event.relatedTarget.setAttribute('valid', 'false');
                 document.getElementById('saver_form_rank').setAttribute('value', '-1');
-                //num_policies ++;
-                //console.log('leave', num_policies)
                 //event.relatedTarget.textContent = 'Drag me…';
             })
             .on('drop', function (event) {

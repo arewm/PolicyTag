@@ -34,6 +34,20 @@
     </script>
 </head>
 <body>
+    <div id="next_form">
+        <form id="rank_saver" action="{% url 'save_rank' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="person" value="{{ person }}">
+            <input type="hidden" name="tag" value="" id="saver_form_tag">
+            <input type="hidden" name="rank" value="-1" id="saver_form_rank">
+        </form>
+
+        <form id="next_page" action="{% url 'generator' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="person" value="{{ person }}">
+            <input type="submit" name="button" id="next_button" value="Next" disabled/>
+        </form>
+    </div>
 <div class="main">
     <!--<h2 class="heading">Tag Ranking</h2>-->
     <div style="width:100%">
@@ -70,20 +84,6 @@
         {% endif %}
     </div>
 
-    <div id="next_form">
-        <form id="rank_saver" action="{% url 'save_rank' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="person" value="{{ person }}">
-            <input type="hidden" name="tag" value="" id="saver_form_tag">
-            <input type="hidden" name="rank" value="-1" id="saver_form_rank">
-        </form>
-
-        <form id="next_page" action="{% url 'generator' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="person" value="{{ person }}">
-            <input type="submit" name="button" id="next_button" value="Next" disabled/>
-        </form>
-    </div>
 </div>
 <script type="text/javascript">
     setupFunction('.js-drop', '{{ ids|safe }}')
