@@ -79,19 +79,15 @@ def custom_tag(request):
     # create a custom tag as long as it does not already exist as a system or this-user tag
     response = {'new': 'false', 'category': request.POST['category']}
     p = Person.objects.get(person_id=request.POST['person'])
-    try:
-        get_object_or_404(Tag, text=request.POST['tag'].strip(), tag_class=request.POST['category'], creator=None)
-    except Http404:
-        # we could not find the tag as a system tag
-        try:
-            get_object_or_404(Tag, text=request.POST['tag'].strip(), tag_class=request.POST['category'], creator=p)
-        except Http404:
-            # we could not find the tag in those owned by this user
-            tag = Tag(text=request.POST['tag'].strip(), tag_class=request.POST['category'], custom=True, creator=p)
-            tag.save()
-            response['new'] = 'true'
-            response['id'] = 't{}'.format(tag.tag_id)
-            response['text'] = tag.text
+    if not Tag.objects.filter(Q(text=request.POST['tag'].strip()) &
+                              Q(tag_class=request.POST['category']) &
+                              (Q(creator=None) | Q(creator=p))):
+        # we cannot find a system or user-created tag with the text and class provided
+        tag = Tag(text=request.POST['tag'].strip(), tag_class=request.POST['category'], custom=True, creator=p)
+        tag.save()
+        response['new'] = 'true'
+        response['id'] = 't{}'.format(tag.tag_id)
+        response['text'] = tag.text
     return JsonResponse(response)
 
 
@@ -103,19 +99,11 @@ def rank(request):
     p = request.GET.get('person', '4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
     p = Person.objects.get(person_id=p)
 
-    # tag_list = Tag.objects.order_by('tag_class', 'text')
-    #tag_list = [pt.tag for pt in PolicyTag.objects.filter(Q(owner=None) | Q(owner=p))]
     tag_list = [pt.tag for pt in PolicyTag.objects.filter(owner=p)]
     tag_list.sort(key=custom_tag_order)
     for t in tag_list:
         t.tag_id = 'a{}'.format(t.tag_id)
     ids = re.sub(r'[\'"]', '', str(['#{}'.format(t.tag_id) for t in tag_list])[1:-1])
-    # ids = ['#{}'.format(t.tag_id) for t in tag_list]
-    # ids.extend(['#drag1', '#drag2', '#drag3', '#drag4'])
-    # ids = ['#drag1', '#drag2', '#drag3', '#drag4', '#test']
-    # ids = str(ids)[1:-1]
-    # ids = re.sub(r'[\'"]', '', str(ids)[1:-1])
-    # ids = [t.tag_id for t in tag_list]
     insert_list = []
     class_dict = {0: 'first', 1: 'second', 2: 'third', 3: 'fourth'}
     i = 0
