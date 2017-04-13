@@ -45,7 +45,6 @@ setupFunction = null;
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (data) {
-                    console.log('success')
                     document.getElementById('saver_form_tag').setAttribute('value', '');
                     document.getElementById('saver_form_rank').setAttribute('value', '-1');
                 },
@@ -88,11 +87,6 @@ setupFunction = null;
                 },
                 ondropdeactivate: function (event) {
                     removeClass(event.relatedTarget, '-drop-possible');
-                    /*if (event.relatedTarget.getAttribute('valid') === 'false') {
-                        event.relatedTarget.style.left = "";
-                        event.relatedTarget.style.top = "";
-                    }
-                    event.relatedTarget.removeAttribute('valid');*/
                 }
             })
             .on('dropactivate', function (event) {
