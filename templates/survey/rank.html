@@ -58,6 +58,7 @@
             </div>
         {% endif %}
         {% endfor %}
+        {{ end_div }}
     {% else %}
         {% for c,t in tags %}
             <div id="{{ t.tag_id }}" class="draggable js-drag">{{ t.text }}</div>
