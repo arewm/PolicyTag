@@ -16,6 +16,7 @@ setupFunction = null;
             event.interaction.y = parseInt(window.getComputedStyle(event.target).top.slice(0, -2), 10);
             //event.interaction.x = parseInt(event.target.getAttribute('data-x'), 10) || 1000;
             //event.interaction.y = parseInt(event.target.getAttribute('data-y'), 10) || 10;
+            document.getElementById('saver_form_tag').setAttribute('value', event.target.getAttribute('id'));
         })
         .on('dragmove', function (event) {
             event.interaction.x += event.dx;
@@ -45,6 +46,8 @@ setupFunction = null;
                 data: frm.serialize(),
                 success: function (data) {
                     console.log('success')
+                    document.getElementById('saver_form_tag').setAttribute('value', '');
+                    document.getElementById('saver_form_rank').setAttribute('value', '-1');
                 },
                 error: function (data) {
                     alert("Something went wrong!" + data);
@@ -118,7 +121,6 @@ setupFunction = null;
             .on('dragenter', function (event) {
                 addClass(event.target, '-drop-over');
                 event.relatedTarget.setAttribute('valid', 'true');
-                document.getElementById('saver_form_tag').setAttribute('value', event.target.getAttribute('id'));
                 document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
                 //event.relatedTarget.textContent = 'I\'m in';
             })
