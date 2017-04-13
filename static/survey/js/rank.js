@@ -1,4 +1,5 @@
 setupFunction = null;
+var start_valid = false;
 
 (function (interact) {
 
@@ -12,6 +13,7 @@ setupFunction = null;
     interact('.js-drag')
         .draggable({max: Infinity})
         .on('dragstart', function (event) {
+            start_valid = event.target.style.left !== "";
             event.interaction.x = parseInt(window.getComputedStyle(event.target).left.slice(0, -2), 10);
             event.interaction.y = parseInt(window.getComputedStyle(event.target).top.slice(0, -2), 10);
             //event.interaction.x = parseInt(event.target.getAttribute('data-x'), 10) || 1000;
@@ -40,7 +42,9 @@ setupFunction = null;
                 num_policies++;
                 console.log('invalid drop', num_policies)
             } else {
-                num_policies--;
+                if (!start_valid) {
+                    num_policies--;
+                }
                 console.log('valid drop', num_policies)
             }
             document.getElementById('next_button').disabled = num_policies !== 0;
