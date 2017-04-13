@@ -64,16 +64,16 @@ setupFunction = null;
                 ondropactivate: function (event) {
                     addClass(event.relatedTarget, '-drop-possible');
                     event.relatedTarget.setAttribute('valid', 'false');
-                    $('#saver_form_tag').attr('value', event.relatedTarget.attr('id'));
+                    $('#saver_form_tag').setAttribute('value', event.relatedTarget.getAttribute('id'));
                 },
                 ondropdeactivate: function (event) {
                     removeClass(event.relatedTarget, '-drop-possible');
                     if (event.relatedTarget.getAttribute('valid') === 'false') {
                         event.relatedTarget.style.left = "";
                         event.relatedTarget.style.top = "";
-                        $('#saver_form_rank').attr('value', '-1');
+                        $('#saver_form_rank').setAttribute('value', '-1');
                     } else {
-                        $('#saver_form_rank').attr('value', event.target.attr('id').slice(9));
+                        $('#saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(9));
                     }
                     event.relatedTarget.removeAttribute('valid');
                     $('#rank_saver').submit()
