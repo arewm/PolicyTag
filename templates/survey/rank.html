@@ -66,7 +66,6 @@
     {% endif %}
 </div>
 
-<div id="forms">
     <form id="rank_saver" action="{% url 'save_rank' %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="person" value="{{ person }}">
@@ -79,7 +78,6 @@
         <input type="hidden" name="person" value="{{ person }}">
         <input type="submit" name="button" id="next_button" value="Next" disabled/>
     </form>
-</div>
 <script type="text/javascript">
     setupFunction('.js-drop', '{{ ids|safe }}')
 </script>
