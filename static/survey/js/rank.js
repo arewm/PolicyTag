@@ -96,6 +96,8 @@ setupFunction = null;
                 // change style if it was previously not active
                 if (active === 0) {
                     addClass(event.target, '-drop-possible');
+                    num_policies --;
+                    console.log('enter', num_policies)
                     //event.target.textContent = 'Drop me here!';
                 }
 
@@ -117,8 +119,6 @@ setupFunction = null;
                 addClass(event.target, '-drop-over');
                 event.relatedTarget.setAttribute('valid', 'true');
                 document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
-                num_policies --;
-                console.log('enter', num_policies)
                 //event.relatedTarget.textContent = 'I\'m in';
             })
             .on('dragleave', function (event) {
