@@ -9,8 +9,21 @@
     <script src="/static/survey/js/interact.js"></script>
     <script src="/static/survey/js/rank.js"></script>
     <script>
-        $(document).ready(function () {
-        });
+        function record_rank() {
+            var frm = $('#rank_saver');
+            $.ajax({
+                type: frm.attr('method'),
+                url: frm.attr('action'),
+                data: frm.serialize(),
+                success: function (data) {
+                    console.log('success')
+                },
+                error: function (data) {
+                    alert("Something went wrong!" + data);
+                }
+            });
+            return false;
+        };
     </script>
 </head>
 <body>
@@ -48,7 +61,7 @@
     {% endif %}
 </div>
 
-<form id="rank_saver" action="{% url 'save_rank' %}" method="post">
+<form id="rank_saver" action="{% url 'save_rank' %}" method="post" onsubmit="record_rank()">
     {% csrf_token %}
     <input type="hidden" name="person" value="{{ person }}">
     <input type="hidden" name="tag" value="" id="saver_form_tag">
@@ -57,22 +70,6 @@
 
 <script type="text/javascript">
     setupFunction('.js-drop', '{{ ids|safe }}');
-
-    var frm = $('#rank_saver');
-    frm.submit(function () {
-        $.ajax({
-            type: frm.attr('method'),
-            url: frm.attr('action'),
-            data: frm.serialize(),
-            success: function (data) {
-                console.log('success')
-            },
-            error: function (data) {
-                alert("Something went wrong!" + data);
-            }
-        });
-        return false;
-    });
 </script>
 
 </body>
