@@ -7,6 +7,27 @@
     <link rel="stylesheet" href="/static/survey/css/tags.css">
     <script src="/static/survey/js/interact.js"></script>
     <script src="/static/survey/js/rank.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            var frm = $('#rank_saver');
+            frm.submit(function () {
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    success: function (data) {
+                        console.log('success')
+                    },
+                    error: function (data) {
+                        alert("Something went wrong!" + data);
+                    }
+                });
+                return false;
+            });
+            setToggles();
+        });
+    </script>
 </head>
 <body >
 <!--<h2 class="heading">Tag Ranking</h2>-->
@@ -41,6 +62,13 @@
     {% endfor %}
 {% endif %}
 </div>
+
+<form id="rank_saver" action="{% url 'save_rank' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="person" value="{{ person }}">
+    <input type="hidden" name="tag" value="" id="saver_form_tag">
+    <input type="hidden" name="rank" value="-1" id="saver_form_rank">
+</form>
 
 <script type="text/javascript">
     setupFunction('.js-drop', '{{ ids|safe }}')

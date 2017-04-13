@@ -1,26 +1,27 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse, HttpResponse, Http404
+from django.db.models import Q
 
 from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
 import re
 
-# Create your views here.
 
 def index(request):
     context = {}
     return render(request, 'survey/index.html', context)
-    #return HttpResponse('Hello, world. You\'re at the index. {}'.format(request))
+
 
 def tutorial(request):
     context = {}
     return render(request, 'survey/tutorial.html', context)
 
+
 def policy(request):
     p = request.GET.get('person', None)
 
     if p is None:
-            p = Person.objects.get(person_id='4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
+        p = Person.objects.get(person_id='4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
     else:
         expert = request.GET.get('e', '').lower() == 't'
         consent = request.GET.get('c', '').lower() == 'c'
@@ -37,9 +38,10 @@ def policy(request):
         for t in tags:
             t.tag_id = 't{}'.format(t.tag_id)
         tag_list.append((c['tag_class'], tags))
-    #tag_list = Tag.objects.order_by('tag_class', 'text')
-    context = {'person': p.person_id, 'actions': action_list, 'classes': classes,'tags': tag_list, 'ids': ''}
+    # tag_list = Tag.objects.order_by('tag_class', 'text')
+    context = {'person': p.person_id, 'actions': action_list, 'classes': classes, 'tags': tag_list, 'ids': ''}
     return render(request, 'survey/policy.html', context)
+
 
 def submit_policy(request):
     p = Person.objects.get(person_id=request.POST['person'])
@@ -70,8 +72,8 @@ def submit_policy(request):
         new_policy.tags.add(pt)
     new_policy.save()
 
-    response = {}
-    return JsonResponse(response)
+    return HttpResponse('')
+
 
 def custom_tag(request):
     # create a custom tag as long as it does not already exist as a system or this-user tag
@@ -93,26 +95,47 @@ def custom_tag(request):
     return JsonResponse(response)
 
 
+def custom_tag_order(tag):
+    return '{} {}'.format(tag.tag_class, tag.tag.text)
+
+
 def rank(request):
-    tag_list = Tag.objects.order_by('tag_class', 'text')
+    p = request.GET.get('person', '4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
+    p = Person.objects.get(person_id=p)
+
+    # tag_list = Tag.objects.order_by('tag_class', 'text')
+    tag_list = [pt.tag for pt in PolicyTag.objects.filter(Q(creator=None) | Q(creator=p))]
+    tag_list.sort(key=custom_tag_order)
     for t in tag_list:
         t.tag_id = 'a{}'.format(t.tag_id)
-    ids = re.sub(r'[\'"]', '',str(['#{}'.format(t.tag_id) for t in tag_list])[1:-1])
-    #ids = ['#{}'.format(t.tag_id) for t in tag_list]
-    #ids.extend(['#drag1', '#drag2', '#drag3', '#drag4'])
-    #ids = ['#drag1', '#drag2', '#drag3', '#drag4', '#test']
-    #ids = str(ids)[1:-1]
-    #ids = re.sub(r'[\'"]', '', str(ids)[1:-1])
-    #ids = [t.tag_id for t in tag_list]
+    ids = re.sub(r'[\'"]', '', str(['#{}'.format(t.tag_id) for t in tag_list])[1:-1])
+    # ids = ['#{}'.format(t.tag_id) for t in tag_list]
+    # ids.extend(['#drag1', '#drag2', '#drag3', '#drag4'])
+    # ids = ['#drag1', '#drag2', '#drag3', '#drag4', '#test']
+    # ids = str(ids)[1:-1]
+    # ids = re.sub(r'[\'"]', '', str(ids)[1:-1])
+    # ids = [t.tag_id for t in tag_list]
     insert_list = []
     class_dict = {0: 'first', 1: 'second', 2: 'third', 3: 'fourth'}
-    i=0
+    i = 0
     for t in tag_list:
-        insert_list.append((class_dict[i%4], t))
+        insert_list.append((class_dict[i % 4], t))
         i += 1
-    context = {'tags': insert_list, 'ids':ids}
+    context = {'person': p.person_id, 'tags': insert_list, 'ids': ids}
     return render(request, 'survey/rank.html', context)
-    #return HttpResponse('Hellow, you are at rank. {}'.format(request))
+
+
+def save_rank(request):
+    p = request.POST.get('person', '4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
+    p = Person.objects.get(person_id=p)
+
+    tag = get_object_or_404(Tag, tag_id=request.POST.get('tag')[1:])
+
+    my_tag = get_object_or_404(PolicyTag, owner=p, tag=tag)
+    my_tag.priority = int(request.POST.get('rank'))
+    my_tag.save()
+    return HttpResponse('')
+
 
 def gen(request):
     p = request.GET.get('person', None)
@@ -128,14 +151,15 @@ def gen(request):
     action_list = []
     for a in actions:
         action_list.append(('a{}'.format(a.action_id), a.text))
-      #tag_list = Tag.objects.order_by('tag_class', 'text')
+    # tag_list = Tag.objects.order_by('tag_class', 'text')
     context = {'person': p.person_id, 'actions': action_list, 'ids': ''}
     return render(request, 'survey/generate.html', context)
+
 
 def survey(request):
     context = {}
     return render(request, 'survey/survey.html', context)
-    #return HttpResponse('Hello, you are at content. {}'.format(request))
+
 
 def end(request):
     context = {}
