@@ -10,10 +10,12 @@ setupFunction = null;
 
     // setup draggable elements.
     interact('.js-drag')
-        .draggable({ max: Infinity })
+        .draggable({max: Infinity})
         .on('dragstart', function (event) {
-            if (!event.target.hasAttribute('valid')) {
-                num_policies --;
+            if (event.target.style.left !== "") {
+                // If we are currently in a drop zone, increment the number of policies
+                num_policies++;
+                console.log('pick up', num_policies)
             }
             console.log('enter', num_policies);
             event.interaction.x = parseInt(window.getComputedStyle(event.target).left.slice(0, -2), 10);
@@ -32,17 +34,22 @@ setupFunction = null;
             }
             else {
                 event.target.style.left = event.interaction.x + 'px';
-                event.target.style.top  = event.interaction.y + 'px';
+                event.target.style.top = event.interaction.y + 'px';
             }
         })
         .on('dragend', function (event) {
             //event.target.setAttribute('data-x', event.interaction.x);
             //event.target.setAttribute('data-y', event.interaction.y);
-            if (event.target.getAttribute('valid') === 'false' ) {
-                        event.target.style.left = "";
-                        event.target.style.top = "";
+            if (event.target.getAttribute('valid') === 'false') {
+                event.target.style.left = "";
+                event.target.style.top = "";
+                num_policies++;
+                console.log('invalid drop', num_policies)
+            } else {
+                num_policies--;
+                console.log('valid drop', num_policies)
             }
-            document.getElementById('next_button').disabled = num_policies !== 0 ;
+            document.getElementById('next_button').disabled = num_policies !== 0;
             event.target.removeAttribute('valid');
             var frm = $('#rank_saver');
             $.ajax({
@@ -59,7 +66,7 @@ setupFunction = null;
             });
             return false;
         });
-    
+
 
     /**
      * Setup a given element as a dropzone.
@@ -80,7 +87,7 @@ setupFunction = null;
                 }
             })
             .on('dropactivate', function (event) {
-                var active = event.target.getAttribute('active')|0;
+                var active = event.target.getAttribute('active') | 0;
 
                 // change style if it was previously not active
                 if (active === 0) {
@@ -91,7 +98,7 @@ setupFunction = null;
                 event.target.setAttribute('active', active + 1);
             })
             .on('dropdeactivate', function (event) {
-                var active = event.target.getAttribute('active')|0;
+                var active = event.target.getAttribute('active') | 0;
 
                 // change style if it was previously active
                 // but will no longer be active
@@ -106,14 +113,16 @@ setupFunction = null;
                 addClass(event.target, '-drop-over');
                 event.relatedTarget.setAttribute('valid', 'true');
                 document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
+                //num_policies --;
+                //console.log('leave', num_policies)
                 //event.relatedTarget.textContent = 'I\'m in';
             })
             .on('dragleave', function (event) {
                 removeClass(event.target, '-drop-over');
                 event.relatedTarget.setAttribute('valid', 'false');
                 document.getElementById('saver_form_rank').setAttribute('value', '-1');
-                num_policies ++;
-                console.log('leave', num_policies)
+                //num_policies ++;
+                //console.log('leave', num_policies)
                 //event.relatedTarget.textContent = 'Drag me…';
             })
             .on('drop', function (event) {
@@ -125,7 +134,7 @@ setupFunction = null;
             });
     }
 
-    function addClass (element, className) {
+    function addClass(element, className) {
         if (element.classList) {
             return element.classList.add(className);
         }
@@ -134,7 +143,7 @@ setupFunction = null;
         }
     }
 
-    function removeClass (element, className) {
+    function removeClass(element, className) {
         if (element.classList) {
             return element.classList.remove(className);
         }
@@ -145,11 +154,11 @@ setupFunction = null;
 
     interact(document).on('ready', function () {
         transformProp = 'transform' in document.body.style
-            ? 'transform': 'webkitTransform' in document.body.style
-            ? 'webkitTransform': 'mozTransform' in document.body.style
-            ? 'mozTransform': 'oTransform' in document.body.style
-            ? 'oTransform': 'msTransform' in document.body.style
-            ? 'msTransform': null;
+            ? 'transform' : 'webkitTransform' in document.body.style
+                ? 'webkitTransform' : 'mozTransform' in document.body.style
+                    ? 'mozTransform' : 'oTransform' in document.body.style
+                        ? 'oTransform' : 'msTransform' in document.body.style
+                            ? 'msTransform' : null;
     });
 
     setupFunction = setupDropzone;
