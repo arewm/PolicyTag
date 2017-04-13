@@ -34,6 +34,14 @@
     </script>
 </head>
 <body>
+<div class="main">
+    <!--<h2 class="heading">Tag Ranking</h2>-->
+    <div style="width:100%">
+        <span class="label label-default" style="font-size: 150%;float:left;margin: 0 16px;">Tag Ranking</span>
+        <p> All of the tags that you used to generate your policies are on the right. In order to ensure that we can
+            understand
+            the relationship between all tags, please drag them into the relevant priority.</p>
+    </div>
     <div id="next_form">
         <form id="rank_saver" action="{% url 'save_rank' %}" method="post">
             {% csrf_token %}
@@ -47,14 +55,6 @@
             <input type="hidden" name="person" value="{{ person }}">
             <input type="submit" name="button" id="next_button" value="Next" disabled/>
         </form>
-    </div>
-<div class="main">
-    <!--<h2 class="heading">Tag Ranking</h2>-->
-    <div style="width:100%">
-        <span class="label label-default" style="font-size: 150%;float:left;margin: 0 16px;">Tag Ranking</span>
-        <p> All of the tags that you used to generate your policies are on the right. In order to ensure that we can
-            understand
-            the relationship between all tags, please drag them into the relevant priority.</p>
     </div>
 
     <div class="dropzone-wrapper">
