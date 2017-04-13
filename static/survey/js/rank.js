@@ -33,6 +33,24 @@ setupFunction = null;
         .on('dragend', function (event) {
             //event.target.setAttribute('data-x', event.interaction.x);
             //event.target.setAttribute('data-y', event.interaction.y);
+            if (event.target.getAttribute('valid') === 'false' ) {
+                        event.relatedTarget.style.left = "";
+                        event.relatedTarget.style.top = "";
+            }
+            event.relatedTarget.removeAttribute('valid');
+            var frm = $('#rank_saver');
+            $.ajax({
+                type: frm.attr('method'),
+                url: frm.attr('action'),
+                data: frm.serialize(),
+                success: function (data) {
+                    console.log('success')
+                },
+                error: function (data) {
+                    alert("Something went wrong!" + data);
+                }
+            });
+            return false;
         });
 
     // setup drop areas.
@@ -64,19 +82,14 @@ setupFunction = null;
                 ondropactivate: function (event) {
                     addClass(event.relatedTarget, '-drop-possible');
                     event.relatedTarget.setAttribute('valid', 'false');
-                    document.getElementById('saver_form_tag').setAttribute('value', event.relatedTarget.getAttribute('id'));
                 },
                 ondropdeactivate: function (event) {
                     removeClass(event.relatedTarget, '-drop-possible');
-                    if (event.relatedTarget.getAttribute('valid') === 'false') {
+                    /*if (event.relatedTarget.getAttribute('valid') === 'false') {
                         event.relatedTarget.style.left = "";
                         event.relatedTarget.style.top = "";
-                        document.getElementById('saver_form_rank').setAttribute('value', '-1');
-                    } else {
-                        document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
                     }
-                    event.relatedTarget.removeAttribute('valid');
-                    document.getElementById('rank_saver').submit()
+                    event.relatedTarget.removeAttribute('valid');*/
                 }
             })
             .on('dropactivate', function (event) {
@@ -105,11 +118,14 @@ setupFunction = null;
             .on('dragenter', function (event) {
                 addClass(event.target, '-drop-over');
                 event.relatedTarget.setAttribute('valid', 'true');
+                document.getElementById('saver_form_tag').setAttribute('value', event.target.getAttribute('id'));
+                document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
                 //event.relatedTarget.textContent = 'I\'m in';
             })
             .on('dragleave', function (event) {
                 removeClass(event.target, '-drop-over');
                 event.relatedTarget.setAttribute('valid', 'false');
+                document.getElementById('saver_form_rank').setAttribute('value', '-1');
                 //event.relatedTarget.textContent = 'Drag me…';
             })
             .on('drop', function (event) {
