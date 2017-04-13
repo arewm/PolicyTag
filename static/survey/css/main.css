@@ -200,10 +200,3 @@ div#policies{
     overflow-y: scroll;
     /*background-color: lightyellow;/**/
 }
-
-#next_form {
-    position: absolute;
-    width: 5%;
-    left: 95%;
-    bottom: 0px;
-}

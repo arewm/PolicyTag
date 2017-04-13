@@ -72,6 +72,13 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .draggable.-drop-possible { background-color: #42bd41; }
+
+#next_form {
+    position: absolute;
+    width: 5%;
+    left: 95%;
+    bottom: 0px;
+}
 /**/
 /*body { font-family: Helvetica, Arial, sans-serif; }
 
