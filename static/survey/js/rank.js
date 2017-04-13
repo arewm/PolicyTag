@@ -76,7 +76,7 @@ setupFunction = null;
                         document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
                     }
                     event.relatedTarget.removeAttribute('valid');
-                    document.getElementById('rank_saver').submit()
+                    $('#rank_saver').submit()
                 }
             })
             .on('dropactivate', function (event) {
