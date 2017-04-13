@@ -28,7 +28,6 @@
         $(function () {
             $('#rank_saver').submit(function () {
                 frm = $('#rank_saver');
-                alert('submit caught')
                 $.ajax({
                     type: $(this).attr('method'),
                     url: $(this).attr('action'),
