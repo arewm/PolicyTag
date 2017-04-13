@@ -6,6 +6,8 @@ from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
 import re
 
+test_id = '4b81dbb5-3e78-4bb0-a2dd-bf1052368669'
+
 
 def index(request):
     context = {}
@@ -21,7 +23,7 @@ def policy(request):
     p = request.GET.get('person', None)
 
     if p is None:
-        p = Person.objects.get(person_id='4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
+        p = Person.objects.get(person_id=test_id)
     else:
         expert = request.GET.get('e', '').lower() == 't'
         consent = request.GET.get('c', '').lower() == 'c'
@@ -96,7 +98,7 @@ def custom_tag_order(tag):
 
 
 def rank(request):
-    p = request.GET.get('person', '4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
+    p = request.GET.get('person', test_id)
     p = Person.objects.get(person_id=p)
 
     tag_list = [pt.tag for pt in PolicyTag.objects.filter(owner=p)]
@@ -116,7 +118,7 @@ def rank(request):
 
 
 def save_rank(request):
-    p = request.POST.get('person', '4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
+    p = request.POST.get('person', test_id)
     p = Person.objects.get(person_id=p)
 
     tag = get_object_or_404(Tag, tag_id=request.POST.get('tag')[1:])
@@ -131,7 +133,7 @@ def gen(request):
     p = request.GET.get('person', None)
 
     if p is None:
-            p = Person.objects.get(person_id='4b81dbb5-3e78-4bb0-a2dd-bf1052368669')
+            p = Person.objects.get(person_id=test_id)
     else:
         expert = request.GET.get('e', '').lower() == 't'
         consent = request.GET.get('c', '').lower() == 'c'

@@ -31,6 +31,7 @@
     </script>
 </head>
 <body>
+<div class="main">
 <!--<h2 class="heading">Tag Ranking</h2>-->
 <div style="width:100%">
     <span class="label label-default" style="font-size: 150%;float:left;margin: 0 16px;">Tag Ranking</span>
@@ -78,6 +79,7 @@
         <input type="hidden" name="person" value="{{ person }}">
         <input type="submit" name="button" id="next_button" value="Next" disabled/>
     </form>
+</div>
 <script type="text/javascript">
     setupFunction('.js-drop', '{{ ids|safe }}')
 </script>
