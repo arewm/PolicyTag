@@ -96,7 +96,7 @@ def custom_tag(request):
 
 
 def custom_tag_order(tag):
-    return '{} {}'.format(tag.tag_class, tag.tag.text)
+    return '{} {}'.format(tag.tag_class, tag.text)
 
 
 def rank(request):
