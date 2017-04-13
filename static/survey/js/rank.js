@@ -35,8 +35,8 @@ setupFunction = null;
             //event.target.setAttribute('data-x', event.interaction.x);
             //event.target.setAttribute('data-y', event.interaction.y);
             if (event.target.getAttribute('valid') === 'false' ) {
-                        event.relatedTarget.style.left = "";
-                        event.relatedTarget.style.top = "";
+                        event.target.style.left = "";
+                        event.target.style.top = "";
             }
             event.target.removeAttribute('valid');
             var frm = $('#rank_saver');
