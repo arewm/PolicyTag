@@ -202,7 +202,7 @@ div#policies{
 }
 
 #next_button {
-    position: relative;
-    left: 98%;
-    margin-top:98%;
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
 }
