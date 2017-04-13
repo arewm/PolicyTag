@@ -73,7 +73,7 @@ setupFunction = null;
                         event.relatedTarget.style.top = "";
                         document.getElementById('saver_form_rank').setAttribute('value', '-1');
                     } else {
-                        document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(9));
+                        document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
                     }
                     event.relatedTarget.removeAttribute('valid');
                     document.getElementById('rank_saver').submit()
