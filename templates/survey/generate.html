@@ -59,11 +59,11 @@
             }
 
         }
-        $(function() {
-            $('#default-toggle').change(function() {
+        $(function () {
+            $('#default-toggle').change(function () {
                 setToggles()
             });
-            $('.toggle.btn.btn-success').each(function() {
+            $('.toggle.btn.btn-success').each(function () {
                 var toggle = $(this).find('input');
                 if (toggle.attr('id') !== 'default-toggle') {
                     setAction(toggle.attr('id'), toggle.prop('checked'))
@@ -71,7 +71,7 @@
             });
 
             {% for action_id, action_text in actions %}
-                $('#{{ action_id }}').change(function() {
+                $('#{{ action_id }}').change(function () {
                     setAction("{{ action_id }}", $('#{{ action_id }}').prop('checked'))
                 });
             {% endfor %}
@@ -124,7 +124,7 @@
             // only continue if we have some tags
             if ($('#workspace').children('.ui-draggable').length) {
                 // submit form to store in database
-                $('#policy_time').attr('value', (Date.now() - seconds)/1000 );
+                $('#policy_time').attr('value', (Date.now() - seconds) / 1000);
                 $('#policy_specification').submit();
                 seconds = Date.now();
             }
@@ -177,14 +177,15 @@
 </form>
 <div id="top_row" class="row">
     <div style="width:98%;margin:0 1%">
-    <h3> In order to continue to understand how your tags might interact in policies, please tell us how you
-    would specify the acions on the defined policy. We will only use tags that you included in your policies.</h3>
-</div>
+        <h3> In order to continue to understand how your tags might interact in policies, please tell us how you
+            would specify the acions on the defined policy. We will only use tags that you included in your
+            policies.</h3>
+    </div>
 </div>
 
 <div id="mid_row" class="row">
     <div id="workspace">
-            <span class="label label-default" style="font-size: 100%;">Workspace</span>
+        <span class="label label-default" style="font-size: 100%;">Workspace</span>
     </div>
     <div id="operation">
         <div class="buff"></div>
@@ -212,5 +213,11 @@
 
     </div>
 </div>
+
+<form id="next_page" action="#" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="person" value="{{ person }}">
+    <input type="submit" name="button" id="next_button" value="Next" disabled/>
+</form>
 </body>
 </html>
