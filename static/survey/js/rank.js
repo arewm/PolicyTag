@@ -12,11 +12,6 @@ setupFunction = null;
     interact('.js-drag')
         .draggable({max: Infinity})
         .on('dragstart', function (event) {
-            if (event.target.style.left !== "") {
-                // If we are currently in a drop zone, increment the number of policies
-                num_policies++;
-                console.log('pick up', num_policies)
-            }
             console.log('enter', num_policies);
             event.interaction.x = parseInt(window.getComputedStyle(event.target).left.slice(0, -2), 10);
             event.interaction.y = parseInt(window.getComputedStyle(event.target).top.slice(0, -2), 10);
