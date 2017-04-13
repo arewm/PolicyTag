@@ -12,6 +12,10 @@ setupFunction = null;
     interact('.js-drag')
         .draggable({ max: Infinity })
         .on('dragstart', function (event) {
+            if (!event.target.hasAttribute('valid')) {
+                num_policies --;
+            }
+            console.log('enter', num_policies);
             event.interaction.x = parseInt(window.getComputedStyle(event.target).left.slice(0, -2), 10);
             event.interaction.y = parseInt(window.getComputedStyle(event.target).top.slice(0, -2), 10);
             //event.interaction.x = parseInt(event.target.getAttribute('data-x'), 10) || 1000;
@@ -55,22 +59,7 @@ setupFunction = null;
             });
             return false;
         });
-
-    // setup drop areas.
-    // dropzone #1 accepts draggable #1
-    //setupDropzone('#drop1', '#drag1');
-    // dropzone #2 accepts draggable #1 and #2
-    //setupDropzone('#drop2', '#drag1, #drag2');
-    // every dropzone accepts draggable #3
-    /*var ids = document.getElementById('ids_to_drop').innerHTML;
-    setupDropzone('.js-drop', ids);
-    /*for (var i=0; i<all_ids.arrayLength; i++){
-        setupDropzone('.js-drop', all_ids[i])
-    }*/
-    //setupDropzone('.js-drop', '#drag1, #drag2, #drag3');
     
-
-
 
     /**
      * Setup a given element as a dropzone.
@@ -96,8 +85,6 @@ setupFunction = null;
                 // change style if it was previously not active
                 if (active === 0) {
                     addClass(event.target, '-drop-possible');
-                    num_policies --;
-                    console.log('enter', num_policies)
                     //event.target.textContent = 'Drop me here!';
                 }
 
@@ -131,6 +118,9 @@ setupFunction = null;
             })
             .on('drop', function (event) {
                 removeClass(event.target, '-drop-over');
+                if (event.relatedTarget.getAttribute('valid') === false) {
+
+                }
                 //event.relatedTarget.textContent = 'Dropped';
             });
     }
