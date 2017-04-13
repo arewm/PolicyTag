@@ -104,7 +104,8 @@ def rank(request):
     p = Person.objects.get(person_id=p)
 
     # tag_list = Tag.objects.order_by('tag_class', 'text')
-    tag_list = [pt.tag for pt in PolicyTag.objects.filter(Q(creator=None) | Q(creator=p))]
+    #tag_list = [pt.tag for pt in PolicyTag.objects.filter(Q(owner=None) | Q(owner=p))]
+    tag_list = [pt.tag for pt in PolicyTag.objects.filter(owner=p)]
     tag_list.sort(key=custom_tag_order)
     for t in tag_list:
         t.tag_id = 'a{}'.format(t.tag_id)
