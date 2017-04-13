@@ -5,10 +5,10 @@
     <title>Tag Ranking</title>
     <link rel="stylesheet" href="/static/survey/css/rank.css">
     <link rel="stylesheet" href="/static/survey/css/tags.css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="/static/survey/js/interact.js"></script>
     <script src="/static/survey/js/rank.js"></script>
     <script>
-
         $(document).ready(function () {
             var frm = $('#rank_saver');
             frm.submit(function () {
@@ -32,9 +32,9 @@
 <body >
 <!--<h2 class="heading">Tag Ranking</h2>-->
 <div style="width:100%">
-<span class="label label-default" style="font-size: 150%;float:left;margin: 0 16px;">Tag Ranking</span>
+    <span class="label label-default" style="font-size: 150%;float:left;margin: 0 16px;">Tag Ranking</span>
     <p> All of the tags that you used to generate your policies are on the right. In order to ensure that we can understand
-    the relationship between all tags, please drag them into the relevant priority.</p>
+        the relationship between all tags, please drag them into the relevant priority.</p>
 </div>
 
 <div class="dropzone-wrapper">
@@ -46,21 +46,21 @@
 
 
 <div class="tags">
-{% if True %}
-    {% for c, t in tags %}
-        {% if c == 'first' %}
-            <div style="position:relative; height: 62px;">
-        {% endif %}
+    {% if True %}
+        {% for c, t in tags %}
+            {% if c == 'first' %}
+                <div style="position:relative; height: 62px;">
+            {% endif %}
         <div id= "{{ t.tag_id }}" class="draggable js-drag {{ t.tag_class }} {{ c }}" >{{ t.text }}</div>
         {% if c == 'fourth' %}
             </div>
         {% endif %}
-    {% endfor %}
-{% else %}
-    {% for c,t in tags %}
-        <div id= "{{ t.tag_id }}" class="draggable js-drag" >{{ t.text }}</div>
-    {% endfor %}
-{% endif %}
+        {% endfor %}
+    {% else %}
+        {% for c,t in tags %}
+            <div id= "{{ t.tag_id }}" class="draggable js-drag" >{{ t.text }}</div>
+        {% endfor %}
+    {% endif %}
 </div>
 
 <form id="rank_saver" action="{% url 'save_rank' %}" method="post">
