@@ -118,6 +118,7 @@ setupFunction = null;
                 event.relatedTarget.setAttribute('valid', 'true');
                 document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
                 num_policies --;
+                console.log('enter', num_policies)
                 //event.relatedTarget.textContent = 'I\'m in';
             })
             .on('dragleave', function (event) {
@@ -125,6 +126,7 @@ setupFunction = null;
                 event.relatedTarget.setAttribute('valid', 'false');
                 document.getElementById('saver_form_rank').setAttribute('value', '-1');
                 num_policies ++;
+                console.log('leave', num_policies)
                 //event.relatedTarget.textContent = 'Drag me…';
             })
             .on('drop', function (event) {
