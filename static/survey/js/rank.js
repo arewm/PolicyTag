@@ -77,7 +77,7 @@ setupFunction = null;
                     }
                     event.relatedTarget.removeAttribute('valid');
                     //$('#rank_saver').submit()
-                    frm = $('#rank_saver');
+                    var frm = $('#rank_saver');
                     $.ajax({
                         type: frm.attr('method'),
                         url: frm.attr('action'),
