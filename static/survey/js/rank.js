@@ -39,7 +39,9 @@ var start_valid = false;
             if (event.target.getAttribute('valid') === 'false') {
                 event.target.style.left = "";
                 event.target.style.top = "";
-                num_policies++;
+                if (start_valid) {
+                    num_policies++;
+                }
                 console.log('invalid drop', num_policies)
             } else {
                 if (!start_valid) {
