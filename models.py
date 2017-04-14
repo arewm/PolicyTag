@@ -56,6 +56,9 @@ class PolicyTag(models.Model):
     owner = models.ForeignKey(Person, on_delete=models.CASCADE, default=None)
     priority = models.IntegerField(default=-1)
 
+    def __str__(self):
+        return '{}: {} = {}'.format(self.owner, self.tag, self.priority)
+
 
 class Policies(models.Model):
     policy_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -64,3 +67,6 @@ class Policies(models.Model):
     owner = models.ForeignKey(Person, on_delete=models.CASCADE, default=None)
     time_to_generate = models.FloatField()
     generated = models.BooleanField(default=False)
+
+    def __str__(self):
+        return ', '.join([str(t.tag) for t in self.tags.all()])
