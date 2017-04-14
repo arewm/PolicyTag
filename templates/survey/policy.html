@@ -61,14 +61,29 @@
 </form>
 <div id="top_row" class="row">
     <div id="suggestions">
-        <div id="policy_suggestion">
-            <span class="label label-default" style="font-size: 100%;">Policy Suggestions</span>
-        </div>
-        <div id="tags">
+        {% if policies %}
+            <div id="policy_suggestion">
+                <span class="label label-default" style="font-size: 100%;">Policy Suggestions</span>
+                <div id="policy-' + policyNumber + '" class="panel panel-default">')
+                    {% for p in policies %}
+                        <div class="panel-body" style="padding:5px;">
+                            {% for t in p %}
+                                <div id="{{ t.tag_id }}" class="{{ c }}">{{ t.text }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="tags">
+
+        {% else %}
+            <div id="tags-no-suggestion">
+        {% endif %}
             <div>
                 <span class="label label-default" style="font-size: 100%;">Tag Suggestions</span>
                 {% for c in classes %}
-                    <label class="checkbox-inline"><input id="{{ c.tag_class }}-check" type="checkbox" checked value=""
+                    <label class="checkbox-inline"><input id="{{ c.tag_class }}-check" type="checkbox" checked
+                                                          value=""
                                                           onchange="toggleLinked('{{ c.tag_class }}')">{{ c.tag_class }}
                     </label>
                 {% endfor %}
@@ -86,60 +101,60 @@
                     </div>
                 </div>
             {% endfor %}
+            </div>
         </div>
-    </div>
-    <div id="top_right">
-        <div id="tutorial_buffer">&nbsp;</div>
-        <div id="tutorial">
-            <span class="label label-default" style="font-size: 100%;">Open tutorial</span>
+        <div id="top_right">
+            <div id="tutorial_buffer">&nbsp;</div>
+            <div id="tutorial">
+                <span class="label label-default" style="font-size: 100%;">Open tutorial</span>
+            </div>
+            <div id="tutorial_buffer">&nbsp;</div>
         </div>
-        <div id="tutorial_buffer">&nbsp;</div>
+
     </div>
 
-</div>
+    <div id="mid_row" class="row">
+        <div id="workspace">
+            <div id="trashcompactor">
+                <span class="label label-default" style="font-size: 100%;">Workspace</span>
+            </div>
+            <div id="compactedtrash">
+                <i id="trash" class="fa fa-trash fa-4x" aria-hidden="true"></i>
+            </div>
+        </div>
+        <div id="operation">
+            <div class="buff"></div>
+            <i class="fa fa-check fa-3x" aria-hidden="true" onclick="savePolicy()"></i>
+            <i class="fa fa-times fa-3x" aria-hidden="true" onclick="clearPolicy()"></i>
+        </div>
+        <div id="action">
+            <div class="checkbox">
+                <input id="default-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                       data-offstyle="danger" data-on="Allow" data-off="Deny">
+                <span class="label label-default" style="font-size: 100%;">Default action preference</span>
+            </div>
+            <div class="checkbox">
+                {% for action_id, action_text in actions %}
+                    <label>
+                        <input id="{{ action_id }}" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
+                               data-offstyle="danger" data-on="Allow" data-off="Deny"> {{ action_text }}
+                    </label><br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
-<div id="mid_row" class="row">
-    <div id="workspace">
-        <div id="trashcompactor">
-            <span class="label label-default" style="font-size: 100%;">Workspace</span>
-        </div>
-        <div id="compactedtrash">
-            <i id="trash" class="fa fa-trash fa-4x" aria-hidden="true"></i>
-        </div>
-    </div>
-    <div id="operation">
-        <div class="buff"></div>
-        <i class="fa fa-check fa-3x" aria-hidden="true" onclick="savePolicy()"></i>
-        <i class="fa fa-times fa-3x" aria-hidden="true" onclick="clearPolicy()"></i>
-    </div>
-    <div id="action">
-        <div class="checkbox">
-            <input id="default-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
-                   data-offstyle="danger" data-on="Allow" data-off="Deny">
-            <span class="label label-default" style="font-size: 100%;">Default action preference</span>
-        </div>
-        <div class="checkbox">
-            {% for action_id, action_text in actions %}
-                <label>
-                    <input id="{{ action_id }}" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
-                           data-offstyle="danger" data-on="Allow" data-off="Deny"> {{ action_text }}
-                </label><br>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+    <div id="bottom_row" class="row">
+        <div id="policies">
+            <span class="label label-default" style="font-size: 100%;">Current Policies</span>
 
-<div id="bottom_row" class="row">
-    <div id="policies">
-        <span class="label label-default" style="font-size: 100%;">Current Policies</span>
-        <ul></ul>
+        </div>
     </div>
-</div>
 
-<form id="next_page" action="{% url 'rank' %}" method="post">
-    {% csrf_token %}
-    <input type="hidden" name="person" value="{{ person }}">
-    <input type="submit" name="button" id="next_button" value="Next" disabled/>
-</form>
+    <form id="next_page" action="{% url 'rank' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="person" value="{{ person }}">
+        <input type="submit" name="button" id="next_button" value="Next" disabled/>
+    </form>
 </body>
 </html>

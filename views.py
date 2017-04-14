@@ -15,13 +15,19 @@ def index(request):
 
 
 def tutorial(request):
+    # Create the user for this instance. Randomly assign them to expert or non-expert.
+
+    # If they did not accept the consent, redirect them to after the survey.
+
+    # Make sure we set some kind of cookie here to determine if they have completed the survey.
+    #   maybe allow the user to pick up where they left off...? probably not now.
     context = {}
     return render(request, 'survey/tutorial.html', context)
 
 
 def policy(request):
+    # Determine who is creating policies
     p = request.GET.get('person', None)
-
     if p is None:
         p = Person.objects.get(person_id=test_id)
     else:
@@ -29,6 +35,8 @@ def policy(request):
         consent = request.GET.get('c', '').lower() == 'c'
         p = Person(expert_class=expert, consent_accepted=consent)
         p.save()
+
+    # Get all system defaults to populate the page with
     actions = Action.objects.all()
     action_list = []
     for a in actions:
@@ -40,8 +48,16 @@ def policy(request):
         for t in tags:
             t.tag_id = 't{}'.format(t.tag_id)
         tag_list.append((c['tag_class'], tags))
-    # tag_list = Tag.objects.order_by('tag_class', 'text')
-    context = {'person': p.person_id, 'actions': action_list, 'classes': classes, 'tags': tag_list, 'ids': ''}
+    # Get the suggested policies if we want to display them.
+    expert_policies = Policies.objects.filter(creator=None)
+    sugg_policies = []
+    for e in expert_policies:
+        this_policy = []
+        for t in e.tags.all():
+            this_policy.append((t.tag.tag_class, t.tag.tag_id))
+        sugg_policies.append(this_policy)
+    # make the context for generating the page
+    context = {'person': p.person_id, 'actions': action_list, 'classes': classes, 'tags': tag_list, 'policies': sugg_policies}
     return render(request, 'survey/policy.html', context)
 
 
@@ -74,7 +90,15 @@ def submit_policy(request):
         new_policy.tags.add(pt)
     new_policy.save()
 
-    return HttpResponse('')
+    response = {'id': new_policy.policy_id, 'num': Policies.objects.count()}
+    return JsonResponse(response)
+
+
+def remove_policy(request):
+    # do something like this to see if the tags are associated with any other policies...
+    # if user.partner_set.filter(slug=requested_slug).exists():
+    # use .delete()
+    pass
 
 
 def custom_tag(request):

@@ -1,4 +1,6 @@
 var policyNumber = 0;
+var seconds = Date.now();
+
 function setAction(action, state) {
     var myId = "#submit-" + action;
     var input;
@@ -20,7 +22,6 @@ function setAction(action, state) {
     }
 
 }
-var seconds = Date.now();
 function clearPolicy() {
     // remove all tags from the workspace
     $('#workspace').children('.ui-draggable').each(function () {

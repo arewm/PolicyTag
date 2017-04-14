@@ -69,6 +69,14 @@ div#tags {
     /*background-color: lightyellow;/**/
 }
 
+div#tags-no-suggestion {
+    float: right;
+    width: 98%;
+    height: 100%;
+    margin: 0 1%;
+    overflow-y: scroll;
+}
+
 .tag-properties {
     min-width: 10px;
     float: left;
