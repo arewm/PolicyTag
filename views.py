@@ -54,7 +54,7 @@ def policy(request):
     for e in expert_policies:
         this_policy = []
         for t in e.tags.all():
-            this_policy.append((t.tag.tag_class, t.tag.tag_id))
+            this_policy.append((t.tag.tag_class, 't{}'.format(t.tag.tag_id)))
         sugg_policies.append(this_policy)
     # make the context for generating the page
     context = {'person': p.person_id, 'actions': action_list, 'classes': classes, 'tags': tag_list, 'policies': sugg_policies}
