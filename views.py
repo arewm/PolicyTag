@@ -49,7 +49,7 @@ def policy(request):
             t.tag_id = 't{}'.format(t.tag_id)
         tag_list.append((c['tag_class'], tags))
     # Get the suggested policies if we want to display them.
-    expert_policies = Policies.objects.filter(creator=None)
+    expert_policies = Policies.objects.filter(owner=None)
     sugg_policies = []
     for e in expert_policies:
         this_policy = []
