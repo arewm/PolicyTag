@@ -27,7 +27,7 @@ def tutorial(request):
 
 def policy(request):
     # Determine who is creating policies
-    is_expert = bool(request.get('expert', 0))
+    is_expert = bool(request.GET('expert', 0))
     p = request.GET.get('person', None)
     if p is None:
         p = Person.objects.get(person_id=test_id)
