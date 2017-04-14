@@ -27,6 +27,7 @@ def tutorial(request):
 
 def policy(request):
     # Determine who is creating policies
+    is_expert = bool(request.get('expert', 0))
     p = request.GET.get('person', None)
     if p is None:
         p = Person.objects.get(person_id=test_id)
@@ -35,6 +36,8 @@ def policy(request):
         consent = request.GET.get('c', '').lower() == 'c'
         p = Person(expert_class=expert, consent_accepted=consent)
         p.save()
+
+    policy_sugg_owner = None if is_expert else p
 
     # Get all system defaults to populate the page with
     actions = Action.objects.all()
@@ -49,7 +52,7 @@ def policy(request):
             t.tag_id = 't{}'.format(t.tag_id)
         tag_list.append((c['tag_class'], tags))
     # Get the suggested policies if we want to display them.
-    expert_policies = Policies.objects.filter(owner=p)
+    expert_policies = Policies.objects.filter(owner=policy_sugg_owner)
     sugg_policies = []
     for e in expert_policies:
         this_policy = []
