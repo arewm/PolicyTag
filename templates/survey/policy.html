@@ -64,15 +64,15 @@
         {% if policies %}
             <div id="policy_suggestion">
                 <span class="label label-default" style="font-size: 100%;">Policy Suggestions</span>
-                    {% for id, p in policies %}
-                        <div id="policy-{{ id }}" class="panel panel-default">
+                {% for id, p in policies %}
+                    <div id="policy-{{ id }}" class="panel panel-default">
                         <div class="panel-body" style="padding:5px;">
                             {% for class, tid, text in p %}
                                 <div id="{{ tid }}" class="{{ class }}">{{ text }}</div>
                             {% endfor %}
                         </div>
-                    {% endfor %}
-                </div>
+                    </div>
+                {% endfor %}
             </div>
             <div id="tags">
 
