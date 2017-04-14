@@ -69,7 +69,7 @@ div#tags {
     /*background-color: lightyellow;/**/
 }
 
-div#tags-no-suggestion {
+div#tags_no_suggestion {
     float: right;
     width: 98%;
     height: 100%;
