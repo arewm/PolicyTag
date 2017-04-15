@@ -11,7 +11,7 @@ function add_to_workspace(tag_div_clone) {
     close.on("click", function() {
         $(this).parent().remove()
     });
-    tag_div_clone.appendTo('#trashcompactor');
+    tag_div_clone.appendTo('#workspace');
     var formId = "pol-" + tag_id;
     var input = document.createElement("input");
     input.setAttribute("type", "hidden");
