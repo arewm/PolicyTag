@@ -178,14 +178,14 @@ div#operation .buff{
 .fa-check {
     clear: both;
     padding: 5px 5px;
-    color: green;
+    color: #00C851;
     cursor: pointer;
 }
 
 .fa-times {
     clear: both;
     padding: 5px 10px;
-    color: red;
+    color: #ff4444;
     cursor: pointer;
 }
 
