@@ -65,7 +65,7 @@
             <div id="policy_suggestion">
                 <span class="label label-default" style="font-size: 100%;">Policy Suggestions</span>
                 {% for id, p in policies %}
-                    <div id="policy-{{ id }}" class="panel panel-default">
+                    <div id="policy-{{ id }}" class="panel panel-default load-policy" style="cursor:pointer">
                         <div class="panel-body" style="padding:5px;">
                             {% for class, tid, text in p %}
                                 <div id="{{ tid }}" class="{{ class }} tag-properties">{{ text }}</div>
