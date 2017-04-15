@@ -112,12 +112,12 @@ div#workspace{
 }
 
 #workspace-label {
-    height: 5%;
+    height: 10%;
     width: 100%;
 }
 
 #trashcompactor{
-    height: 65%;
+    height: 60%;
     width: 100%;
     vertical-align: bottom;
 }
