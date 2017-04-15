@@ -20,46 +20,8 @@
             crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/676d1f983a.js"></script>
 
-    <!--script src="/static/survey/js/change-action.js"></script-->
-    <script src="/static/survey/js/draggable-tag.js"></script>
-    <script src="/static/survey/js/editable-tag.js"></script>
+    <script src="/static/survey/js/change-action.js"></script>
     <script>
-        function setToggles() {
-            state = $('#default-toggle').prop('checked') ? 'on' : 'off';
-            {% for action_id, action_text in actions %}
-                $('#{{ action_id }}').bootstrapToggle(state);
-            {% endfor %}
-            /*$('#toggle1').bootstrapToggle(state);
-             $('#toggle2').bootstrapToggle(state);
-             $('#toggle3').bootstrapToggle(state);
-             $('#toggle4').bootstrapToggle(state);
-             $('#toggle5').bootstrapToggle(state);*/
-        }
-        function setAction(action, state) {
-            console.log(action);
-            console.log(state);
-            var myId = "#submit-" + action;
-            var input;
-            console.log($(myId));
-            console.log($(myId).length);
-            if (state === true) {
-                if ($(myId).length) {
-                    input = document.getElementById(myId.slice(1));
-                } else {
-                    input = document.createElement("input");
-                    input.setAttribute("type", "hidden");
-                    input.setAttribute("name", "action");
-                    input.setAttribute("id", myId.slice(1));
-                }
-                input.setAttribute("value", action);
-                document.getElementById('policy_specification').appendChild(input);
-            } else {
-                if ($(myId).length) {
-                    $(myId).remove();
-                }
-            }
-
-        }
         $(function () {
             $('#default-toggle').change(function () {
                 setToggles()
@@ -76,93 +38,12 @@
                     setAction("{{ action_id }}", $('#{{ action_id }}').prop('checked'))
                 });
             {% endfor %}
-            /*$('#toggle1').change(function(){
-             setAction("action1", $('#toggle1').prop('checked'))
-             });
-             $('#toggle2').change(function(){
-             setAction("action2", $('#toggle2').prop('checked'))
-             });
-             $('#toggle3').change(function(){
-             setAction("action3", $('#toggle3').prop('checked'))
-             });
-             $('#toggle4').change(function(){
-             setAction("action4", $('#toggle4').prop('checked'))
-             });
-             $('#toggle5').change(function(){
-             setAction("action5", $('#toggle5').prop('checked'))
-             })*/
         });
-    </script>
-    <script>
-        var policyNumber = 0;
-        var seconds = Date.now();
-        function clearPolicy() {
-            // remove all tags from the workspace
-            $('#workspace').children('.ui-draggable').each(function () {
-                this.remove(); // "this" is the current element in the loop
-            });
-            // remove all tags from the policy specification
-            $('#policy_specification').children("input[name='tag']").each(function () {
-                this.remove();
-            });
-            // reset all toggles to default
-            setToggles();
-        }
-        function copyPolicy() {
-            var tagArray = $('<ul id="policy-' + policyNumber++ + '" class="list-group list-inline"/>');
-            tagArray = $('<div id="policy-' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body" style="padding:5px;"/>'));
-            $('#workspace').children('.ui-draggable').each(function () {
-                var tempTag = $(this).clone();
-                tempTag.removeClass('ui-draggable').removeClass('ui-draggable-dragging').removeClass('ui-draggable-handle');
-                tempTag.removeClass('moved-me').removeClass('removable');
-                tempTag.attr('style', '');
-                tempTag.attr('id', $(this).attr('id').slice(5));
-                tagArray.children()[0].append(tempTag[0]);
-            });
-            $('#policies').append(tagArray);
-        }
-        function savePolicy() {
-            // only continue if we have some tags
-            if ($('#workspace').children('.ui-draggable').length) {
-                // submit form to store in database
-                $('#policy_time').attr('value', (Date.now() - seconds) / 1000);
-                $('#policy_specification').submit();
-                seconds = Date.now();
-            }
-        }
-        $(document).ready(function () {
-            var frm = $('#policy_specification');
-            frm.submit(function () {
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    success: function (data) {
-                        // we have successfully submitted, so put policy into bottom div
-                        copyPolicy();
-                        console.log(data);
-                        // and now reset the policy
-                        clearPolicy();
-                    },
-                    error: function (data) {
-                        console.log('error');
-                        alert("Something went wrong!" + data);
-                        // and now reset the policy
-                        clearPolicy();
-                    }
-                });
-                return false;
-            });
-            setToggles();
-        });
-        // function to hide linked tags
-        function toggleLinked(linked) {
-            if ($('#' + linked + "-check").is(":checked")) {
-                // we want to show if we are checked
-                $('#' + linked + "-group").show()
-            } else {
-                $('#' + linked + "-group").hide()
-            }
+        function setToggles() {
+            state = $('#default-toggle').prop('checked') ? 'on' : 'off';
+            {% for action_id, action_text in actions %}
+                $('#{{ action_id }}').bootstrapToggle(state);
+            {% endfor %}
         }
     </script>
 </head>

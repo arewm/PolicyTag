@@ -83,7 +83,8 @@ def policy(request, default_person='invalid_person_id'):
 
 def submit_policy(request):
     p = get_object_or_404(Person, person_id=request.POST['person'])
-    new_policy = Policies(owner=p, time_to_generate=request.POST['time'])
+    is_generated = request.POST.get('gen', None) is not None
+    new_policy = Policies(owner=p, time_to_generate=request.POST.get('time', '-1'), generated=is_generated)
 
     # get GUIDs by removing the first character
     action_list = [a[1:] for a in request.POST.getlist('action')]
@@ -187,7 +188,6 @@ def gen(request):
     action_list = []
     for a in actions:
         action_list.append(('a{}'.format(a.action_id), a.text))
-    # tag_list = Tag.objects.order_by('tag_class', 'text')
 
     context = {'person': p.person_id, 'actions': action_list, 'tags': generate_policy(p)}
     return render(request, 'survey/generate.html', context)
