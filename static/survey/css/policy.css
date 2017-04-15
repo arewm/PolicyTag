@@ -111,8 +111,13 @@ div#workspace{
     /*background-color: lightyellow;/**/
 }
 
+#workspace-label {
+    height: 5%;
+    width: 100%;
+}
+
 #trashcompactor{
-    height: 70%;
+    height: 65%;
     width: 100%;
     vertical-align: bottom;
 }
