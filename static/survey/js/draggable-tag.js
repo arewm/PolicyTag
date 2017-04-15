@@ -6,7 +6,7 @@ function add_to_workspace(tag_div_clone) {
     var tag_id = tag_div_clone.attr("id")
     tag_div_clone.attr("id", "drag-" + tag_id);
     tag_div_clone.addClass('moved-me');
-    tag_div_clone.appendTo('#workspace');
+    tag_div_clone.appendTo('#trashcompactor');
     var formId = "pol-" + tag_id;
     var input = document.createElement("input");
     input.setAttribute("type", "hidden");

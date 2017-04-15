@@ -24,7 +24,7 @@ function setAction(action, state) {
 }
 function clearPolicy() {
     // remove all tags from the workspace
-    $('#workspace').children('.ui-draggable').each(function () {
+    $('#workspace').find('.ui-draggable').each(function () {
         this.remove(); // "this" is the current element in the loop
     });
     // remove all tags from the policy specification
