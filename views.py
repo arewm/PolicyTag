@@ -31,6 +31,7 @@ def tutorial(request):
     expert = random() < 0.5
     if is_test:
         p = Person.objects.get(person_id=test_id)
+        expert = bool(request.GET.get('e', 0))
     else:
         p = Person(expert_class=expert, consent_accepted=consent)
         p.save()
