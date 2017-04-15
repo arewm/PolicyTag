@@ -8,6 +8,7 @@ from random import random
 import re
 
 test_id = '4b81dbb5-3e78-4bb0-a2dd-bf1052368669'
+is_test = True
 
 
 def index(request):
@@ -22,11 +23,13 @@ def consent(request):
 def tutorial(request):
     # If they did not accept the consent, redirect them to an end message.
     consent = request.POST.get('agree', 'no') == 'yes'
+    if is_test:
+        consent = True
     if not consent:
         return redirect('end')
     # Create the user for this instance. Randomly assign them to expert or non-expert.
     expert = random() < 0.5
-    p = Person(expert_class=expert, consent_accepted=consent)
+    #p = Person(expert_class=expert, consent_accepted=consent)
     #p.save()
 
     # Make sure we set some kind of cookie here to determine if they have completed the survey.
@@ -37,13 +40,17 @@ def tutorial(request):
 
 def policy(request, default_person='invalid_person_id'):
     # Determine who is creating policies
-    p_id = request.GET.get('person', default_person)
-    if p_id is None:
+    p_id = request.POST.get('person', default_person)
+    if is_test:
         p = Person.objects.get(person_id=test_id)
     else:
         p = get_object_or_404(Person, person_id=p_id)
 
+
+    is_expert = bool(request.GET.get('e', 0))
     policy_sugg_owner = None if p.expert_class else p
+    if is_test:
+        policy_sugg_owner = None if is_expert else p
 
     # Get all system defaults to populate the page with
     actions = Action.objects.all()
@@ -131,7 +138,7 @@ def custom_tag_order(tag):
 
 
 def rank(request):
-    p_id = request.GET.get('person', test_id)
+    p_id = request.POST.get('person', test_id)
     p = get_object_or_404(Person, person_id=p_id)
 
     tag_list = [pt.tag for pt in PolicyTag.objects.filter(owner=p)]
