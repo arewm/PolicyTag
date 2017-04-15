@@ -16,7 +16,7 @@ function makeDraggable() {
     });
     $('#workspace').droppable({
         accept: function(d) {
-            if(d.hasClass("move-me")||(d.hasClass("moved-me"))||d.hasClass("removable")) {
+            if(d.hasClass("move-me")||(d.hasClass("moved-me"))||d.hasClass("removable-me")) {
                 return true;
             }
         },
@@ -49,14 +49,14 @@ function makeDraggable() {
                 });
             } else if (hasClass(src, 'moved-me')) {
                 src.removeClass('moved-me');
-                src.addClass('removable');
+                src.addClass('removable-me');
             }
 
         }
 
     });
     $('#trash').droppable({
-        accept: '.removable',
+        accept: '.removable-me',
         drop: function(event, ui) {
             ui.draggable.remove();
         }
