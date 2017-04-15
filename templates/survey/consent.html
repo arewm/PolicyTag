@@ -136,9 +136,11 @@
 
 <form id="consent" action="{% url 'tutorial' %}" method="post">
     {% csrf_token %}
-    <label style="width: 50%;"><input type="radio" name="agree" value="yes"></label>Yes<br/>
+    <div style="width: 50%;">
+    <label><input type="radio" name="agree" value="yes"></label>Yes<br/>
     <label><input type="radio" name="agree" value="no"></label>No<br/>
     <input type="submit" name="button" id="next_button" value="Next"/>
+    </div>
 </form>
 
 </body>
