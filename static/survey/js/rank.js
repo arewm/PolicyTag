@@ -21,6 +21,7 @@ var start_valid = false;
             document.getElementById('saver_form_tag').setAttribute('value', event.target.getAttribute('id'));
         })
         .on('dragmove', function (event) {
+            event.target.style.position = "absolute";
             event.interaction.x += event.dx;
             event.interaction.y += event.dy;
 
@@ -37,6 +38,7 @@ var start_valid = false;
             //event.target.setAttribute('data-x', event.interaction.x);
             //event.target.setAttribute('data-y', event.interaction.y);
             if (event.target.getAttribute('valid') === 'false') {
+                event.target.style.position = "";
                 event.target.style.left = "";
                 event.target.style.top = "";
                 if (start_valid) {
