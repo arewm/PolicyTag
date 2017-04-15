@@ -53,6 +53,7 @@ div#policy_suggestion {
     height: 100%;
     margin: 0 1%;
     overflow-y: scroll;
+    background-color: #ffffff;
     /*background-color: lightyellow;/**/
 }
 
@@ -62,6 +63,7 @@ div#tags {
     height: 100%;
     margin: 0 1%;
     overflow-y: scroll;
+    background-color: #ffffff;
     /*background-color: lightyellow;/**/
 }
 
@@ -91,6 +93,7 @@ div#tutorial {
     float: left;
     width: 80%;
     height: 100%;
+    background-color: #ffffff;
     /*margin: 0 1%;/**/
     /*background-color: lightyellow;/**/
 }
@@ -190,6 +193,7 @@ div#action {
     width: 25%;
     height: 100%;
     margin: 0 1%;
+    background-color: #ffffff;
 }
 
 /*div#action{
@@ -205,7 +209,7 @@ div#policies{
     width: 99%;
     height: 100%;
     margin: 0 1%;
-
+    background-color: #ffffff;
     overflow-y: scroll;
     /*background-color: lightyellow;/**/
 }
