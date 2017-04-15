@@ -85,7 +85,7 @@ $(document).ready(function () {
             new_div.addClass('ui-draggable ui-draggable-handle ui-draggable-dragging');
             add_to_workspace(new_div);
         });
-        makeDraggable();
+        //makeDraggable();
     });
 });
 // function to hide linked tags

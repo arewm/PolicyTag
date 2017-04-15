@@ -17,7 +17,10 @@ function add_to_workspace(tag_div_clone) {
     tag_div_clone.on("remove", function() {
         var removeId = "#" + formId;
         $(removeId).remove();
-    })
+    });
+    tag_div_clone.draggable({
+        containment: "#workspace"
+    });
 }
 function makeDraggable() {
     $('.move-me').draggable({
