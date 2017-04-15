@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse, Http404
 from django.db.models import Q
 
 from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
+from random import random
 import re
 
 test_id = '4b81dbb5-3e78-4bb0-a2dd-bf1052368669'
@@ -19,29 +20,30 @@ def consent(request):
 
 
 def tutorial(request):
+    # If they did not accept the consent, redirect them to an end message.
+    consent = request.POST.get('agree', 'no') == 'yes'
+    if not consent:
+        return redirect('end')
     # Create the user for this instance. Randomly assign them to expert or non-expert.
-
-    # If they did not accept the consent, redirect them to after the survey.
+    expert = random() < 0.5
+    p = Person(expert_class=expert, consent_accepted=consent)
+    #p.save()
 
     # Make sure we set some kind of cookie here to determine if they have completed the survey.
     #   maybe allow the user to pick up where they left off...? probably not now.
-    context = {}
+    context = {'expert': expert, 'person': p.id}
     return render(request, 'survey/tutorial.html', context)
 
 
-def policy(request):
+def policy(request, default_person='invalid_person_id'):
     # Determine who is creating policies
-    is_expert = bool(request.GET.get('e', 0))
-    p = request.GET.get('person', None)
-    if p is None:
+    p_id = request.GET.get('person', default_person)
+    if p_id is None:
         p = Person.objects.get(person_id=test_id)
     else:
-        expert = request.GET.get('e', '').lower() == 't'
-        consent = request.GET.get('c', '').lower() == 'c'
-        p = Person(expert_class=expert, consent_accepted=consent)
-        p.save()
+        p = get_object_or_404(Person, person_id=p_id)
 
-    policy_sugg_owner = None if is_expert else p
+    policy_sugg_owner = None if p.expert_class else p
 
     # Get all system defaults to populate the page with
     actions = Action.objects.all()
@@ -69,7 +71,7 @@ def policy(request):
 
 
 def submit_policy(request):
-    p = Person.objects.get(person_id=request.POST['person'])
+    p = get_object_or_404(Person, person_id=request.POST['person'])
     new_policy = Policies(owner=p, time_to_generate=request.POST['time'])
 
     # get GUIDs by removing the first character
@@ -111,7 +113,7 @@ def remove_policy(request):
 def custom_tag(request):
     # create a custom tag as long as it does not already exist as a system or this-user tag
     response = {'new': 'false', 'category': request.POST['category']}
-    p = Person.objects.get(person_id=request.POST['person'])
+    p = get_object_or_404(Person, person_id=request.POST['person'])
     if not Tag.objects.filter(Q(text=request.POST['tag'].strip()) &
                               Q(tag_class=request.POST['category']) &
                               (Q(creator=None) | Q(creator=p))):
@@ -129,8 +131,8 @@ def custom_tag_order(tag):
 
 
 def rank(request):
-    p = request.GET.get('person', test_id)
-    p = Person.objects.get(person_id=p)
+    p_id = request.GET.get('person', test_id)
+    p = get_object_or_404(Person, person_id=p_id)
 
     tag_list = [pt.tag for pt in PolicyTag.objects.filter(owner=p)]
     tag_list.sort(key=custom_tag_order)
@@ -143,7 +145,7 @@ def rank(request):
     for t in tag_list:
         insert_list.append((class_dict[i % 4], t))
         i += 1
-    context = {'person': p.person_id, 'tags': insert_list, 'ids': ids, 'number': len(tag_list)}
+    context = {'person': p_id, 'tags': insert_list, 'ids': ids, 'number': len(tag_list)}
     context['end_div'] = '' if len(tag_list) % 4 == 0 else '</div>'
     return render(request, 'survey/rank.html', context)
 
@@ -151,8 +153,8 @@ def rank(request):
 def save_rank(request):
     import sys
     print(request.POST, file=sys.stderr)
-    p = request.POST.get('person', test_id)
-    p = Person.objects.get(person_id=p)
+    p_id = request.POST.get('person', test_id)
+    p = get_object_or_404(Person, person_id=p_id)
 
     tag = get_object_or_404(Tag, tag_id=request.POST.get('tag')[1:])
 
@@ -163,15 +165,13 @@ def save_rank(request):
 
 
 def gen(request):
-    p = request.GET.get('person', None)
+    p_id = request.GET.get('person', None)
 
-    if p is None:
-            p = Person.objects.get(person_id=test_id)
+    if p_id is None:
+        p = Person.objects.get(person_id=test_id)
     else:
-        expert = request.GET.get('e', '').lower() == 't'
-        consent = request.GET.get('c', '').lower() == 'c'
-        p = Person(expert_class=expert, consent_accepted=consent)
-        p.save()
+        p = get_object_or_404(Person, person_id=p_id)
+
     actions = Action.objects.all()
     action_list = []
     for a in actions:
