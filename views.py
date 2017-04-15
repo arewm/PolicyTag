@@ -23,7 +23,7 @@ def tutorial(request):
     # If they did not accept the consent, redirect them to an end message.
     consent = request.POST.get('agree', 'no') == 'yes'
     if not consent:
-        return redirect(end)
+        return redirect(end, request)
     # Create the user for this instance. Randomly assign them to expert or non-expert.
     expert = random() < 0.5
     p = Person(expert_class=expert, consent_accepted=consent)
