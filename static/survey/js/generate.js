@@ -34,7 +34,7 @@ function copyPolicy() {
 }
 function clearPolicy() {
     // remove all tags from the workspace
-    $('#workspace').children('.ui-draggable').each(function () {
+    $('#workspace').children('.tag-properties').each(function () {
         this.remove(); // "this" is the current element in the loop
     });
     // remove all tags from the policy specification
@@ -46,7 +46,7 @@ function clearPolicy() {
 }
 function savePolicy() {
     // only continue if we have some tags
-    if ($('#workspace').children('.ui-draggable').length) {
+    if ($('#workspace').children('.tag-properties').length) {
         // submit form to store in database
         $('#policy_time').attr('value', (Date.now() - seconds) / 1000);
         copyPolicy();
@@ -77,15 +77,6 @@ $(document).ready(function () {
         return false;
     });
     setToggles();
-    $('.load-policy').click(function() {
-        clearPolicy();
-        $(this).children().first().children().each( function() {
-            var new_div = $(this).clone();
-            new_div.addClass('ui-draggable ui-draggable-handle ui-draggable-dragging');
-            add_to_workspace(new_div);
-        });
-        //makeDraggable();
-    });
 });
 // function to hide linked tags
 function toggleLinked(linked) {
