@@ -14,6 +14,10 @@ def index(request):
     return render(request, 'survey/index.html', context)
 
 
+def consent(request):
+    return render(request, 'survey/consent.html', {})
+
+
 def tutorial(request):
     # Create the user for this instance. Randomly assign them to expert or non-expert.
 
