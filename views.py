@@ -4,7 +4,7 @@ from django.db.models import Q
 
 from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
-from random import random
+from random import random, choice
 import re
 
 test_id = '4b81dbb5-3e78-4bb0-a2dd-bf1052368669'
@@ -188,13 +188,51 @@ def gen(request):
     for a in actions:
         action_list.append(('a{}'.format(a.action_id), a.text))
     # tag_list = Tag.objects.order_by('tag_class', 'text')
-    context = {'person': p.person_id, 'actions': action_list, 'ids': ''}
+
+    context = {'person': p.person_id, 'actions': action_list, 'tags': generate_policy(p)}
     return render(request, 'survey/generate.html', context)
 
 
-def survey(request):
-    context = {}
-    return render(request, 'survey/survey.html', context)
+def generate_policy(p):
+    policy_tags = [t for t in PolicyTag.objects.filter(owner=p)]
+    new_policy = []
+    iter = 0
+    while iter < 5:
+        # five attempts to find a policy suggestion
+        while len(new_policy) < 3:
+            # find three unique tags
+            selection = choice(policy_tags)
+            if selection not in new_policy:
+                new_policy.append(selection)
+
+        # We have a potential policy, test to see if it exists.
+        # get all policies that contain all three filters
+        search = Policies.objects.filter(owner=p).filter(tags=new_policy[0]).filter(tags=new_policy[1]).filter(tags=new_policy[2])
+        if search:
+            # loop through all possible policy matches
+            for s in search:
+                # if there are only three tags in the policy, it exists
+                if s.tags.all().count() == 3:
+                    new_policy.clear()
+                    break
+        if new_policy:
+            # hooray, we still have a new policy!
+            break
+
+    tags = [t.tag for t in new_policy]
+    for t in tags:
+        t.tag_id = 't{}'.format(t.tag_id)
+    return tags
+
+
+def next_generated_policy(request):
+    if is_test:
+        p = Person.objects.get(person_id=test_id)
+    else:
+        p = get_object_or_404(Person, person_id = request.POST.get('person', None))
+
+    response = {'tags': generate_policy(p)}
+    return JsonResponse(response)
 
 
 def end(request):
