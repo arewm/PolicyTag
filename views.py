@@ -85,6 +85,8 @@ def submit_policy(request):
     p = get_object_or_404(Person, person_id=request.POST['person'])
     is_generated = request.POST.get('gen', None) is not None
     new_policy = Policies(owner=p, time_to_generate=request.POST.get('time', '-1'), generated=is_generated)
+    # todo allow policy to be skipped (for policy generator)
+    generate_new_policy = request.POST.get('get_another', None) is not None
 
     # get GUIDs by removing the first character
     action_list = [a[1:] for a in request.POST.getlist('action')]
@@ -112,6 +114,11 @@ def submit_policy(request):
     new_policy.save()
 
     response = {'id': new_policy.policy_id, 'num': Policies.objects.count()}
+    if generate_new_policy:
+        if need_more_policies(p):
+            response['tags'] = generate_policy(p)
+        else:
+            response['tags'] = []
     return JsonResponse(response)
 
 
@@ -191,6 +198,11 @@ def gen(request):
 
     context = {'person': p.person_id, 'actions': action_list, 'tags': generate_policy(p)}
     return render(request, 'survey/generate.html', context)
+
+
+def need_more_policies(p):
+    # todo determine whether we need more!
+    return True
 
 
 def generate_policy(p):

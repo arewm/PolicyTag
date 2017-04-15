@@ -20,7 +20,7 @@
             crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/676d1f983a.js"></script>
 
-    <script src="/static/survey/js/policy.js"></script>
+    <script src="/static/survey/js/generate.js"></script>
     <script>
         $(function () {
             $('#default-toggle').change(function () {
@@ -51,6 +51,7 @@
 <form id="policy_specification" action="{% url 'submit_policy' %}" method="post">
     {% csrf_token %}
     <input type="hidden" name="person" value="{{ person }}">
+    <input type="hidden" name="get_another" value="True">
     <input id="policy_time" type="hidden" name="time" value="">
 </form>
 <div id="top_row" class="row">
