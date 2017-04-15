@@ -78,6 +78,9 @@ $(document).ready(function () {
         return false;
     });
     setToggles();
+    $('.load-policy').click(function() {
+        clearPolicy();
+    })
 });
 // function to hide linked tags
 function toggleLinked(linked) {
