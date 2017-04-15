@@ -83,8 +83,8 @@ $(document).ready(function () {
         $(this).children[0].children.each( function() {
             var new_div = $(this).clone();
             add_to_workspace(new_div);
-        })
-    })
+        });
+    });
 });
 // function to hide linked tags
 function toggleLinked(linked) {
