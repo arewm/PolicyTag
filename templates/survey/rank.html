@@ -61,10 +61,10 @@
                 {% endif %}
             <div id="{{ t.tag_id }}" class="draggable js-drag {{ t.tag_class }} {{ c }}">{{ t.text }}</div>
             {% if c == 'fourth' %}
-                <!--/div-->
+                </div>
             {% endif %}
             {% endfor %}
-            {{ end_div }}
+            {{ end_div|safe }}
         {% else %}
             {% for c,t in tags %}
                 <div id="{{ t.tag_id }}" class="draggable js-drag">{{ t.text }}</div>
