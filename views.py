@@ -37,7 +37,7 @@ def tutorial(request):
 
     # Make sure we set some kind of cookie here to determine if they have completed the survey.
     #   maybe allow the user to pick up where they left off...? probably not now.
-    context = {'expert': expert, 'person': p.id}
+    context = {'expert': expert, 'person': p.person_id}
     return render(request, 'survey/tutorial.html', context)
 
 
