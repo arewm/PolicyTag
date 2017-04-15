@@ -1,5 +1,5 @@
 .type {
-    background-color: #009933;
+    background-color: #0275d8;
     color: #000;
     /*min-width: 10px;
     float: left;
@@ -7,7 +7,7 @@
 }
 
 .location {
-    background-color: #ff9900;
+    background-color: #5cb85c;
     color: #000;
     /*min-width: 10px;
     float: left;
@@ -15,7 +15,7 @@
 }
 
 .things {
-    background-color: #006699;
+    background-color: #5bc0de;
     color: #000;
     /*min-width: 10px;
     float: left;
@@ -23,7 +23,7 @@
 }
 
 .properties {
-    background-color: #cc0066;
+    background-color: #f0ad4e;
     color: #000;
     /*min-width: 10px;
     float: left;
@@ -31,7 +31,7 @@
 }
 
 .time {
-    background-color: #6666ff;
+    background-color: #d9534f;
     color: #000;
     /*min-width: 10px;
     float: left;
