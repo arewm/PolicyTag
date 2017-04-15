@@ -190,7 +190,7 @@
             <span class="label label-default" style="font-size: 100%;">Workspace</span>
         </div>
         {% for t in tags %}
-            <div id="{{ t.tag_id }}" class="{{ c }} ">{{ t.text }}</div>
+            <div id="{{ t.tag_id }}" class="{{ t.tag_class }} ">{{ t.text }}</div>
         {% endfor %}
     </div>
     <div id="operation">
