@@ -80,7 +80,7 @@ $(document).ready(function () {
     setToggles();
     $('.load-policy').click(function() {
         clearPolicy();
-        $(this).children().first().children.each( function() {
+        $(this).children().first().children().each( function() {
             var new_div = $(this).clone();
             add_to_workspace(new_div);
         });
