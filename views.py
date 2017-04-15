@@ -29,8 +29,11 @@ def tutorial(request):
         return redirect('end')
     # Create the user for this instance. Randomly assign them to expert or non-expert.
     expert = random() < 0.5
-    #p = Person(expert_class=expert, consent_accepted=consent)
-    #p.save()
+    if is_test:
+        p = Person.objects.get(person_id=test_id)
+    else:
+        p = Person(expert_class=expert, consent_accepted=consent)
+        p.save()
 
     # Make sure we set some kind of cookie here to determine if they have completed the survey.
     #   maybe allow the user to pick up where they left off...? probably not now.
