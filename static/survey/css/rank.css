@@ -40,14 +40,13 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .draggable {
-    /*position: absolute;/**/
+    position: absolute;
     z-index: 10;
     /*left: 1050px;/**/
     width: 100px;
     padding: 1em 1em;
     margin: 0 .25em;
-    float: left;
-    /*display: inline-block;/**/
+    display: inline-block;
     /*background-color: #29e;/**/
     /*color: #fff;/**/
     text-align: center;
