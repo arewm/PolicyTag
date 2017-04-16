@@ -66,7 +66,7 @@ $(document).ready(function () {
                 // we have successfully submitted, so clear the policy
                 clearPolicy();
                 // fill in the next policy if there are any
-                if (data.more === "True") {
+                if (data.more) {
                     var work = $('#workspace');
                     for (var i =0; i<data.tags.length; i++){
                         //<div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties">{{ t.text }}</div>
