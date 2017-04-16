@@ -78,7 +78,8 @@ def policy(request, default_person='invalid_person_id'):
             this_policy.append((t.tag.tag_class, 't{}'.format(t.tag.tag_id), t.tag.text))
         sugg_policies.append(('p{}'.format(e.policy_id), this_policy))
     # make the context for generating the page
-    context = {'person': p.person_id, 'actions': action_list, 'classes': classes, 'tags': tag_list, 'policies': sugg_policies}
+    _, percent = need_more_policies(p)
+    context = {'person': p.person_id, 'actions': action_list, 'classes': classes, 'tags': tag_list, 'policies': sugg_policies, 'percent': percent}
     return render(request, 'survey/policy.html', context)
 
 
@@ -126,7 +127,7 @@ def submit_policy(request):
         else:
             response['tags'] = []
         print(response['tags'], file=sys.stderr)
-        print(not not response['tas'], file=sys.stderr)
+        print(not not response['tags'], file=sys.stderr)
         response['more'] = not not response['tags']
         response['percent'] = percent
     import sys
