@@ -80,8 +80,8 @@ $(document).ready(function () {
                 } else {
                     // otherwise, enable the link to go to the next page
                     var button = $('#next_button');
-                    button.style.display = "";
-                    button.disabled = false
+                    button.show();
+                    button.prop("disabled", false);
                 }
             },
             error: function (data) {
