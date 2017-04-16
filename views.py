@@ -115,12 +115,18 @@ def submit_policy(request):
     new_policy.save()
 
     response = {'id': new_policy.policy_id, 'num': Policies.objects.count()}
+    import sys
     if generate_new_policy:
+        print(generate_new_policy, file=sys.stderr)
         more, percent = need_more_policies(p)
+        print('{} {}'.format(more, percent), file=sys.stderr)
         if more:
+            print('getting more', file=sys.stderr)
             response['tags'] = generate_policy(p)
         else:
             response['tags'] = []
+        print(response['tags'], file=sys.stderr)
+        print(not not response['tas'], file=sys.stderr)
         response['more'] = not not response['tags']
         response['percent'] = percent
     import sys
@@ -210,7 +216,6 @@ def need_more_policies(p):
     num_tags = PolicyTag.objects.filter(owner=p).count()/2
     num_generated = Policies.objects.filter(owner=p).filter(generated=True).count()
     percent = min(num_generated/num_tags, 1)*100
-    print('{} {} {} {}'.format(num_tags, num_generated, num_tags/2, num_tags/2 < num_generated))
     return percent <= 100, percent
 
 
