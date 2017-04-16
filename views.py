@@ -239,11 +239,12 @@ def generate_policy(p):
             break
     tags = [t.tag for t in new_policy]
     import sys
-    tags = [model_to_dict(t) for t in tags]
+    return_tags = []
     for t in tags:
-        t['tag_id'] = 't{}'.format(t['tag_id'])
-    print(tags, file=sys.stderr)
-    return tags
+        return_tags.append(model_to_dict(t))
+        return_tags[-1]['tag_id'] = 't{}'.format(t.tag_id)
+    print(return_tags, file=sys.stderr)
+    return return_tags
 
 
 def next_generated_policy(request):
