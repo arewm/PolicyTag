@@ -120,6 +120,8 @@ def submit_policy(request):
             response['more'] = need_more_policies(p) and response['tags'] is not None
         else:
             response['tags'] = []
+    import sys
+    print(response, file=sys.stderr)
     return JsonResponse(response)
 
 

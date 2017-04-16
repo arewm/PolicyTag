@@ -50,7 +50,7 @@ function savePolicy() {
         // submit form to store in database
         $('#policy_time').attr('value', (Date.now() - seconds) / 1000);
         copyPolicy();
-        //$('#policy_specification').submit();
+        $('#policy_specification').submit();
         seconds = Date.now();
     }
 }
@@ -62,7 +62,7 @@ $(document).ready(function () {
             url: frm.attr('action'),
             data: frm.serialize(),
             success: function (data) {
-                var resp = data;
+                console.log(data);
                 // we have successfully submitted, so clear the policy
                 clearPolicy();
                 // fill in the next policy if there are any
