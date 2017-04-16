@@ -10,7 +10,8 @@ body{
 }
 
 .progress {
-    width: 100%
+    width: 100%;
     position: absolute;
     bottom: 0px;
+    z-index: 100;
 }
