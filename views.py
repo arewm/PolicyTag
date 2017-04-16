@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse, Http404
 from django.db.models import Q
+from django.forms.models import model_to_dict
 
 from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
@@ -116,10 +117,12 @@ def submit_policy(request):
     response = {'id': new_policy.policy_id, 'num': Policies.objects.count()}
     if generate_new_policy:
         if need_more_policies(p):
-            response['tags'] = generate_policy(p)
-            response['more'] = need_more_policies(p) and response['tags'] is not None
+            response['tags'] = []
+            for t in generate_policy(p):
+                response['tags'].append(model_to_dict(t))
         else:
             response['tags'] = []
+        response['more'] = not not response['tags']
     import sys
     print(response, file=sys.stderr)
     return JsonResponse(response)
@@ -221,13 +224,11 @@ def generate_policy(p):
             selection = choice(policy_tags)
             if selection not in new_policy:
                 new_policy.append(selection)
-
         # We have a potential policy, test to see if it exists.
         # get all policies that contain all  filters
         search = Policies.objects.filter(owner=p)
         for np in new_policy:
             search = search.filter(tags=np)
-
         if search:
             # loop through all possible policy matches
             for s in search:
@@ -238,7 +239,6 @@ def generate_policy(p):
         if new_policy:
             # hooray, we still have a new policy!
             break
-
     tags = [t.tag for t in new_policy]
     for t in tags:
         t.tag_id = 't{}'.format(t.tag_id)
