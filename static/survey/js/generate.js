@@ -62,11 +62,27 @@ $(document).ready(function () {
             url: frm.attr('action'),
             data: frm.serialize(),
             success: function (data) {
+                var resp = data;
                 // we have successfully submitted, so clear the policy
                 clearPolicy();
                 // fill in the next policy if there are any
-
-                // otherwise, enable the link to go to the next page
+                if (data.more === "True") {
+                    var work = $('#workspace');
+                    for (var i =0; i<data.tags.length; i++){
+                        //<div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties">{{ t.text }}</div>
+                        var tag = data.tags[i];
+                        var tag_div = $('<div class="tag-properties"/div>');
+                        tag_div.attr('id', tag.tag_id);
+                        tag_div.addClass(tag.tag_class);
+                        tag_div.html = tag.text;
+                        work.append(tag_div);
+                    }
+                } else {
+                    // otherwise, enable the link to go to the next page
+                    var button = $('#next_button');
+                    button.style.display = "";
+                    button.disabled = false
+                }
             },
             error: function (data) {
                 alert("Something went wrong!" + data);

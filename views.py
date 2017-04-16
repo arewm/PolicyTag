@@ -117,6 +117,7 @@ def submit_policy(request):
     if generate_new_policy:
         if need_more_policies(p):
             response['tags'] = generate_policy(p)
+            response['more'] = need_more_policies(p) and response['tags'] is not None
         else:
             response['tags'] = []
     return JsonResponse(response)
@@ -196,13 +197,14 @@ def gen(request):
     for a in actions:
         action_list.append(('a{}'.format(a.action_id), a.text))
 
-    context = {'person': p.person_id, 'actions': action_list, 'tags': generate_policy(p)}
+    context = {'person': p, 'actions': action_list, 'tags': generate_policy(p)}
     return render(request, 'survey/generate.html', context)
 
 
 def need_more_policies(p):
-    # todo determine whether we need more!
-    return True
+    num_tags = PolicyTag.objects.filter(owner=p).count()
+    num_generated = Policies.objects.filter(owner=p).filter(generated=True).count()
+    return num_tags/2 < num_generated
 
 
 def generate_policy(p):
@@ -218,8 +220,11 @@ def generate_policy(p):
                 new_policy.append(selection)
 
         # We have a potential policy, test to see if it exists.
-        # get all policies that contain all three filters
-        search = Policies.objects.filter(owner=p).filter(tags=new_policy[0]).filter(tags=new_policy[1]).filter(tags=new_policy[2])
+        # get all policies that contain all  filters
+        search = Policies.objects.filter(owner=p)
+        for np in new_policy:
+            search = search.filter(tags=np)
+
         if search:
             # loop through all possible policy matches
             for s in search:
