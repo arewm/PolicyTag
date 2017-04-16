@@ -116,11 +116,13 @@ def submit_policy(request):
 
     response = {'id': new_policy.policy_id, 'num': Policies.objects.count()}
     if generate_new_policy:
-        if need_more_policies(p):
+        more, percent = need_more_policies(p)
+        if more:
             response['tags'] = generate_policy(p)
         else:
             response['tags'] = []
         response['more'] = not not response['tags']
+        response['percent'] = percent
     import sys
     print(response, file=sys.stderr)
     return JsonResponse(response)
@@ -205,10 +207,11 @@ def gen(request):
 
 
 def need_more_policies(p):
-    num_tags = PolicyTag.objects.filter(owner=p).count()
+    num_tags = PolicyTag.objects.filter(owner=p).count()/2
     num_generated = Policies.objects.filter(owner=p).filter(generated=True).count()
+    percent = min(num_generated/num_tags, 1)*100
     print('{} {} {} {}'.format(num_tags, num_generated, num_tags/2, num_tags/2 < num_generated))
-    return num_tags/2 >= num_generated
+    return percent <= 1, percent
 
 
 def generate_policy(p):
@@ -223,27 +226,26 @@ def generate_policy(p):
             if selection not in new_policy:
                 new_policy.append(selection)
         # We have a potential policy, test to see if it exists.
-        # get all policies that contain all  filters
+        # get the intersection of policies that contain each filter
         search = Policies.objects.filter(owner=p)
         for np in new_policy:
-            search = search.filter(tags=np)
+            search = search & np.policies_set.all()
         if search:
             # loop through all possible policy matches
             for s in search:
                 # if there are only three tags in the policy, it exists
                 if s.tags.all().count() == 3:
+                    print('cleared!')
                     new_policy.clear()
                     break
         if new_policy:
             # hooray, we still have a new policy!
             break
     tags = [t.tag for t in new_policy]
-    import sys
     return_tags = []
     for t in tags:
         return_tags.append(model_to_dict(t))
         return_tags[-1]['tag_id'] = 't{}'.format(t.tag_id)
-    print(return_tags, file=sys.stderr)
     return return_tags
 
 

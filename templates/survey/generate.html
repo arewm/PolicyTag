@@ -98,7 +98,12 @@
 
     </div>
 </div>
-
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="0"
+  aria-valuemin="0" aria-valuemax="100">
+    <span class="sr-only">0% Complete</span>
+  </div>
+</div>
 <form id="next_page" action="#" method="post">
     {% csrf_token %}
     <input type="hidden" name="p" value="{{ person.person_id }}">

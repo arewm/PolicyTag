@@ -71,7 +71,6 @@ $(document).ready(function () {
                     console.log('got to more');
                     var work = $('#workspace');
                     for (var i =0; i<data.tags.length; i++){
-                        //<div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties">{{ t.text }}</div>
                         var tag = data.tags[i];
                         var tag_div = $('<div class="tag-properties"/div>');
                         console.log(tag.tag_class, tag.text);
@@ -81,6 +80,7 @@ $(document).ready(function () {
                         console.log(tag_div);
                         work.append(tag_div);
                     }
+                    $('.progress-bar').attr('aria-valuenow', data.percent).attr('style', 'width:' + data.percent +'%').html(data.percent + '% Complete')
                 } else {
                     // otherwise, enable the link to go to the next page
                     var button = $('#next_button');
