@@ -117,9 +117,7 @@ def submit_policy(request):
     response = {'id': new_policy.policy_id, 'num': Policies.objects.count()}
     if generate_new_policy:
         if need_more_policies(p):
-            response['tags'] = []
-            for t in generate_policy(p):
-                response['tags'].append(model_to_dict(t))
+            response['tags'] = generate_policy(p)
         else:
             response['tags'] = []
         response['more'] = not not response['tags']
@@ -241,10 +239,10 @@ def generate_policy(p):
             break
     tags = [t.tag for t in new_policy]
     import sys
-    print([model_to_dict(t) for t in tags], file=sys.stderr)
+    tags = [model_to_dict(t) for t in tags]
     for t in tags:
-        t.tag_id = 't{}'.format(t.tag_id)
-    print([model_to_dict(t) for t in tags], file=sys.stderr)
+        t['tag_id'] = 't{}'.format(t['tag_id'])
+    print(tags, file=sys.stderr)
     return tags
 
 
