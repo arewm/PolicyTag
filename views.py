@@ -206,7 +206,7 @@ def gen(request):
 def need_more_policies(p):
     num_tags = PolicyTag.objects.filter(owner=p).count()
     num_generated = Policies.objects.filter(owner=p).filter(generated=True).count()
-    print('{} {} {} {]'.format(num_tags, num_generated, num_tags/2, num_tags/2 < num_generated))
+    print('{} {} {} {}'.format(num_tags, num_generated, num_tags/2, num_tags/2 < num_generated))
     return num_tags/2 < num_generated
 
 
