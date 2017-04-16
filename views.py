@@ -199,7 +199,7 @@ def gen(request):
     for a in actions:
         action_list.append(('a{}'.format(a.action_id), a.text))
 
-    context = {'person': p, 'actions': action_list, 'tags': generate_policy(p)}
+    context = {'person': p.person_id, 'actions': action_list, 'tags': generate_policy(p)}
     return render(request, 'survey/generate.html', context)
 
 
