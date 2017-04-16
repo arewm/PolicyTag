@@ -66,15 +66,19 @@ $(document).ready(function () {
                 // we have successfully submitted, so clear the policy
                 clearPolicy();
                 // fill in the next policy if there are any
+                console.log(data.more);
                 if (data.more) {
+                    console.log('got to more');
                     var work = $('#workspace');
                     for (var i =0; i<data.tags.length; i++){
                         //<div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties">{{ t.text }}</div>
                         var tag = data.tags[i];
                         var tag_div = $('<div class="tag-properties"/div>');
+                        console.log(tag.tag_class, tag.text);
                         tag_div.attr('id', tag.tag_id);
                         tag_div.addClass(tag.tag_class);
                         tag_div.html = tag.text;
+                        console.log(tag_div)
                         work.append(tag_div);
                     }
                 } else {
