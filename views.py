@@ -217,7 +217,7 @@ def need_more_policies(p):
     num_tags = PolicyTag.objects.filter(owner=p).count()/2
     num_generated = Policies.objects.filter(owner=p).filter(generated=True).count()
     percent = min(num_generated/num_tags, 1)*100
-    return percent <= 100, percent
+    return percent < 100, percent
 
 
 def generate_policy(p):

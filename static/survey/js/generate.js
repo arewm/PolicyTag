@@ -80,7 +80,7 @@ $(document).ready(function () {
                         console.log(tag_div);
                         work.append(tag_div);
                     }
-                    $('.progress-bar').attr('aria-valuenow', data.percent).attr('style', 'width:' + data.percent +'%').html(data.percent + '% Complete')
+                    $('.progress-bar').attr('aria-valuenow', data.percent).attr('style', 'width:' + data.percent +'%').children().html(data.percent + '% Complete')
                 } else {
                     // otherwise, enable the link to go to the next page
                     var button = $('#next_button');
