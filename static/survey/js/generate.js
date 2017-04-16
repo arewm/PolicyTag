@@ -77,8 +77,8 @@ $(document).ready(function () {
                         console.log(tag.tag_class, tag.text);
                         tag_div.attr('id', tag.tag_id);
                         tag_div.addClass(tag.tag_class);
-                        tag_div.html = tag.text;
-                        console.log(tag_div)
+                        tag_div.html(tag.text);
+                        console.log(tag_div);
                         work.append(tag_div);
                     }
                 } else {
