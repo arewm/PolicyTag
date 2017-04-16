@@ -78,8 +78,7 @@ def policy(request, default_person='invalid_person_id'):
             this_policy.append((t.tag.tag_class, 't{}'.format(t.tag.tag_id), t.tag.text))
         sugg_policies.append(('p{}'.format(e.policy_id), this_policy))
     # make the context for generating the page
-    _, percent = need_more_policies(p)
-    context = {'person': p.person_id, 'actions': action_list, 'classes': classes, 'tags': tag_list, 'policies': sugg_policies, 'percent': percent}
+    context = {'person': p.person_id, 'actions': action_list, 'classes': classes, 'tags': tag_list, 'policies': sugg_policies}
     return render(request, 'survey/policy.html', context)
 
 
@@ -209,7 +208,8 @@ def gen(request):
     for a in actions:
         action_list.append(('a{}'.format(a.action_id), a.text))
 
-    context = {'person': p.person_id, 'actions': action_list, 'tags': generate_policy(p)}
+    _, percent = need_more_policies(p)
+    context = {'person': p.person_id, 'actions': action_list, 'tags': generate_policy(p), 'percent': percent}
     return render(request, 'survey/generate.html', context)
 
 
