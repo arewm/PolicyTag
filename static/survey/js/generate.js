@@ -86,6 +86,7 @@ $(document).ready(function () {
                     var button = $('#next_button');
                     button.show();
                     button.prop("disabled", false);
+                    $('.progress-bar').hide();
                 }
             },
             error: function (data) {
