@@ -20,14 +20,8 @@ var msnry = new Masonry('.grid', {
             start_valid = event.target.style.left[0] === "-";
             event.interaction.x = parseInt(window.getComputedStyle(event.target).left.slice(0, -2), 10);
             event.interaction.y = parseInt(window.getComputedStyle(event.target).top.slice(0, -2), 10);
-            //event.interaction.x = parseInt(event.target.getAttribute('data-x'), 10) || 1000;
-            //event.interaction.y = parseInt(event.target.getAttribute('data-y'), 10) || 10;
             document.getElementById('saver_form_tag').setAttribute('value', event.target.getAttribute('id'));
-            if (!start_valid) {
-                //event.target.setAttribute('old-left', event.target.style.left);
-                //event.target.setAttribute('old-top', event.target.style.top);
-                //event.target.classList.add('grid-item')
-            }
+
         })
         .on('dragmove', function (event) {
             event.interaction.x += event.dx;
@@ -43,29 +37,21 @@ var msnry = new Masonry('.grid', {
             }
         })
         .on('dragend', function (event) {
-            //event.target.setAttribute('data-x', event.interaction.x);
-            //event.target.setAttribute('data-y', event.interaction.y);
             if (event.target.getAttribute('valid') === 'false') {
-                //event.target.style.left = event.target.getAttribute('old-left');
-                //event.target.style.top = event.target.getAttribute('old-top');
                 if (start_valid) {
                     num_policies++;
                     event.target.classList.add('grid-item');
                     msnry.appended(event.target);
                     msnry.reloadItems()
-                } else {
-
                 }
             } else {
-                if (start_valid) {
-                } else {
+                if (!start_valid) {
                     num_policies--;
                     event.target.classList.remove('grid-item');
                     msnry.reloadItems();
                     msnry.layout();
                 }
             }
-            console.log(num_policies);
             document.getElementById('next_button').disabled = num_policies !== 0;
             event.target.removeAttribute('valid');
             var frm = $('#rank_saver');
@@ -121,7 +107,6 @@ var msnry = new Masonry('.grid', {
                 // but will no longer be active
                 if (active === 1) {
                     removeClass(event.target, '-drop-possible');
-                    //event.target.textContent = 'Dropzone';
                 }
 
                 event.target.setAttribute('active', active - 1);
@@ -130,20 +115,14 @@ var msnry = new Masonry('.grid', {
                 addClass(event.target, '-drop-over');
                 event.relatedTarget.setAttribute('valid', 'true');
                 document.getElementById('saver_form_rank').setAttribute('value', event.target.getAttribute('id').slice(8));
-                //event.relatedTarget.textContent = 'I\'m in';
             })
             .on('dragleave', function (event) {
                 removeClass(event.target, '-drop-over');
                 event.relatedTarget.setAttribute('valid', 'false');
                 document.getElementById('saver_form_rank').setAttribute('value', '-1');
-                //event.relatedTarget.textContent = 'Drag me…';
             })
             .on('drop', function (event) {
                 removeClass(event.target, '-drop-over');
-                if (event.relatedTarget.getAttribute('valid') === false) {
-
-                }
-                //event.relatedTarget.textContent = 'Dropped';
             });
     }
 
