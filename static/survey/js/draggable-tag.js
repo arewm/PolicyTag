@@ -2,9 +2,8 @@
 function hasClass(element, cls) {
     return (' ' + element.attr('class') + ' ').indexOf(' ' + cls + ' ') > -1;
 }
-function add_to_workspace(tag_div_clone) {
+function add_to_workspace(tag_div_clone, tag_id) {
     console.log(tag_div_clone);
-    var tag_id = tag_div_clone.attr("id");
     console.log(tag_id);
     tag_div_clone.attr("id", "drag-" + tag_id);
     tag_div_clone.addClass('moved-me');
@@ -55,9 +54,9 @@ function makeDraggable() {
             }
             else if (hasClass(src, 'move-me')) {
                 var a = u.helper.clone();//.attr("id", "drag-" + src.attr("id"));
-                a.removeClass('move-me');
+                var tag_id = u.helper.attr("id")
+                a.removeClass('move-me', tag_id);
                 add_to_workspace(a);
-                a.addClass('moved-me');
             }
 
         }

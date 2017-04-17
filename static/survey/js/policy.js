@@ -82,8 +82,9 @@ $(document).ready(function () {
         clearPolicy();
         $(this).children().first().children().each( function() {
             var new_div = $(this).clone();
+            var tag_id = $(this).attr("id");
             new_div.addClass('ui-draggable ui-draggable-handle ui-draggable-dragging');
-            add_to_workspace(new_div);
+            add_to_workspace(new_div, tag_id);
         });
         //makeDraggable();
     });
