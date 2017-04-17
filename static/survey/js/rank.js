@@ -51,7 +51,7 @@ var msnry = new Masonry('.grid', {
                 if (start_valid) {
                     num_policies++;
                     event.target.classList.add('grid-item');
-                    msnry.appended(event.target)
+                    msnry.appended(event.target);
                     msnry.reloadItems()
                 } else {
 
@@ -61,7 +61,8 @@ var msnry = new Masonry('.grid', {
                 } else {
                     num_policies--;
                     event.target.classList.remove('grid-item');
-                    msnry.layout()
+                    msnry.reloadItems();
+                    msnry.layout();
                 }
             }
             console.log(num_policies);
