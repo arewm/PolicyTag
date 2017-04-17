@@ -59,6 +59,8 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .draggable-text {
+    height: 100%;
+    width: 100%;
     text-align: center;
     overflow-y: scroll;
 }
