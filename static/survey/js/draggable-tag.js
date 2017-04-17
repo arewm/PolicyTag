@@ -41,7 +41,7 @@ function makeDraggable() {
     });
     $('#workspace').droppable({
         accept: function(d) {
-            if(d.hasClass("move-me")||(d.hasClass("moved-me"))||d.hasClass("removable-me")) {
+            if(d.hasClass("move-me")||(d.hasClass("moved-me"))) {
                 return true;
             }
         },
@@ -54,7 +54,7 @@ function makeDraggable() {
             else if (hasClass(src, 'move-me')) {
                 var a = u.helper.clone();//.attr("id", "drag-" + src.attr("id"));
                 var tag_id = src.attr("id");
-                console.log(src);
+                console.log(src.context());
                 a.removeClass('move-me', tag_id);
                 add_to_workspace(a);
             }
