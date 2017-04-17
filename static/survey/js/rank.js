@@ -26,7 +26,7 @@ var msnry = new Masonry('.grid', {
             if (!start_valid) {
                 //event.target.setAttribute('old-left', event.target.style.left);
                 //event.target.setAttribute('old-top', event.target.style.top);
-                msnry.unstamp(event.target);
+                //event.target.classList.add('grid-item')
             }
         })
         .on('dragmove', function (event) {
@@ -46,16 +46,23 @@ var msnry = new Masonry('.grid', {
             //event.target.setAttribute('data-x', event.interaction.x);
             //event.target.setAttribute('data-y', event.interaction.y);
             if (event.target.getAttribute('valid') === 'false') {
-                event.target.classList.add('grid-item');
                 //event.target.style.left = event.target.getAttribute('old-left');
                 //event.target.style.top = event.target.getAttribute('old-top');
                 if (start_valid) {
                     num_policies++;
+                    event.target.classList.add('grid-item');
                     msnry.appended(event.target)
+                    msnry.reloadItems()
+                } else {
+
                 }
-            } else if (!start_valid) {
-                num_policies--;
-                msnry.unstamp(event.target);
+            } else {
+                if (start_valid) {
+                } else {
+                    num_policies--;
+                    event.target.classList.remove('grid-item');
+                    msnry.reloadItems()
+                }
             }
             console.log(num_policies);
             document.getElementById('next_button').disabled = num_policies !== 0;
