@@ -101,7 +101,7 @@
                     {% for t in ta %}
                         <div id="{{ t.tag_id }}" class="{{ c.name }} tag-properties move-me">{{ t.text }}</div>
                     {% endfor %}
-                    <div id="custom-{{ c.name }}" class="{{ c.name }} tag-properties write-in-me">_____________</div>
+                    <div id="custom-{{ c.name }}" class="{{ c.name }} tag-properties write-in-me" data-toggle="tooltip" title="Click to write your own tag" >_____________</div>
                 </div>
             </div>
         {% endfor %}
