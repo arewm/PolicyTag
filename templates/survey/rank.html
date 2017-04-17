@@ -55,7 +55,7 @@
 
 
     <div class="tags grid">
-        {% if True %}
+        {% if False %}
             {% for c, t in tags %}
                 {% if c == 'first' %}
                     <div style="position:relative; height: 62px;">
@@ -68,7 +68,7 @@
             {{ end_div|safe }}
         {% else %}
             {% for c,t in tags %}
-                <div id="{{ t.tag_id }}" class="draggable js-drag">{{ t.text }}</div>
+                <div id="{{ t.tag_id }}" class="draggable js-drag grid-item {{ t.tag_class }}">{{ t.text }}</div>
             {% endfor %}
         {% endif %}
     </div>
