@@ -54,7 +54,7 @@ function makeDraggable() {
             }
             else if (hasClass(src, 'move-me')) {
                 var a = u.helper.clone();//.attr("id", "drag-" + src.attr("id"));
-                var tag_id = u.helper.attr("id")
+                var tag_id = src.attr("id");
                 a.removeClass('move-me', tag_id);
                 add_to_workspace(a);
             }
