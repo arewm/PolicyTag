@@ -12,5 +12,9 @@ body{
 .progress {
     width: 100%;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
+}
+
+.consent {
+    margin: 0 5em;
 }
