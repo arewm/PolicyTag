@@ -40,7 +40,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .draggable {
-    position: absolute;
+    /*position: absolute;/**/
     z-index: 10;
     /*left: 1050px;/**/
     width: 100px;
@@ -56,20 +56,16 @@ body { font-family: Helvetica, Arial, sans-serif; }
 }
 
 .first {
-    /*left: 600px;/**/
-    left: 0px;
+    /*left: 0px;/**/
 }
 .second {
-    /*left: 740px;/**/
-    left: 140px;
+    /*left: 140px;/**/
 }
 .third{
-    /*left: 880px;/**/
-    left: 280px;
+    /*left: 280px;/**/
 }
 .fourth{
-    /*left: 880px;/**/
-    left: 420px;
+    /*left: 420px;/**/
 }
 
 .draggable.-drop-possible { background-color: #42bd41; }
