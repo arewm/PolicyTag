@@ -83,6 +83,8 @@ def policy(request, default_person='invalid_person_id'):
 
 
 def submit_policy(request):
+    import sys
+    print(request.POST, file=sys.stderr)
     p = get_object_or_404(Person, person_id=request.POST['person'])
     is_generated = request.POST.get('gen', None) is not None
     new_policy = Policies(owner=p, time_to_generate=request.POST.get('time', '-1'), generated=is_generated)
