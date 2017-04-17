@@ -13,12 +13,16 @@ var start_valid = false;
     interact('.js-drag')
         .draggable({max: Infinity})
         .on('dragstart', function (event) {
-            start_valid = event.target.style.left !== "";
+            start_valid = event.target.style.left[0] === "-";
             event.interaction.x = parseInt(window.getComputedStyle(event.target).left.slice(0, -2), 10);
             event.interaction.y = parseInt(window.getComputedStyle(event.target).top.slice(0, -2), 10);
             //event.interaction.x = parseInt(event.target.getAttribute('data-x'), 10) || 1000;
             //event.interaction.y = parseInt(event.target.getAttribute('data-y'), 10) || 10;
             document.getElementById('saver_form_tag').setAttribute('value', event.target.getAttribute('id'));
+            if (!start_valid) {
+                event.target.setAttribute('old-left', event.target.style.left);
+                event.target.setAttribute('old-top', event.target.style.top);
+            }
         })
         .on('dragmove', function (event) {
             event.interaction.x += event.dx;
@@ -37,8 +41,8 @@ var start_valid = false;
             //event.target.setAttribute('data-x', event.interaction.x);
             //event.target.setAttribute('data-y', event.interaction.y);
             if (event.target.getAttribute('valid') === 'false') {
-                event.target.style.left = "";
-                event.target.style.top = "";
+                event.target.style.left = event.target.getAttribute('old-left');
+                event.target.style.top = event.target.getAttribute('old-right');
                 if (start_valid) {
                     num_policies++;
                 }
