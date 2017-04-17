@@ -56,35 +56,8 @@ function makeDraggable() {
                 a.removeClass('move-me');
                 add_to_workspace(a);
                 a.addClass('moved-me');
-                //console.log("INFO: Accepted: ", a.attr("class"));
-                /*a.css("z-index", 1000);
-                a.appendTo("#workspace");
-                var formId = "pol-" + src.attr("id");
-                var input = document.createElement("input");
-                input.setAttribute("type", "hidden");
-                input.setAttribute("name", "tag");
-                input.setAttribute("id", formId);
-                input.setAttribute("value", src.attr("id"));
-                document.getElementById('policy_specification').appendChild(input);
-                a.on("remove", function() {
-                    var removeId = "#" + formId;
-                    $(removeId).remove();
-                });
-                a.draggable({
-                    containment: "#workspace"
-                });*/
-            } else if (hasClass(src, 'moved-me')) {
-                src.removeClass('moved-me');
-                src.addClass('removable-me');
             }
 
-        }
-
-    });
-    $('#trash').droppable({
-        accept: '.removable-me',
-        drop: function(event, ui) {
-            ui.draggable.remove();
         }
 
     });

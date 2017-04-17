@@ -50,7 +50,9 @@ body { font-family: Helvetica, Arial, sans-serif; }
     float: left;
     /*background-color: #29e;/**/
     /*color: #fff;/**/
+    max-height: 36px;
     text-align: center;
+    overflow-y: scroll;
 
     -ms-touch-action: none;
         touch-action: none;
