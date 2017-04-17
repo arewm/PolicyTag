@@ -79,14 +79,10 @@ def policy(request, default_person='invalid_person_id'):
         sugg_policies.append(('p{}'.format(e.policy_id), this_policy))
     # make the context for generating the page
     context = {'person': p.person_id, 'actions': action_list, 'categories': categories, 'tags': tag_list, 'policies': sugg_policies}
-    import sys
-    print(context, file=sys.stderr)
     return render(request, 'survey/policy.html', context)
 
 
 def submit_policy(request):
-    import sys
-    print(request.POST, file=sys.stderr)
     p = get_object_or_404(Person, person_id=request.POST['person'])
     is_generated = request.POST.get('gen', None) is not None
     new_policy = Policies(owner=p, time_to_generate=request.POST.get('time', '-1'), generated=is_generated)
@@ -218,6 +214,8 @@ def gen(request):
 def need_more_policies(p):
     num_created = Policies.objects.filter(owner=p).filter(generated=False).count()
     num_generated = Policies.objects.filter(owner=p).filter(generated=True).count()
+    if num_created == 0:
+        return False, 0
     percent = min(num_generated/num_created, 1)*100
     return percent < 100, percent
 
