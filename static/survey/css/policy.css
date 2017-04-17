@@ -167,18 +167,24 @@ div#operation .buff{
     margin-bottom: -50px;
 }
 
+div#operation-holder {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 .fa-check {
-    clear: both;
+    /*clear: both;/**/
     padding: 5px 5px;
     color: #00C851;
-    cursor: pointer;
+    /*cursor: pointer;/**/
 }
 
 .fa-times {
-    clear: both;
+    /*clear: both;/**/
     padding: 5px 10px;
     color: #ff4444;
-    cursor: pointer;
+    /*cursor: pointer;/**/
 }
 
 div#action {
