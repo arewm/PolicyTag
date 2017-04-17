@@ -36,16 +36,16 @@ div#mid_row {
 
 div#suggestions{
   float: left;
-  width: var(--main-width);
+  width: 100%;
   height: 99%;
   /*background-color: green;/**/
 }
 
-div#top_right{
+/*div#top_right{
   float: left;
   width: var(--secondary-width);
   height: 99%;
-}
+}*/
 
 div#policy_suggestion {
     float: left;
@@ -82,21 +82,21 @@ div#tags_no_suggestion {
     margin: 2px;
 }
 
-div#tutorial_buffer{
+/*div#tutorial_buffer{
   float: left;
   width: 10%;
   height: 100%;
   /*background-color: lightgreen;/**/
-}
+/*}/**/
 
-div#tutorial {
+/*div#tutorial {
     float: left;
     width: 80%;
     height: 100%;
     background-color: #ffffff;
     /*margin: 0 1%;/**/
     /*background-color: lightyellow;/**/
-}
+/*}/**/
 
 div#workspace{
     float: left;/**/

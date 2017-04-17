@@ -138,6 +138,11 @@ def remove_policy(request):
     # do something like this to see if the tags are associated with any other policies...
     # if user.partner_set.filter(slug=requested_slug).exists():
     # use .delete()
+    #
+    # Probably not going to happen soon. There has to be a lot of upkeep to make sure that
+    # stuff is only deleted that is not being referenced anymore.
+    # If we want to do it, investigate the policies_all() method on the PolicyAction and PolicyTag to see
+    # if there are any more policies referencing the object in a ManyToMany field.
     pass
 
 
