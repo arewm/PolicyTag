@@ -213,8 +213,10 @@ def gen(request):
     for a in actions:
         action_list.append(('a{}'.format(a.action_id), a.text))
 
-    _, percent = need_more_policies(p)
-    context = {'person': p.person_id, 'actions': action_list, 'tags': generate_policy(p), 'percent': percent}
+    more, percent = need_more_policies(p)
+    context = {'person': p.person_id, 'actions': action_list, 'tags': {}, 'percent': percent}
+    if more:
+        context['tags'] =  generate_policy(p)
     return render(request, 'survey/generate.html', context)
 
 
