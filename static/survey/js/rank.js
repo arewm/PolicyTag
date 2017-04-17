@@ -24,9 +24,9 @@ var msnry = new Masonry('.grid', {
             //event.interaction.y = parseInt(event.target.getAttribute('data-y'), 10) || 10;
             document.getElementById('saver_form_tag').setAttribute('value', event.target.getAttribute('id'));
             if (!start_valid) {
-                event.target.setAttribute('old-left', event.target.style.left);
-                event.target.setAttribute('old-top', event.target.style.top);
-                event.target.classList.remove('grid-item');
+                //event.target.setAttribute('old-left', event.target.style.left);
+                //event.target.setAttribute('old-top', event.target.style.top);
+                msnry.unstamp(event.target);
             }
         })
         .on('dragmove', function (event) {
@@ -51,15 +51,12 @@ var msnry = new Masonry('.grid', {
                 event.target.style.top = event.target.getAttribute('old-top');
                 if (start_valid) {
                     num_policies++;
+                    msnry.appended(event.target)
                 }
             } else if (!start_valid) {
                 num_policies--;
+                msnry.unstamp(event.target);
             }
-            var msnry = new Masonry('.grid', {
-                // options
-                itemSelector: '.grid-item',
-                columnWidth: 20
-            });
             console.log(num_policies);
             document.getElementById('next_button').disabled = num_policies !== 0;
             event.target.removeAttribute('valid');
