@@ -135,7 +135,7 @@
 </div>
 
 
-<div class="panel panel-danger consent">
+<div class="panel panel-danger consent" style="margin-bottom: 5em;">
     <div class="panel-heading"><strong>Consent To Participate</strong>
     </div>
     <div class="panel-body">
@@ -149,7 +149,7 @@
         <form id="consent" action="{% url 'tutorial' %}" method="post">
             {% csrf_token %}
             <label><input type="radio" name="agree" value="yes">Yes</label>
-            <label><input type="radio" name="agree" value="no">No</label><br/>
+            <label><input type="radio" name="agree" value="no">No</label>
             <input type="submit" name="button" id="next_button" value="Continue"/>
         </form>
     </div>
