@@ -42,13 +42,14 @@ var start_valid = false;
             //event.target.setAttribute('data-y', event.interaction.y);
             if (event.target.getAttribute('valid') === 'false') {
                 event.target.style.left = event.target.getAttribute('old-left');
-                event.target.style.top = event.target.getAttribute('old-right');
+                event.target.style.top = event.target.getAttribute('old-top');
                 if (start_valid) {
                     num_policies++;
                 }
             } else if (!start_valid) {
                 num_policies--;
             }
+            console.log(num_policies);
             document.getElementById('next_button').disabled = num_policies !== 0;
             event.target.removeAttribute('valid');
             var frm = $('#rank_saver');
