@@ -19,7 +19,7 @@ body{
     margin: 5px 5em;
 }
 
-.tooltop {
+.tooltip {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
