@@ -5,7 +5,7 @@ from django.forms.models import model_to_dict
 
 from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
 
-from random import random, choice
+from random import random, randint, choice
 import re
 
 test_id = '4b81dbb5-3e78-4bb0-a2dd-bf1052368669'
@@ -215,9 +215,9 @@ def gen(request):
 
 
 def need_more_policies(p):
-    num_tags = PolicyTag.objects.filter(owner=p).count()/2
+    num_created = Policies.objects.filter(owner=p).filter(generated=False).count()
     num_generated = Policies.objects.filter(owner=p).filter(generated=True).count()
-    percent = min(num_generated/num_tags, 1)*100
+    percent = min(num_generated/num_created, 1)*100
     return percent < 100, percent
 
 
@@ -225,9 +225,10 @@ def generate_policy(p):
     policy_tags = [t for t in PolicyTag.objects.filter(owner=p)]
     new_policy = []
     iter = 0
+    ntags = randint(2, 3)
     while iter < 5:
         # five attempts to find a policy suggestion
-        while len(new_policy) < 3:
+        while len(new_policy) < ntags:
             # find three unique tags
             selection = choice(policy_tags)
             if selection not in new_policy:
@@ -240,8 +241,8 @@ def generate_policy(p):
         if search:
             # loop through all possible policy matches
             for s in search:
-                # if there are only three tags in the policy, it exists
-                if s.tags.all().count() == 3:
+                # if there are only these tags in the policy, it exists
+                if s.tags.all().count() == ntags:
                     new_policy.clear()
                     break
         if new_policy:
