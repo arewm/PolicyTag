@@ -51,6 +51,11 @@ var start_valid = false;
             } else if (!start_valid) {
                 num_policies--;
             }
+            msnry = new Masonry(elem, {
+                // options
+                itemSelector: '.grid-item',
+                columnWidth: 200
+            });
             console.log(num_policies);
             document.getElementById('next_button').disabled = num_policies !== 0;
             event.target.removeAttribute('valid');
