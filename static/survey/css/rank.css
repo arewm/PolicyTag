@@ -51,11 +51,16 @@ body { font-family: Helvetica, Arial, sans-serif; }
     /*background-color: #29e;/**/
     /*color: #fff;/**/
     max-height: 36px;
-    text-align: center;
-    overflow-y: scroll;
+    /*text-align: center;
+    overflow-y: scroll;/**/
 
     -ms-touch-action: none;
         touch-action: none;
+}
+
+.draggable-text {
+    text-align: center;
+    overflow-y: scroll;
 }
 
 .first {
