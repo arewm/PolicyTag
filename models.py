@@ -24,12 +24,12 @@ class Person(models.Model):
 class Tag(models.Model):
     tag_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     text = models.CharField(max_length=50)
-    tag_cat = models.ForeignKey(TagCategory, on_delete=models.CASCADE, null=True)
+    tag_cat = models.ForeignKey(TagCategory, on_delete=models.CASCADE)
     custom = models.BooleanField(default=False)
     creator = models.ForeignKey(Person, on_delete=models.CASCADE, default=None, null=True)
 
     def __str__(self):
-        return '{}: {}'.format(self.tag_class, self.text)
+        return '{}: {}'.format(self.tag_cat.name, self.text)
 
 
 class Action(models.Model):
