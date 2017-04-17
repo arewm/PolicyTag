@@ -57,7 +57,7 @@ function makeDraggable() {
                 console.log($(this).attr('id'));
                 console.log(u.draggable.attr("id"));
                 console.log(src.attr("id"));
-                console.log(src.attr("id"));
+                console.log(tag_id);
                 a.removeClass('move-me', tag_id);
                 add_to_workspace(a);
             }
