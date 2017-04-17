@@ -81,23 +81,23 @@
         {% endif %}
         <div>
             <span class="label label-default" style="font-size: 100%;">Tag Suggestions</span>
-            {% for c in classes %}
-                <label class="checkbox-inline"><input id="{{ c.tag_class }}-check" type="checkbox" checked
+            {% for c in categories %}
+                <label class="checkbox-inline"><input id="{{ c.name }}-check" type="checkbox" checked
                                                       value=""
-                                                      onchange="toggleLinked('{{ c.tag_class }}')">{{ c.tag_class }}
+                                                      onchange="toggleLinked('{{ c.name }}')">{{ c.name }}
                 </label>
             {% endfor %}
         </div>
         {% for c, ta in tags %}
-            <div id="{{ c }}-group" class="panel panel-default">
+            <div id="{{ c.name }}-group" class="panel panel-default class-description">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{ c }}</h3>
+                    <div class="tooltip"><h3 class="panel-title">{{ c.name }}</h3><span class="tooltiptext">{{ c.help_text }}</span></div>
                 </div>
                 <div class="panel-body">
                     {% for t in ta %}
-                        <div id="{{ t.tag_id }}" class="{{ c }} tag-properties move-me">{{ t.text }}</div>
+                        <div id="{{ t.tag_id }}" class="{{ c.name }} tag-properties move-me">{{ t.text }}</div>
                     {% endfor %}
-                    <div id="custom-{{ c }}" class="{{ c }} tag-properties write-in-me">_____________</div>
+                    <div id="custom-{{ c.name }}" class="{{ c.name }} tag-properties write-in-me">_____________</div>
                 </div>
             </div>
         {% endfor %}

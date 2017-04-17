@@ -38,6 +38,13 @@
     padding: 2px;/**/
 }
 
+.tag-properties {
+    min-width: 10px;
+    float: left;
+    padding: 2px;
+    margin: 2px;
+}
+
 .write-in-me {
     cursor: text;
 }

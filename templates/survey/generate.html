@@ -61,6 +61,11 @@
             would specify the actions on the defined policy. We will only use tags that you included in your
             policies.</h3>
     </div>
+    <div id="category-list">
+        {% for c in categories %}
+            <div id="{{ c.name }}" class="{{ c.name }} tooltip tag-properties">{{ c.name }} <span class="tooltiptext">{{ c.help_text }}</span></div>
+        {% endfor %}
+    </div>
 </div>
 
 <div id="mid_row" class="row">

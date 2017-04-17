@@ -53,7 +53,7 @@ div#policy_suggestion {
     height: 100%;
     margin: 0 1%;
     overflow-y: scroll;
-    background-color: #ffffff;
+   /* background-color: #ffffff;/**/
     /*background-color: lightyellow;/**/
 }
 
@@ -63,7 +63,7 @@ div#tags {
     height: 100%;
     margin: 0 1%;
     overflow-y: scroll;
-    background-color: #ffffff;
+   /* background-color: #ffffff;/**/
     /*background-color: lightyellow;/**/
 }
 
@@ -73,13 +73,6 @@ div#tags_no_suggestion {
     height: 100%;
     margin: 0 1%;
     overflow-y: scroll;
-}
-
-.tag-properties {
-    min-width: 10px;
-    float: left;
-    padding: 2px;
-    margin: 2px;
 }
 
 /*div#tutorial_buffer{
@@ -193,7 +186,7 @@ div#action {
     width: 25%;
     height: 100%;
     margin: 0 1%;
-    background-color: #ffffff;
+    /*background-color: #ffffff;/**/
 }
 
 /*div#action{
@@ -209,7 +202,7 @@ div#policies{
     width: 99%;
     height: 100%;
     margin: 0 1%;
-    background-color: #ffffff;
+    /*background-color: #ffffff;/**/
     overflow-y: scroll;
     /*background-color: lightyellow;/**/
 }
