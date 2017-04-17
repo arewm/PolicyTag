@@ -54,7 +54,7 @@ var start_valid = false;
             msnry = new Masonry(elem, {
                 // options
                 itemSelector: '.grid-item',
-                columnWidth: 200
+                columnWidth: 20
             });
             console.log(num_policies);
             document.getElementById('next_button').disabled = num_policies !== 0;
