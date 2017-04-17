@@ -79,6 +79,8 @@ def policy(request, default_person='invalid_person_id'):
         sugg_policies.append(('p{}'.format(e.policy_id), this_policy))
     # make the context for generating the page
     context = {'person': p.person_id, 'actions': action_list, 'classes': classes, 'tags': tag_list, 'policies': sugg_policies}
+    import sys
+    print(context, file=sys.stderr)
     return render(request, 'survey/policy.html', context)
 
 
