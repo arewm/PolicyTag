@@ -91,7 +91,7 @@
         {% for c, ta in tags %}
             <div id="{{ c.name }}-group" class="panel panel-default class-description">
                 <div class="panel-heading">
-                    <div class="tooltip"><h3 class="panel-title">{{ c.name }}</h3><span class="tooltiptext">{{ c.help_text }}</span></div>
+                    <div class="panel-title tooltip"><h3>{{ c.name }}</h3><span class="tooltiptext">{{ c.help_text }}</span></div>
                 </div>
                 <div class="panel-body">
                     {% for t in ta %}
