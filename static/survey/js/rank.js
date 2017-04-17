@@ -1,5 +1,9 @@
 setupFunction = null;
 var start_valid = false;
+var msnry = new Masonry('.grid', {
+    itemSelector: '.grid-item',
+    columnWidth: 20
+});
 
 (function (interact) {
 
@@ -51,7 +55,7 @@ var start_valid = false;
             } else if (!start_valid) {
                 num_policies--;
             }
-            msnry = new Masonry(elem, {
+            var msnry = new Masonry('.grid', {
                 // options
                 itemSelector: '.grid-item',
                 columnWidth: 20
