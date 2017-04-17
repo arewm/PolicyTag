@@ -42,7 +42,8 @@ function copyPolicy() {
         tempTag.removeClass('ui-draggable').removeClass('ui-draggable-dragging').removeClass('ui-draggable-handle');
         tempTag.removeClass('moved-me').removeClass('removable');
         tempTag.attr('style', '');
-        tempTag.attr('id', $(this).attr('id').slice(5));
+        tempTag.attr('id', 'policy-' + $(this).attr('id').slice(5));
+        tempTag.children('button').remove()
         tagArray.children()[0].append(tempTag[0]);
     });
     $('#policies').append(tagArray);
