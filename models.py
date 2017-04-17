@@ -2,6 +2,15 @@ import uuid
 from django.db import models
 
 
+class TagCategory(models.Model):
+    name = models.CharField(max_length=50)
+    help_text = models.CharField(max_length=100)
+    display_order = models.IntegerField(default=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Person(models.Model):
     expert_class = models.BooleanField(default=False)
     person_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -15,7 +24,7 @@ class Person(models.Model):
 class Tag(models.Model):
     tag_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     text = models.CharField(max_length=50)
-    tag_class = models.CharField(max_length=50)
+    tag_cat = models.ForeignKey(TagCategory, on_delete=models.CASCADE)
     custom = models.BooleanField(default=False)
     creator = models.ForeignKey(Person, on_delete=models.CASCADE, default=None, null=True)
 

@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse, Http404
 from django.db.models import Q
 from django.forms.models import model_to_dict
 
-from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag
+from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag, TagCategory
 
 from random import random, randint, choice
 import re
@@ -62,23 +62,23 @@ def policy(request, default_person='invalid_person_id'):
     action_list = []
     for a in actions:
         action_list.append(('a{}'.format(a.action_id), a.text))
-    classes = Tag.objects.values('tag_class').distinct().order_by('tag_class')
+    categories = TagCategory.objects.order_by('display_order')
     tag_list = []
-    for c in classes:
-        tags = Tag.objects.filter(tag_class=c['tag_class']).filter(creator=None).order_by('text')
+    for c in categories:
+        tags = Tag.objects.filter(tag_cat=c).filter(creator=None).order_by('text')
         for t in tags:
             t.tag_id = 't{}'.format(t.tag_id)
-        tag_list.append((c['tag_class'], tags))
+        tag_list.append((c, tags))
     # Get the suggested policies if we want to display them.
     expert_policies = Policies.objects.filter(owner=policy_sugg_owner)
     sugg_policies = []
     for e in expert_policies:
         this_policy = []
         for t in e.tags.all():
-            this_policy.append((t.tag.tag_class, 't{}'.format(t.tag.tag_id), t.tag.text))
+            this_policy.append((t.tag.tag_cat.name, 't{}'.format(t.tag.tag_id), t.tag.text))
         sugg_policies.append(('p{}'.format(e.policy_id), this_policy))
     # make the context for generating the page
-    context = {'person': p.person_id, 'actions': action_list, 'classes': classes, 'tags': tag_list, 'policies': sugg_policies}
+    context = {'person': p.person_id, 'actions': action_list, 'categories': categories, 'tags': tag_list, 'policies': sugg_policies}
     import sys
     print(context, file=sys.stderr)
     return render(request, 'survey/policy.html', context)
@@ -146,11 +146,12 @@ def custom_tag(request):
     # create a custom tag as long as it does not already exist as a system or this-user tag
     response = {'new': 'false', 'category': request.POST['category']}
     p = get_object_or_404(Person, person_id=request.POST['person'])
+    category = get_object_or_404(TagCategory, name=request.POST['category'])
     if not Tag.objects.filter(Q(text=request.POST['tag'].strip()) &
-                              Q(tag_class=request.POST['category']) &
+                              Q(tag_cat=category) &
                               (Q(creator=None) | Q(creator=p))):
         # we cannot find a system or user-created tag with the text and class provided
-        tag = Tag(text=request.POST['tag'].strip(), tag_class=request.POST['category'], custom=True, creator=p)
+        tag = Tag(text=request.POST['tag'].strip(), tag_cat=category, custom=True, creator=p)
         tag.save()
         response['new'] = 'true'
         response['id'] = 't{}'.format(tag.tag_id)
@@ -159,7 +160,7 @@ def custom_tag(request):
 
 
 def custom_tag_order(tag):
-    return '{} {}'.format(tag.tag_class, tag.text)
+    return '{} {} {}'.format(tag.tag_cat.display_order, tag.tag_cat.name, tag.text)
 
 
 def rank(request):
@@ -210,7 +211,7 @@ def gen(request):
     more, percent = need_more_policies(p)
     context = {'person': p.person_id, 'actions': action_list, 'tags': {}, 'percent': percent}
     if more:
-        context['tags'] =  generate_policy(p)
+        context['tags'], context['categories'] =  generate_policy(p)
     return render(request, 'survey/generate.html', context)
 
 
@@ -226,6 +227,7 @@ def generate_policy(p):
     new_policy = []
     iter = 0
     ntags = randint(2, 3)
+    categories = []
     while iter < 5:
         # five attempts to find a policy suggestion
         while len(new_policy) < ntags:
@@ -247,13 +249,23 @@ def generate_policy(p):
                     break
         if new_policy:
             # hooray, we still have a new policy!
-            break
+            # make sure we do not have two time or location tags
+            are_done = True
+            for t in new_policy:
+                c = t.tag.tag_cat
+                if c  in categories:
+                    if c == '' or c == '':
+                        are_done = False
+                else:
+                    categories.append(c)
+            if are_done:
+                break
     tags = [t.tag for t in new_policy]
     return_tags = []
     for t in tags:
         return_tags.append(model_to_dict(t))
         return_tags[-1]['tag_id'] = 't{}'.format(t.tag_id)
-    return return_tags
+    return return_tags, categories
 
 
 def next_generated_policy(request):
@@ -262,7 +274,8 @@ def next_generated_policy(request):
     else:
         p = get_object_or_404(Person, person_id = request.POST.get('person', None))
 
-    response = {'tags': generate_policy(p)}
+    response = {}
+    response['tags'], response['categories'] = generate_policy(p)
     return JsonResponse(response)
 
 
