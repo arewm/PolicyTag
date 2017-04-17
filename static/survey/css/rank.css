@@ -45,8 +45,8 @@ body { font-family: Helvetica, Arial, sans-serif; }
     /*left: 1050px;/**/
     width: 100px;
     padding: 1em 1em;
-    margin: 0 .25em;
-    display: inline-block;
+    margin: .25em;
+    /*display: inline-block;/**/
     /*background-color: #29e;/**/
     /*color: #fff;/**/
     text-align: center;
