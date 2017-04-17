@@ -115,22 +115,14 @@ def submit_policy(request):
     new_policy.save()
 
     response = {'id': new_policy.policy_id, 'num': Policies.objects.count()}
-    import sys
     if generate_new_policy:
-        print(generate_new_policy, file=sys.stderr)
         more, percent = need_more_policies(p)
-        print('{} {}'.format(more, percent), file=sys.stderr)
         if more:
-            print('getting more', file=sys.stderr)
             response['tags'] = generate_policy(p)
         else:
             response['tags'] = []
-        print(response['tags'], file=sys.stderr)
-        print(not not response['tags'], file=sys.stderr)
         response['more'] = not not response['tags']
         response['percent'] = percent
-    import sys
-    print(response, file=sys.stderr)
     return JsonResponse(response)
 
 
@@ -187,8 +179,6 @@ def rank(request):
 
 
 def save_rank(request):
-    import sys
-    print(request.POST, file=sys.stderr)
     p_id = request.POST.get('person', test_id)
     p = get_object_or_404(Person, person_id=p_id)
 
@@ -248,7 +238,6 @@ def generate_policy(p):
             for s in search:
                 # if there are only three tags in the policy, it exists
                 if s.tags.all().count() == 3:
-                    print('cleared!')
                     new_policy.clear()
                     break
         if new_policy:
