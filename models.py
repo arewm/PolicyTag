@@ -6,8 +6,6 @@ class Person(models.Model):
     expert_class = models.BooleanField(default=False)
     person_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     consent_accepted = models.BooleanField(default=False)
-    demographics = models.ForeignKey(Demographics, on_delete=models.CASCADE, null=True)
-    questions = models.ForeignKey(Survey, on_delete=models.CASCADE, null=True)
 
 
     def __str__(self):
