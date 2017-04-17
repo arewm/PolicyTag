@@ -47,8 +47,8 @@ var msnry = new Masonry('.grid', {
             //event.target.setAttribute('data-y', event.interaction.y);
             if (event.target.getAttribute('valid') === 'false') {
                 event.target.classList.add('grid-item');
-                event.target.style.left = event.target.getAttribute('old-left');
-                event.target.style.top = event.target.getAttribute('old-top');
+                //event.target.style.left = event.target.getAttribute('old-left');
+                //event.target.style.top = event.target.getAttribute('old-top');
                 if (start_valid) {
                     num_policies++;
                     msnry.appended(event.target)
