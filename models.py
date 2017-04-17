@@ -1,16 +1,6 @@
 import uuid
 from django.db import models
 
-# Create your models here.
-
-class Demographics(models.Model):
-    age = 12
-    education_level = 'kindergarten'
-    gender = 'N/A'
-
-class Survey(models.Model):
-    pass
-
 
 class Person(models.Model):
     expert_class = models.BooleanField(default=False)
@@ -48,7 +38,7 @@ class PolicyAction(models.Model):
     allow = models.BooleanField()
 
     def __str__(self):
-        return '{}'.format(self.allow)
+        return '{}: {}'.format(self.action_id.text, self.allow)
 
 
 class PolicyTag(models.Model):
