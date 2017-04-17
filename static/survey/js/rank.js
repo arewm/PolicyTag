@@ -61,7 +61,7 @@ var msnry = new Masonry('.grid', {
                 } else {
                     num_policies--;
                     event.target.classList.remove('grid-item');
-                    msnry.reloadItems()
+                    msnry.layout()
                 }
             }
             console.log(num_policies);
