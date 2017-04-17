@@ -47,6 +47,9 @@
                 $('#{{ action_id }}').bootstrapToggle(state);
             {% endfor %}
         }
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
 </head>
 <body>
@@ -91,7 +94,8 @@
         {% for c, ta in tags %}
             <div id="{{ c.name }}-group" class="panel panel-default class-description">
                 <div class="panel-heading">
-                    <div class="panel-title tooltip"><h3>{{ c.name }}</h3><span class="tooltiptext">{{ c.help_text }}</span></div>
+                    <div class="panel-title"><a href="#" data-toggle="tooltip" title="{{ c.help_text }}">
+                        <h3>{{ c.name }}</h3></a></div>
                 </div>
                 <div class="panel-body">
                     {% for t in ta %}
