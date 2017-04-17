@@ -22,6 +22,7 @@ var start_valid = false;
             if (!start_valid) {
                 event.target.setAttribute('old-left', event.target.style.left);
                 event.target.setAttribute('old-top', event.target.style.top);
+                event.target.classList.remove('grid-item');
             }
         })
         .on('dragmove', function (event) {
@@ -41,6 +42,7 @@ var start_valid = false;
             //event.target.setAttribute('data-x', event.interaction.x);
             //event.target.setAttribute('data-y', event.interaction.y);
             if (event.target.getAttribute('valid') === 'false') {
+                event.target.classList.add('grid-item');
                 event.target.style.left = event.target.getAttribute('old-left');
                 event.target.style.top = event.target.getAttribute('old-top');
                 if (start_valid) {
