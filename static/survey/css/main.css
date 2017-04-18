@@ -14,17 +14,20 @@ body{
     position: absolute;
 }
 
-.progress .bottom{
+.progress.bottom{
     bottom: 0;
 }
 
-.progress .top {
+.progress.top {
     top: 0;
+}
+
+.progress.top.center {
     left: 50%;
     margin-left: -25%;
 }
 
-.middle {
+.panel.middle {
     margin: 5px 5em;
 }
 
