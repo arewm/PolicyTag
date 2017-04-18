@@ -73,9 +73,9 @@ $(document).ready(function () {
                     for (var i =0; i<data.tags.length; i++){
                         var tag = data.tags[i];
                         var tag_div = $('<div class="tag-properties"/div>');
-                        console.log(tag.tag_class, tag.text);
+                        console.log(tag.category, tag.text);
                         tag_div.attr('id', tag.tag_id);
-                        tag_div.addClass(tag.tag_class);
+                        tag_div.addClass(tag.category);
                         tag_div.html(tag.text);
                         console.log(tag_div);
                         work.append(tag_div);
