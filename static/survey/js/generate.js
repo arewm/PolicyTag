@@ -91,6 +91,7 @@ $(document).ready(function () {
                         cat.addClass(c.name).addClass('tag-properties');
                         cat.attr('data-toggle', 'tooltip').attr('title', c.help_text).attr('data-placement', 'top');
                         cat.html(c.name).tooltip();
+                        console.log(cat);
 
                         category_label.append(cat);
                     }
