@@ -45,6 +45,9 @@
                 $('#{{ action_id }}').bootstrapToggle(state);
             {% endfor %}
         }
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip({container: 'body'});
+        });
     </script>
 </head>
 <body>
@@ -63,7 +66,9 @@
     </div>
     <div id="category-list">
         {% for c in categories %}
-            <div id="{{ c.name }}" class="{{ c.name }} tooltip tag-properties">{{ c.name }} <span class="tooltiptext">{{ c.help_text }}</span></div>
+            <a href="#" data-toggle="tooltip" title="{{ c.help_text }}" data-placement="top">
+                <div id="{{ c.name }}" class="{{ c.name }} tag-properties">{{ c.name }} </div>
+            </a>
         {% endfor %}
     </div>
 </div>
@@ -74,7 +79,7 @@
             <span class="label label-default" style="font-size: 100%;">Workspace</span>
         </div>
         {% for t in tags %}
-            <div id="{{ t.tag_id }}" class="{{ t.tag_class }} tag-properties">{{ t.text }}</div>
+            <div id="{{ t.tag_id }}" class="{{ t.tag_cat.name }} tag-properties">{{ t.text }}</div>
         {% endfor %}
     </div>
     <div id="operation">
