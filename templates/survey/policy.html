@@ -164,7 +164,10 @@
     <form id="next_page" action="{% url 'rank' %}" method="post">
         {% csrf_token %}
         <input type="hidden" name="person" value="{{ person }}">
-        <input type="submit" name="button" id="next_button" value="Next" disabled/>
+        <!--input type="submit" name="button" id="next_button" value="Next" disabled/-->
+        <button type="submit" id="next_button" class="btn btn-primary btn-block"  style="position:absolute;bottom:1em;z-index:200;">Continue to the next
+            part.
+        </button>
     </form>
 </body>
 </html>
