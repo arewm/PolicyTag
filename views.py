@@ -198,10 +198,13 @@ def rank(request):
     # context['end_div'] = '' if len(tag_list) % 4 == 0 else '</div>'
     import sys
     print(context, file=sys.stderr)
+    print(a.text, file=sys.stderr)
     return render(request, 'survey/rank.html', context)
 
 
 def save_rank(request):
+    import sys
+    print(request.POST, file=sys.stderr)
     p_id = request.POST.get('person', test_id)
     p = get_object_or_404(Person, person_id=p_id)
     a = get_object_or_404(Action, request.POST.get('action', None))
