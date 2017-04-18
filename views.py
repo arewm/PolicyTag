@@ -249,15 +249,15 @@ def generate_policy(p):
         if new_policy:
             # hooray, we still have a new policy!
             # make sure we do not have two time or location tags
-            are_done = True
+            done = True
             for t in new_policy:
                 c = t.tag.tag_cat
-                if c  in categories:
-                    if c.name == 'time' or c == 'location':
-                        are_done = False
+                if c in categories:
+                    if c.name == 'time' or c.name == 'location':
+                        done = False
                 else:
                     categories.append(c)
-            if are_done:
+            if done:
                 break
         iter += 1
     tags = [t.tag for t in new_policy]
