@@ -49,7 +49,8 @@
 
     <div class="panel panel-default middle">
         <div class="panel-heading">Current Policy Action: <strong>{{ action.text }}</strong>
-        </div><div class="progress top center">
+        </div>
+        <div class="progress top center">
             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
                  aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">
                 Rank: {{ percent }}% Complete
@@ -80,17 +81,21 @@
                     <input type="hidden" name="tag" value="" id="saver_form_tag">
                     <input type="hidden" name="rank" value="-1" id="saver_form_rank">
                 </form>
-
-                <form id="next_page" action="{% url 'rank' %}" method="post"
-                      style="position:fixed;bottom:2%;width:50%;">
-                    {% csrf_token %}
-                    <input type="hidden" name="person" value="{{ person }}">
-                    <input type="hidden" name="action" value="{{ next_action }}">
-                    <button type="submit" class="btn btn-primary btn-block">Save the rest of the tags as the lowest
-                        priority and
-                        Continue.
-                    </button>
-                    <!--input type="submit" name="button" id="next_button" value="Next" disabled/-->
+                {% if percent != 100 %}
+                    <form id="next_page" action="{% url 'rank' %}" method="post"
+                          style="position:fixed;bottom:2%;width:50%;">
+                {% else %}
+                    <form id="next_page" action="{% url 'generator' %}" method="post"
+                          style="position:fixed;bottom:2%;width:50%;">
+                {% endif %}
+                {% csrf_token %}
+                <input type="hidden" name="person" value="{{ person }}">
+                <input type="hidden" name="action" value="{{ next_action }}">
+                <button type="submit" class="btn btn-primary btn-block">Save the rest of the tags as the lowest
+                    priority and
+                    Continue.
+                </button>
+                <!--input type="submit" name="button" id="next_button" value="Next" disabled/-->
                 </form>
             </div>
         </div>
