@@ -65,7 +65,7 @@
             policies.</h3>
     </div>
     <div id="category-list" style="position:absolute;bottom:0;">
-        <p>These are the categories represented by the tags in this policy:</p>
+        <div id="list-description" style="float:left;"><p>These are the categories represented by the tags in this policy:</p></div>
         {% for c in categories %}
                 <div id="{{ c.name }}" class="{{ c.name }} tag-properties" data-toggle="tooltip" title="{{ c.help_text }}" data-placement="top">{{ c.name }} </div>
         {% endfor %}
