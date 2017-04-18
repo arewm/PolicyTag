@@ -65,10 +65,12 @@ $(document).ready(function () {
                 console.log(data);
                 // we have successfully submitted, so clear the policy
                 clearPolicy();
+                var category_label = $('#category-list');
+                category_label.children('.tag-properties').each().remove();
                 // fill in the next policy if there are any
-                console.log(data.more);
+                //console.log(data.more);
                 if (data.more) {
-                    console.log('got to more');
+                    //console.log('got to more');
                     var work = $('#workspace');
                     for (var i =0; i<data.tags.length; i++){
                         // add each of the tags in the policies
@@ -81,11 +83,10 @@ $(document).ready(function () {
                         console.log(tag_div);
                         work.append(tag_div);
                     }
-                    var category_label = $('#category-list');
-                    category_label.children('.tag-properties').each().remove();
                     for (var i=0; i<data.categories.length; i++) {
                         // add each of the categories in the policy
                         var c = data.category[i];
+                        console.log(c);
                         var cat = $('<div>');
                         cat.addClass(c.name).addClass('tag-properties');
                         cat.attr('data-toggle', 'tooltip').attr('title', c.help_text).attr('data-placement', 'top');
