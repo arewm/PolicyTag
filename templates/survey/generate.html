@@ -117,11 +117,11 @@
     <input type="hidden" name="e" value="{{ person.expert_class }}">
     {% if percent != 100 %}
         <!--input type="submit" name="button" id="next_button" value="Next" disabled style="display:none;"/-->
-        <button type="submit" class="btn btn-primary btn-block" disabled style="display:none;">Continue to the next
+        <button type="submit" class="btn btn-primary btn-block" disabled style="position:absolute;bottom:0;display:none;z-index:200;">Continue to the next
             part.
         </button>
     {% else %}
-        <button type="submit" class="btn btn-primary btn-block">Continue to the next part.</button>
+        <button type="submit" class="btn btn-primary btn-block" style="position: absolute;bottom: 0;z-index:200;">Continue to the next part.</button>
     {% endif %}
 </form>
 </body>
