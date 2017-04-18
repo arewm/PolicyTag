@@ -113,7 +113,7 @@
         Policy Generation: {{ percent }}% Complete
     </div>
 </div>
-<form id="next_page" action="#" method="post">
+<form id="next_page" action="https://ncsu.qualtrics.com/jfe/form/SV_bpG1js3rDjtA0kt" method="GET">
     {% csrf_token %}
     <input type="hidden" name="p" value="{{ person.person_id }}">
     <input type="hidden" name="e" value="{{ person.expert_class }}">
