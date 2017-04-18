@@ -14,7 +14,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
 
 .dropzone {
     overflow: hidden;
-    margin: 1em;
+    margin: .25em;
     padding: 1em;
     color: #666;
     text-align: center;
