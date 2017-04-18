@@ -196,6 +196,8 @@ def rank(request):
     # todo make the next button go to the next action and update the completion bar
     # todo make all progress bars to have the context of the specific page
     # context['end_div'] = '' if len(tag_list) % 4 == 0 else '</div>'
+    import sys
+    print(context, file=sys.stderr)
     return render(request, 'survey/rank.html', context)
 
 
