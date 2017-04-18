@@ -247,7 +247,7 @@ def need_more_policies(p):
 
 
 def generate_policy(p):
-    policy_tags = [t for t in PolicyTag.objects.filter(owner=p)]
+    policy_tags = [t for t in Policies.objects.filter(owner=p).values('tags').distinct()]
     new_policy = []
     i = 0
     ntags = randint(2, 3)
