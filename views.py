@@ -253,7 +253,7 @@ def generate_policy(p):
             for t in new_policy:
                 c = t.tag.tag_cat
                 if c  in categories:
-                    if c == '' or c == '':
+                    if c.name == 'time' or c == 'location':
                         are_done = False
                 else:
                     categories.append(c)
