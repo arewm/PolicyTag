@@ -42,8 +42,9 @@ var msnry = new Masonry('.grid', {
                     //num_policies++;
                     event.target.classList.add('grid-item');
                     msnry.appended(event.target);
+                    msnry.reloadItems();
                 }
-                msnry.reloadItems()
+                msnry.layout();
             } else {
                 if (!start_valid) {
                     //num_policies--;
