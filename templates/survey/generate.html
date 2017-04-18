@@ -83,9 +83,12 @@
         {% endfor %}
     </div>
     <div id="operation">
-        <div class="buff"></div>
-        <i class="fa fa-check fa-3x" aria-hidden="true" onclick="savePolicy()"></i>
+        <div id="operation-holder">
+        <a href="#" data-toggle="tooltip" title="Accept this policy" data-placement="top">
+            <div><i class="fa fa-check fa-3x" aria-hidden="true" onclick="savePolicy()"></i></div></a>
+        </div>
     </div>
+
     <div id="action">
         <div class="checkbox">
             <input id="default-toggle" type="checkbox" checked data-toggle="toggle" data-onstyle="success"
@@ -115,7 +118,6 @@
     <input type="hidden" name="p" value="{{ person.person_id }}">
     <input type="hidden" name="e" value="{{ person.expert_class }}">
     {% if percent != 100 %}
-        <!--input type="submit" name="button" id="next_button" value="Next" disabled style="display:none;"/-->
         <button type="submit" id="next_button" class="btn btn-primary btn-block" disabled style="position:absolute;bottom:1em;display:none;z-index:200;">Continue to the next
             part.
         </button>
