@@ -95,7 +95,7 @@ $(document).ready(function () {
 
                         category_label.append(cat);
                     }
-                    $('.progress-bar').attr('aria-valuenow', data.percent).attr('style', 'width:' + data.percent +'%').children().html(data.percent + '% Complete')
+                    $('.progress-bar').attr('aria-valuenow', data.percent).attr('style', 'width:' + data.percent +'%').html('Policy Generation: ' + data.percent + '% Complete')
                 } else {
                     // otherwise, enable the link to go to the next page
                     var button = $('#next_button');
