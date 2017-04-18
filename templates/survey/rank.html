@@ -34,10 +34,10 @@
             });
 
             var objHeight = 0;
-            $.each($('#rank-holder').children('.dropzone'), function () {
+            $.each($('#rank-holder').find('.dropzone'), function () {
                 objHeight += $(this).height();
             });
-            $('#rank-holder').height($('#dropzone-wrapper'));
+            $('#rank-holder').height(objHeight);
         });
     </script>
 </head>
