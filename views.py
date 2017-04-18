@@ -121,7 +121,7 @@ def submit_policy(request):
             response['tags'], response['category'] = generate_policy(p)
         else:
             response['tags'] = []
-            response['category'] = []
+            response['categories'] = []
         response['more'] = not not response['tags']
         response['percent'] = percent
     return JsonResponse(response)
