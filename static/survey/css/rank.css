@@ -7,7 +7,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
 .dropzone-wrapper {
     position: absolute;
     /*top: 50px;/**/
-    left: 10px;
+    /*left: 10px;/**/
     right: 0;
     width: 50%;
 }
@@ -28,6 +28,7 @@ body { font-family: Helvetica, Arial, sans-serif; }
     /*position: absolute;/**/
     width: 50%;
     left: 50%;
+    margin: 0 1em;
     /*top: 66px;/**/
     /*overflow-y: scroll;/**/
 }

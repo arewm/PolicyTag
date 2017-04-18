@@ -32,7 +32,8 @@
                 });
                 return false;
             });
-            $('#rank-holder').height($('.dropzone-wrapper').height());
+
+            $('#rank-holder').height(Math.max($('.dropzone-wrapper').height(), $('.tags.grid').height()));
         });
     </script>
 </head>
@@ -46,9 +47,9 @@
             repeat this for each policy action.</p>
     </div>
 
-    <div class="panel panel-default consent">
-        <div class="panel-heading"><strong>Current Policy Action: {{ action.text }}</strong>
-        </div><div class="progress top">
+    <div class="panel panel-default middle">
+        <div class="panel-heading">Current Policy Action: <strong>{{ action.text }}</strong>
+        </div><div class="progress top center">
             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
                  aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">
                 Rank: {{ percent }}% Complete
