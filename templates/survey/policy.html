@@ -161,7 +161,7 @@
         </div>
     </div>
 
-    <form id="next_page" action="{% url 'rank' %}" method="post">
+    <form id="next_page" action="{% url 'rank' %}" method="post"  onsubmit="return checkPolicies()">
         {% csrf_token %}
         <input type="hidden" name="person" value="{{ person }}">
         <!--input type="submit" name="button" id="next_button" value="Next" disabled/-->

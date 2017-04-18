@@ -100,3 +100,10 @@ function toggleLinked(linked) {
         $('#' + linked + "-group").hide()
     }
 }
+function checkPolicies() {
+    if (policyNumber >9) {
+        return true;
+    } else {
+        return confirm("We recommend at least 10 policies. You currently have " + policyNumber + ". Are you sure you want to continue?")
+    }
+}
