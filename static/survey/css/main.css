@@ -9,7 +9,7 @@ body{
     bottom: 0px;
 }
 
-.progress {
+.progress .bottom{
     width: 100%;
     position: absolute;
     bottom: 0;
