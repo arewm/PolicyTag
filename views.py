@@ -196,17 +196,11 @@ def rank(request):
     # todo make the next button go to the next action and update the completion bar
     # todo make all progress bars to have the context of the specific page
     # context['end_div'] = '' if len(tag_list) % 4 == 0 else '</div>'
-    import sys
-    print(context, file=sys.stderr)
-    print(a.text, file=sys.stderr)
     return render(request, 'survey/rank.html', context)
 
 
 def save_rank(request):
-    import sys
-    print(request.POST, file=sys.stderr)
-    p_id = request.POST.get('person', test_id)
-    p = get_object_or_404(Person, person_id=p_id)
+    p = get_object_or_404(Person, person_id=request.POST.get('person', test_id))
     a = get_object_or_404(Action, action_id=request.POST.get('action', None))
 
     tag = get_object_or_404(Tag, tag_id=request.POST.get('tag')[1:])
@@ -218,12 +212,7 @@ def save_rank(request):
 
 
 def gen(request):
-    p_id = request.GET.get('person', None)
-
-    if p_id is None:
-        p = Person.objects.get(person_id=test_id)
-    else:
-        p = get_object_or_404(Person, person_id=p_id)
+    p = get_object_or_404(Person, person_id=request.POST.get('person', test_id))
 
     actions = Action.objects.all()
     action_list = []
@@ -231,7 +220,7 @@ def gen(request):
         action_list.append(('a{}'.format(a.action_id), a.text))
 
     more, percent = need_more_policies(p)
-    context = {'person': p.person_id, 'actions': action_list, 'tags': {}, 'percent': int(percent)}
+    context = {'person': p, 'actions': action_list, 'tags': {}, 'percent': int(percent)}
     if more:
         context['tags'], context['categories'] = generate_policy(p)
     return render(request, 'survey/generate.html', context)

@@ -52,7 +52,7 @@
 <body>
 <form id="policy_specification" action="{% url 'submit_policy' %}" method="post">
     {% csrf_token %}
-    <input type="hidden" name="person" value="{{ person }}">
+    <input type="hidden" name="person" value="{{ person.person_id }}">
     <input type="hidden" name="get_another" value="True">
     <input type="hidden" name="gen" value="True">
     <input id="policy_time" type="hidden" name="time" value="">
