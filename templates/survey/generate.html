@@ -66,9 +66,7 @@
     </div>
     <div id="category-list">
         {% for c in categories %}
-            <a href="#" data-toggle="tooltip" title="{{ c.help_text }}" data-placement="top">
-                <div id="{{ c.name }}" class="{{ c.name }} tag-properties">{{ c.name }} </div>
-            </a>
+                <div id="{{ c.name }}" class="{{ c.name }} tag-properties" data-toggle="tooltip" title="{{ c.help_text }}" data-placement="top">{{ c.name }} </div>
         {% endfor %}
     </div>
 </div>
