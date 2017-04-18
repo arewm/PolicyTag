@@ -276,7 +276,7 @@ def generate_policy(p):
             # make sure we do not have two time or location tags
             done = True
             for t in new_policy:
-                c = t.tag.tag_cat
+                c = t.tag_cat
                 if c in categories:
                     if c.name == 'time' or c.name == 'location':
                         done = False
@@ -285,9 +285,8 @@ def generate_policy(p):
             if done:
                 break
         i += 1
-    tags = [t.tag for t in new_policy]
     return_tags = []
-    for t in tags:
+    for t in new_policy:
         return_tags.append(model_to_dict(t))
         return_tags[-1]['tag_id'] = 't{}'.format(t.tag_id)
         return_tags[-1]['category'] = t.category
