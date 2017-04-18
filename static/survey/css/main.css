@@ -22,7 +22,7 @@ body{
     top: 0;
 }
 
-.progress .center {
+.progress .top .center {
     left: 50%;
     margin-left: -25%;
 }
