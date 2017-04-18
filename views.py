@@ -259,6 +259,7 @@ def generate_policy(p):
                     categories.append(c)
             if are_done:
                 break
+        iter += 1
     tags = [t.tag for t in new_policy]
     return_tags = []
     for t in tags:
@@ -268,9 +269,6 @@ def generate_policy(p):
     return_categories = []
     for c in categories:
         return_categories.append(model_to_dict(c))
-    import sys
-    print(return_tags, file=sys.stderr)
-    print(return_categories, file=sys.stderr)
     return return_tags, return_categories
 
 
