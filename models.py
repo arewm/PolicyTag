@@ -31,6 +31,10 @@ class Tag(models.Model):
     def __str__(self):
         return '{}: {}'.format(self.tag_cat.name, self.text)
 
+    @property
+    def category(self):
+        return self.tag_cat.name
+
 
 class Action(models.Model):
     action_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
