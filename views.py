@@ -207,7 +207,7 @@ def save_rank(request):
     print(request.POST, file=sys.stderr)
     p_id = request.POST.get('person', test_id)
     p = get_object_or_404(Person, person_id=p_id)
-    a = get_object_or_404(Action, request.POST.get('action', None))
+    a = get_object_or_404(Action, action_id=request.POST.get('action', None))
 
     tag = get_object_or_404(Tag, tag_id=request.POST.get('tag')[1:])
 

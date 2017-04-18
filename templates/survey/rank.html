@@ -32,11 +32,6 @@
                 });
                 return false;
             });
-
-            var objHeight = 0;
-            $.each($('#rank-holder').find('.dropzone'), function () {
-                objHeight += $(this).height();
-            });
             $('#rank-holder').height($('.dropzone-wrapper').height());
         });
     </script>
@@ -52,7 +47,7 @@
     </div>
 
     <div class="panel panel-default consent">
-        <div class="panel-heading"><strong>Current Policy Action: {{ a.text }}</strong>
+        <div class="panel-heading"><strong>Current Policy Action: {{ action.text }}</strong>
         </div><div class="progress top">
             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
                  aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">
