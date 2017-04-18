@@ -67,10 +67,10 @@
             <input type="hidden" name="rank" value="-1" id="saver_form_rank">
         </form>
 
-        <form id="next_page" action="{% url 'generator' %}" method="post">
+        <form id="next_page" action="{% url 'generator' %}" method="post" style="position:fixed;bottom:2%;width:50%;">
             {% csrf_token %}
             <input type="hidden" name="person" value="{{ person }}">
-            <button type="submit" class="btn btn-primary btn-block" style="position: fixed;bottom: 2%;">Save the rest of the tags as the lowest priority and
+            <button type="submit" class="btn btn-primary btn-block">Save the rest of the tags as the lowest priority and
                 submit.
             </button>
             <!--input type="submit" name="button" id="next_button" value="Next" disabled/-->
