@@ -80,11 +80,11 @@ body { font-family: Helvetica, Arial, sans-serif; }
 
 .draggable.-drop-possible { background-color: #42bd41; }
 
-#next_button {
+/*#next_button {
     position: fixed;
     right: 2%;
     bottom: 2%;
-}
+}/**/
 /**/
 /*body { font-family: Helvetica, Arial, sans-serif; }
 
