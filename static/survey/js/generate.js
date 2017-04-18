@@ -71,6 +71,7 @@ $(document).ready(function () {
                     console.log('got to more');
                     var work = $('#workspace');
                     for (var i =0; i<data.tags.length; i++){
+                        // add each of the tags in the policies
                         var tag = data.tags[i];
                         var tag_div = $('<div class="tag-properties"/div>');
                         console.log(tag.category, tag.text);
@@ -79,6 +80,18 @@ $(document).ready(function () {
                         tag_div.html(tag.text);
                         console.log(tag_div);
                         work.append(tag_div);
+                    }
+                    var category_label = $('#category-list');
+                    category_label.children('.tag-properties').each().remove();
+                    for (var i=0; i<data.categories.length; i++) {
+                        // add each of the categories in the policy
+                        var c = data.category[i];
+                        var cat = $('<div>');
+                        cat.addClass(c.name).addClass('tag-properties');
+                        cat.attr('data-toggle', 'tooltip').attr('title', c.help_text).attr('data-placement', 'top');
+                        cat.html(c.name).tooltip();
+
+                        category_label.append(cat);
                     }
                     $('.progress-bar').attr('aria-valuenow', data.percent).attr('style', 'width:' + data.percent +'%').children().html(data.percent + '% Complete')
                 } else {
