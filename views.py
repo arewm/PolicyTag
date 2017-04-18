@@ -118,7 +118,7 @@ def submit_policy(request):
     if generate_new_policy:
         more, percent = need_more_policies(p)
         if more:
-            response['tags'], response['category'] = generate_policy(p)
+            response['tags'], response['categories'] = generate_policy(p)
         else:
             response['tags'] = []
             response['categories'] = []
