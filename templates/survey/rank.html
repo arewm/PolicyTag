@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/static/survey/css/rank.css">
     <link rel="stylesheet" href="/static/survey/css/tags.css">
     <!--script>
-        var num_policies = {{ number }}
+        var num_policies = {#{  number }#}
     </script-->
     <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -56,7 +56,7 @@
 
     <div class="tags grid">
         {% for c,t in tags %}
-            <div id="{{ t.tag_id }}" class="draggable js-drag grid-item {{ t.tag_class }}">
+            <div id="{{ t.tag_id }}" class="draggable js-drag grid-item {{ t.tag_cat.name }}">
                 {{ t.text }}
             </div>
         {% endfor %}
