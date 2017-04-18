@@ -37,6 +37,7 @@ function clearPolicy() {
 function copyPolicy() {
     var tagArray = $('<ul id="policy-' + policyNumber++ + '" class="list-group list-inline"/>');
     tagArray = $('<div id="policy-' + policyNumber + '" class="panel panel-default"/>').append($('<div class="panel-body" style="padding:5px;"/>'));
+    tagArray.children()[0].append($('<div style="float:left">Policy #' + (policyNumber+1) + '</div>'));
     $('#workspace').children('.ui-draggable').each(function () {
         var tempTag = $(this).clone();
         tempTag.removeClass('ui-draggable').removeClass('ui-draggable-dragging').removeClass('ui-draggable-handle');
