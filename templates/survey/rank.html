@@ -41,9 +41,15 @@
     <div style="width:100%">
         <span class="label label-default" style="font-size: 150%;float:left;margin: 0 16px;">Tag Ranking</span>
         <p> All of the tags that you used to generate your policies are on the right. In order to ensure that we can
-            understand
-            the relationship between all tags, please drag them into the relevant priority.</p>
+            understand the relationship between all tags, please drag them into the relevant priority. You will have to
+            repeat this for each policy action.</p>
     </div>
+
+<div class="panel panel-default consent">
+    <div class="panel-heading"><strong>Current Policy Action: {{ a.name }}</strong>
+    </div>
+    <div class="panel-body" style="position:relative;">
+
 
     <div class="dropzone-wrapper">
         <div id="priority1" class="dropzone js-drop">Highest Priority</div>
@@ -63,20 +69,28 @@
         <form id="rank_saver" action="{% url 'save_rank' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="person" value="{{ person }}">
+            <input type="hidden" name="action" value="{{ action.action_id }}">
             <input type="hidden" name="tag" value="" id="saver_form_tag">
             <input type="hidden" name="rank" value="-1" id="saver_form_rank">
         </form>
 
-        <form id="next_page" action="{% url 'generator' %}" method="post" style="position:fixed;bottom:2%;width:50%;">
+        <form id="next_page" action="{% url 'rank' %}" method="post" style="position:fixed;bottom:2%;width:50%;">
             {% csrf_token %}
             <input type="hidden" name="person" value="{{ person }}">
+            <input type="hidden" name="action" value="{{ next_action }}">
             <button type="submit" class="btn btn-primary btn-block">Save the rest of the tags as the lowest priority and
-                submit.
+                Continue.
             </button>
             <!--input type="submit" name="button" id="next_button" value="Next" disabled/-->
         </form>
     </div>
-
+    </div><div class="progress">
+    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
+         aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">
+        Rank: {{ percent }}% Complete
+    </div>
+</div>
+</div>
 </div>
 <script src="/static/survey/js/rank.js"></script>
 <script type="text/javascript">

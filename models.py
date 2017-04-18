@@ -53,21 +53,40 @@ class PolicyAction(models.Model):
 
 
 class PolicyTag(models.Model):
+    action = models.ForeignKey(Action, on_delete=models.CASCADE)
     tag = models.ForeignKey(Tag, on_delete=models.CASCADE, default=None)
     owner = models.ForeignKey(Person, on_delete=models.CASCADE, default=None)
     priority = models.IntegerField(default=-1)
 
     def __str__(self):
-        return '{}: {} = {}'.format(self.owner, self.tag, self.priority)
+        return '{}: {} = {} ==> {}'.format(self.owner, self.tag, self.action, self.priority)
+
+
+# class TagRank(models.Model):
+#     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+#     action = models.ForeignKey(Action, on_delete=models.CASCADE)
+#     priority = models.IntegerField(default=-1)
+#     owner = models.ForeignKey(Person, on_delete=models.CASCADE)
+
+
+# class PolicyElement(models.Model):
+#     action = models.ForeignKey(Action, on_delete=models.CASCADE)
+#     tags = models.ManyToManyField(PolicyTag)
+#     allow = models.BooleanField()
+#     owner = models.ForeignKey(Person, on_delete=models.CASCADE, default=None)
+#
+#     def __str__(self):
+#         return '{} : {} ==> {}'.format(self.tags, self.action, self.allow)
 
 
 class Policies(models.Model):
     policy_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    tags = models.ManyToManyField(PolicyTag)
+    tags = models.ManyToManyField(Tag)
     actions = models.ManyToManyField(PolicyAction)
+    # elements = models.ManyToManyField(PolicyElement)
     owner = models.ForeignKey(Person, on_delete=models.CASCADE, default=None)
     time_to_generate = models.FloatField()
     generated = models.BooleanField(default=False)
 
     def __str__(self):
-        return ', '.join([str(t.tag) for t in self.tags.all()])
+        return ', '.join([str(t) for t in self.tags.all()])

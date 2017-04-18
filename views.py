@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse, Http404
 from django.db.models import Q
 from django.forms.models import model_to_dict
 
-from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag, TagCategory
+from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag, TagCategory, TagRank
 
 from random import random, randint, choice
 import re
@@ -23,10 +23,10 @@ def consent(request):
 
 def tutorial(request):
     # If they did not accept the consent, redirect them to an end message.
-    consent = request.POST.get('agree', 'no') == 'yes'
+    consent_accepted = request.POST.get('agree', 'no') == 'yes'
     if is_test:
-        consent = True
-    if not consent:
+        consent_accepted = True
+    if not consent_accepted:
         return redirect('end')
     # Create the user for this instance. Randomly assign them to expert or non-expert.
     expert = random() < 0.5
@@ -34,7 +34,7 @@ def tutorial(request):
         p = Person.objects.get(person_id=test_id)
         expert = bool(request.GET.get('e', 0))
     else:
-        p = Person(expert_class=expert, consent_accepted=consent)
+        p = Person(expert_class=expert, consent_accepted=consent_accepted)
         p.save()
 
     # Make sure we set some kind of cookie here to determine if they have completed the survey.
@@ -50,7 +50,6 @@ def policy(request, default_person='invalid_person_id'):
         p = Person.objects.get(person_id=test_id)
     else:
         p = get_object_or_404(Person, person_id=p_id)
-
 
     is_expert = bool(request.GET.get('e', 0))
     policy_sugg_owner = None if p.expert_class else p
@@ -74,11 +73,15 @@ def policy(request, default_person='invalid_person_id'):
     sugg_policies = []
     for e in expert_policies:
         this_policy = []
-        for t in e.tags.all():
+        for t in e.elements.get().tags.all():
             this_policy.append((t.tag.tag_cat.name, 't{}'.format(t.tag.tag_id), t.tag.text))
         sugg_policies.append(('p{}'.format(e.policy_id), this_policy))
     # make the context for generating the page
-    context = {'person': p.person_id, 'actions': action_list, 'categories': categories, 'tags': tag_list, 'policies': sugg_policies}
+    context = {'person': p.person_id,
+               'actions': action_list,
+               'categories': categories,
+               'tags': tag_list,
+               'policies': sugg_policies}
     return render(request, 'survey/policy.html', context)
 
 
@@ -88,6 +91,8 @@ def submit_policy(request):
     new_policy = Policies(owner=p, time_to_generate=request.POST.get('time', '-1'), generated=is_generated)
     # todo allow policy to be skipped (for policy generator)
     generate_new_policy = request.POST.get('get_another', None) is not None
+
+    tag_list = [get_object_or_404(Tag, tag_id=t[1:]) for t in request.POST.getlist('tag')]
 
     # get GUIDs by removing the first character
     action_list = [a[1:] for a in request.POST.getlist('action')]
@@ -102,16 +107,13 @@ def submit_policy(request):
         # add the policy actions to the new policy
         new_policy.actions.add(act)
 
-    my_tags = PolicyTag.objects.filter(owner=p)
-    for t in request.POST.getlist('tag'):
-        tag = get_object_or_404(Tag, tag_id=t[1:])
+        action_tags = PolicyTag.objects.filter(owner=p).filter(action=a)
+        for t in tag_list:
+            if not action_tags.filter(tag=t):
+                pt = PolicyTag(tag=t, owner=p, action=a)
+                pt.save()
 
-        if not my_tags.filter(tag=tag):
-            pt = PolicyTag(tag=tag, owner=p)
-            pt.save()
-        else:
-            pt = my_tags.filter(tag=tag).get()
-        new_policy.tags.add(pt)
+    new_policy.tags.add(*tag_list)
     new_policy.save()
 
     response = {'id': new_policy.policy_id, 'num': Policies.objects.count()}
@@ -123,7 +125,7 @@ def submit_policy(request):
             response['tags'] = []
             response['categories'] = []
         response['more'] = not not response['tags']
-        response['percent'] = percent
+        response['percent'] = int(percent)
     return JsonResponse(response)
 
 
@@ -164,7 +166,14 @@ def rank(request):
     p_id = request.POST.get('person', test_id)
     p = get_object_or_404(Person, person_id=p_id)
 
-    tag_list = [pt.tag for pt in PolicyTag.objects.filter(owner=p)]
+    action_number = int(request.POST.get('action', '0'))
+    a = Action.objects.all()[action_number:action_number+1]
+    if not a:
+        # if we have no more actions, go to the policy generator
+        return redirect('gen')
+    a = a[0]
+
+    tag_list = [pt.tag for pt in PolicyTag.objects.filter(owner=p, action=a)]
     tag_list.sort(key=custom_tag_order)
     for t in tag_list:
         t.tag_id = 'a{}'.format(t.tag_id)
@@ -175,7 +184,17 @@ def rank(request):
     for t in tag_list:
         insert_list.append((class_dict[i % 4], t))
         i += 1
-    context = {'person': p_id, 'tags': insert_list, 'ids': ids, 'number': len(tag_list)}
+    action_number += 1
+    context = {'person': p_id,
+               'tags': insert_list,
+               'ids': ids,
+               'number': len(tag_list),
+               'action': a,
+               'next_action': action_number,
+               'percent': int(action_number/Action.objects.count()*100)}
+    # todo display the current action information on the rank page
+    # todo make the next button go to the next action and update the completion bar
+    # todo make all progress bars to have the context of the specific page
     # context['end_div'] = '' if len(tag_list) % 4 == 0 else '</div>'
     return render(request, 'survey/rank.html', context)
 
@@ -183,10 +202,11 @@ def rank(request):
 def save_rank(request):
     p_id = request.POST.get('person', test_id)
     p = get_object_or_404(Person, person_id=p_id)
+    a = get_object_or_404(Action, request.POST.get('action', None))
 
     tag = get_object_or_404(Tag, tag_id=request.POST.get('tag')[1:])
 
-    my_tag = get_object_or_404(PolicyTag, owner=p, tag=tag)
+    my_tag = get_object_or_404(PolicyTag, owner=p, tag=tag, action=a)
     my_tag.priority = int(request.POST.get('rank', '-1'))
     my_tag.save()
     return HttpResponse('')
@@ -206,9 +226,9 @@ def gen(request):
         action_list.append(('a{}'.format(a.action_id), a.text))
 
     more, percent = need_more_policies(p)
-    context = {'person': p.person_id, 'actions': action_list, 'tags': {}, 'percent': percent}
+    context = {'person': p.person_id, 'actions': action_list, 'tags': {}, 'percent': int(percent)}
     if more:
-        context['tags'], context['categories'] =  generate_policy(p)
+        context['tags'], context['categories'] = generate_policy(p)
     return render(request, 'survey/generate.html', context)
 
 
@@ -224,10 +244,10 @@ def need_more_policies(p):
 def generate_policy(p):
     policy_tags = [t for t in PolicyTag.objects.filter(owner=p)]
     new_policy = []
-    iter = 0
+    i = 0
     ntags = randint(2, 3)
     categories = []
-    while iter < 5:
+    while i < 5:
         # five attempts to find a policy suggestion
         while len(new_policy) < ntags:
             # find three unique tags
@@ -259,7 +279,7 @@ def generate_policy(p):
                     categories.append(c)
             if done:
                 break
-        iter += 1
+        i += 1
     tags = [t.tag for t in new_policy]
     return_tags = []
     for t in tags:
@@ -276,9 +296,9 @@ def next_generated_policy(request):
     if is_test:
         p = Person.objects.get(person_id=test_id)
     else:
-        p = get_object_or_404(Person, person_id = request.POST.get('person', None))
+        p = get_object_or_404(Person, person_id=request.POST.get('person', None))
 
-    response = {}
+    response = dict()
     response['tags'], response['categories'] = generate_policy(p)
     return JsonResponse(response)
 
