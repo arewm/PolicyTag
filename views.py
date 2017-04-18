@@ -43,13 +43,9 @@ def tutorial(request):
     return render(request, 'survey/tutorial.html', context)
 
 
-def policy(request, default_person='invalid_person_id'):
+def policy(request):
     # Determine who is creating policies
-    p_id = request.POST.get('person', default_person)
-    if is_test:
-        p = Person.objects.get(person_id=default_id)
-    else:
-        p = get_object_or_404(Person, person_id=p_id)
+    p = get_object_or_404(Person, person_id=request.POST.get('person', default_id))
 
     is_expert = bool(request.GET.get('e', 0))
     policy_sugg_owner = None if p.expert_class else p
@@ -86,7 +82,7 @@ def policy(request, default_person='invalid_person_id'):
 
 
 def submit_policy(request):
-    p = get_object_or_404(Person, person_id=request.POST['person'])
+    p = get_object_or_404(Person, person_id=request.POST.get('person', default_id))
     is_generated = request.POST.get('gen', None) is not None
     new_policy = Policies(owner=p, time_to_generate=request.POST.get('time', '-1'), generated=is_generated)
     # todo allow policy to be skipped (for policy generator)
@@ -144,7 +140,7 @@ def remove_policy(request):
 def custom_tag(request):
     # create a custom tag as long as it does not already exist as a system or this-user tag
     response = {'new': 'false', 'category': request.POST['category']}
-    p = get_object_or_404(Person, person_id=request.POST['person'])
+    p = get_object_or_404(Person, person_id=request.POST.get('person', default_id))
     category = get_object_or_404(TagCategory, name=request.POST['category'])
     if not Tag.objects.filter(Q(text=request.POST['tag'].strip()) &
                               Q(tag_cat=category) &
@@ -163,8 +159,7 @@ def custom_tag_order(tag):
 
 
 def rank(request):
-    p_id = request.POST.get('person', default_id)
-    p = get_object_or_404(Person, person_id=p_id)
+    p = get_object_or_404(Person, person_id=request.POST.get('person', default_id))
 
     action_number = int(request.POST.get('action', '0'))
     a = Action.objects.all()[action_number:action_number+1]
@@ -185,7 +180,7 @@ def rank(request):
         insert_list.append((class_dict[i % 4], t))
         i += 1
     action_number += 1
-    context = {'person': p_id,
+    context = {'person': p.person_id,
                'tags': insert_list,
                'ids': ids,
                'number': len(tag_list),
