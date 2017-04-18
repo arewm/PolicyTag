@@ -66,7 +66,7 @@ $(document).ready(function () {
                 // we have successfully submitted, so clear the policy
                 clearPolicy();
                 var category_label = $('#category-list');
-                category_label.children('.tag-properties').each().remove();
+                category_label.children('.tag-properties').each(function() {$(this).remove()});
                 // fill in the next policy if there are any
                 //console.log(data.more);
                 if (data.more) {
