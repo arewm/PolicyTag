@@ -76,16 +76,16 @@ $(document).ready(function () {
                         // add each of the tags in the policies
                         var tag = data.tags[i];
                         var tag_div = $('<div class="tag-properties"/div>');
-                        console.log(tag.category, tag.text);
+                        //console.log(tag.category, tag.text);
                         tag_div.attr('id', tag.tag_id);
                         tag_div.addClass(tag.category);
                         tag_div.html(tag.text);
-                        console.log(tag_div);
+                        //console.log(tag_div);
                         work.append(tag_div);
                     }
                     for (var i=0; i<data.categories.length; i++) {
                         // add each of the categories in the policy
-                        var c = data.category[i];
+                        var c = data.categories[i];
                         console.log(c);
                         var cat = $('<div>');
                         cat.addClass(c.name).addClass('tag-properties');
