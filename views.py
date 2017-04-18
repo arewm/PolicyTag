@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse, Http404
 from django.db.models import Q
 from django.forms.models import model_to_dict
 
-from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag, TagCategory, TagRank
+from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag, TagCategory
 
 from random import random, randint, choice
 import re
