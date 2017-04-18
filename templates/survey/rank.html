@@ -37,7 +37,7 @@
             $.each($('#rank-holder').find('.dropzone'), function () {
                 objHeight += $(this).height();
             });
-            $('#rank-holder').height(objHeight);
+            $('#rank-holder').height($('.dropzone-wrapper').height());
         });
     </script>
 </head>
