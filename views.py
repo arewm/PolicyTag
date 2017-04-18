@@ -263,6 +263,9 @@ def generate_policy(p):
     for t in tags:
         return_tags.append(model_to_dict(t))
         return_tags[-1]['tag_id'] = 't{}'.format(t.tag_id)
+    import sys
+    print(return_tags, file=sys.stderr)
+    print(categories, file=sys.stderr)
     return return_tags, categories
 
 
