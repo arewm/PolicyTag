@@ -39,20 +39,20 @@ var msnry = new Masonry('.grid', {
         .on('dragend', function (event) {
             if (event.target.getAttribute('valid') === 'false') {
                 if (start_valid) {
-                    num_policies++;
+                    //num_policies++;
                     event.target.classList.add('grid-item');
                     msnry.appended(event.target);
                     msnry.reloadItems()
                 }
             } else {
                 if (!start_valid) {
-                    num_policies--;
+                    //num_policies--;
                     event.target.classList.remove('grid-item');
                     msnry.reloadItems();
                     msnry.layout();
                 }
             }
-            document.getElementById('next_button').disabled = num_policies !== 0;
+            //document.getElementById('next_button').disabled = num_policies !== 0;
             event.target.removeAttribute('valid');
             var frm = $('#rank_saver');
             $.ajax({
