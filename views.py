@@ -265,10 +265,13 @@ def generate_policy(p):
         return_tags.append(model_to_dict(t))
         return_tags[-1]['tag_id'] = 't{}'.format(t.tag_id)
         return_tags[-1]['category'] = t.category
+    return_categories = []
+    for c in categories:
+        return_categories.append(model_to_dict(c))
     import sys
     print(return_tags, file=sys.stderr)
-    print(categories, file=sys.stderr)
-    return return_tags, categories
+    print(return_categories, file=sys.stderr)
+    return return_tags, return_categories
 
 
 def next_generated_policy(request):
