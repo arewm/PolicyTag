@@ -18,11 +18,8 @@ body{
     bottom: 0;
 }
 
-.progress.top {
-    top: 0;
-}
-
 .progress.top.center {
+    width: 50%;
     left: 50%;
     margin-left: -25%;
 }
