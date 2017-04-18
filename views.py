@@ -221,6 +221,7 @@ def gen(request):
 
     more, percent = need_more_policies(p)
     context = {'person': p, 'actions': action_list, 'tags': {}, 'percent': int(percent)}
+    context['type'] = 'e' if p.expert_class else 'n'
     if more:
         context['tags'], context['categories'] = generate_policy(p)
     return render(request, 'survey/generate.html', context)
