@@ -62,40 +62,32 @@ $(document).ready(function () {
             url: frm.attr('action'),
             data: frm.serialize(),
             success: function (data) {
-                console.log(data);
                 // we have successfully submitted, so clear the policy
                 clearPolicy();
                 var category_label = $('#category-list');
                 category_label.children('.tag-properties').each(function() {$(this).remove()});
                 // fill in the next policy if there are any
-                //console.log(data.more);
                 if (data.more) {
-                    //console.log('got to more');
                     var work = $('#workspace');
                     for (var i =0; i<data.tags.length; i++){
-                        // add each of the tags in the policies
                         var tag = data.tags[i];
                         var tag_div = $('<div class="tag-properties"/div>');
-                        //console.log(tag.category, tag.text);
                         tag_div.attr('id', tag.tag_id);
                         tag_div.addClass(tag.category);
                         tag_div.html(tag.text);
-                        //console.log(tag_div);
                         work.append(tag_div);
                     }
                     for (var i=0; i<data.categories.length; i++) {
                         // add each of the categories in the policy
                         var c = data.categories[i];
-                        console.log(c);
                         var cat = $('<div>');
                         cat.addClass(c.name).addClass('tag-properties');
                         cat.attr('data-toggle', 'tooltip').attr('title', c.help_text).attr('data-placement', 'top');
                         cat.html(c.name).tooltip();
-                        console.log(cat);
 
                         category_label.append(cat);
                     }
-                    $('.progress-bar').attr('aria-valuenow', data.percent).attr('style', 'width:' + data.percent +'%').html('Policy Generation: ' + data.percent + '% Complete')
+                    $('.progress-bar').attr('aria-valuenow', data.percent).attr('style', 'width:' + data.percent +'%').html('Policy Generation: ' + data.percent + '% Complete');
                 } else {
                     // otherwise, enable the link to go to the next page
                     var button = $('#next_button');

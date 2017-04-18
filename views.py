@@ -8,8 +8,8 @@ from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag, TagC
 from random import random, randint, choice
 import re
 
-test_id = 'c54de108-7cf1-493c-912d-a4ddb990a185'
-is_test = True
+is_test = False
+default_id = 'c54de108-7cf1-493c-912d-a4ddb990a185' if is_test else None
 
 
 def index(request):
@@ -31,7 +31,7 @@ def tutorial(request):
     # Create the user for this instance. Randomly assign them to expert or non-expert.
     expert = random() < 0.5
     if is_test:
-        p = Person.objects.get(person_id=test_id)
+        p = Person.objects.get(person_id=default_id)
         expert = bool(request.GET.get('e', 0))
     else:
         p = Person(expert_class=expert, consent_accepted=consent_accepted)
@@ -47,7 +47,7 @@ def policy(request, default_person='invalid_person_id'):
     # Determine who is creating policies
     p_id = request.POST.get('person', default_person)
     if is_test:
-        p = Person.objects.get(person_id=test_id)
+        p = Person.objects.get(person_id=default_id)
     else:
         p = get_object_or_404(Person, person_id=p_id)
 
@@ -163,7 +163,7 @@ def custom_tag_order(tag):
 
 
 def rank(request):
-    p_id = request.POST.get('person', test_id)
+    p_id = request.POST.get('person', default_id)
     p = get_object_or_404(Person, person_id=p_id)
 
     action_number = int(request.POST.get('action', '0'))
@@ -200,7 +200,7 @@ def rank(request):
 
 
 def save_rank(request):
-    p = get_object_or_404(Person, person_id=request.POST.get('person', test_id))
+    p = get_object_or_404(Person, person_id=request.POST.get('person', default_id))
     a = get_object_or_404(Action, action_id=request.POST.get('action', None))
 
     tag = get_object_or_404(Tag, tag_id=request.POST.get('tag')[1:])
@@ -212,7 +212,7 @@ def save_rank(request):
 
 
 def gen(request):
-    p = get_object_or_404(Person, person_id=request.POST.get('person', test_id))
+    p = get_object_or_404(Person, person_id=request.POST.get('person', default_id))
 
     actions = Action.objects.all()
     action_list = []
@@ -288,7 +288,7 @@ def generate_policy(p):
 
 def next_generated_policy(request):
     if is_test:
-        p = Person.objects.get(person_id=test_id)
+        p = Person.objects.get(person_id=default_id)
     else:
         p = get_object_or_404(Person, person_id=request.POST.get('person', None))
 
