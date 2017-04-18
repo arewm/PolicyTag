@@ -65,9 +65,11 @@
             policies.</h3>
     </div>
     <div id="category-list" style="position:absolute;bottom:0;">
-        <div id="list-description" style="float:left;"><p>These are the categories represented by the tags in this policy:</p></div>
+        <div id="list-description" style="float:left;"><p>These are the categories represented by the tags in this
+            policy:</p></div>
         {% for c in categories %}
-                <div class="{{ c.name }} tag-properties" data-toggle="tooltip" title="{{ c.help_text }}" data-placement="top">{{ c.name }} </div>
+            <div class="{{ c.name }} tag-properties" data-toggle="tooltip" title="{{ c.help_text }}"
+                 data-placement="top">{{ c.name }} </div>
         {% endfor %}
     </div>
 </div>
@@ -102,11 +104,7 @@
     </div>
 </div>
 
-<div id="bottom_row" class="row">
-    <div id="policies">
 
-    </div>
-</div>
 <div class="progress">
     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
          aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">
@@ -119,7 +117,9 @@
     <input type="hidden" name="e" value="{{ person.expert_class }}">
     {% if percent != 100 %}
         <!--input type="submit" name="button" id="next_button" value="Next" disabled style="display:none;"/-->
-        <button type="submit" class="btn btn-primary btn-block" disabled style="display:none;">Continue to the next part.</button>
+        <button type="submit" class="btn btn-primary btn-block" disabled style="display:none;">Continue to the next
+            part.
+        </button>
     {% else %}
         <button type="submit" class="btn btn-primary btn-block">Continue to the next part.</button>
     {% endif %}
