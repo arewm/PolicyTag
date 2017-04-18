@@ -32,6 +32,12 @@
                 });
                 return false;
             });
+
+            var objHeight = 0;
+            $.each($('#rank-holder').children(), function () {
+                objHeight += $(this).height();
+            });
+            $('#rank-holder').height(objHeight);
         });
     </script>
 </head>
@@ -45,52 +51,55 @@
             repeat this for each policy action.</p>
     </div>
 
-<div class="panel panel-default consent">
-    <div class="panel-heading"><strong>Current Policy Action: {{ a.text }}</strong>
-    </div>
-    <div class="panel-body" style="position:relative;">
+    <div class="panel panel-default consent">
+        <div class="panel-heading"><strong>Current Policy Action: {{ a.text }}</strong>
+        </div>
+        <div class="panel-body" style="position:relative;" id="rank-holder">
 
 
-    <div class="dropzone-wrapper">
-        <div id="priority1" class="dropzone js-drop">Highest Priority</div>
-        <div id="priority2" class="dropzone js-drop">High Priority</div>
-        <div id="priority3" class="dropzone js-drop">Medium Priority</div>
-        <div id="priority4" class="dropzone js-drop">Low Priority</div>
-        <div id="priority5" class="dropzone js-drop">Lowest Priority</div>
-    </div>
-
-
-    <div class="tags grid">
-        {% for c,t in tags %}
-            <div id="{{ t.tag_id }}" class="draggable js-drag grid-item {{ t.tag_cat.name }}">
-                {{ t.text }}
+            <div class="dropzone-wrapper">
+                <div id="priority1" class="dropzone js-drop">Highest Priority</div>
+                <div id="priority2" class="dropzone js-drop">High Priority</div>
+                <div id="priority3" class="dropzone js-drop">Medium Priority</div>
+                <div id="priority4" class="dropzone js-drop">Low Priority</div>
+                <div id="priority5" class="dropzone js-drop">Lowest Priority</div>
             </div>
-        {% endfor %}
-        <form id="rank_saver" action="{% url 'save_rank' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="person" value="{{ person }}">
-            <input type="hidden" name="action" value="{{ action.action_id }}">
-            <input type="hidden" name="tag" value="" id="saver_form_tag">
-            <input type="hidden" name="rank" value="-1" id="saver_form_rank">
-        </form>
 
-        <form id="next_page" action="{% url 'rank' %}" method="post" style="position:fixed;bottom:2%;width:50%;">
-            {% csrf_token %}
-            <input type="hidden" name="person" value="{{ person }}">
-            <input type="hidden" name="action" value="{{ next_action }}">
-            <button type="submit" class="btn btn-primary btn-block">Save the rest of the tags as the lowest priority and
-                Continue.
-            </button>
-            <!--input type="submit" name="button" id="next_button" value="Next" disabled/-->
-        </form>
+
+            <div class="tags grid">
+                {% for c,t in tags %}
+                    <div id="{{ t.tag_id }}" class="draggable js-drag grid-item {{ t.tag_cat.name }}">
+                        {{ t.text }}
+                    </div>
+                {% endfor %}
+                <form id="rank_saver" action="{% url 'save_rank' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="person" value="{{ person }}">
+                    <input type="hidden" name="action" value="{{ action.action_id }}">
+                    <input type="hidden" name="tag" value="" id="saver_form_tag">
+                    <input type="hidden" name="rank" value="-1" id="saver_form_rank">
+                </form>
+
+                <form id="next_page" action="{% url 'rank' %}" method="post"
+                      style="position:fixed;bottom:2%;width:50%;">
+                    {% csrf_token %}
+                    <input type="hidden" name="person" value="{{ person }}">
+                    <input type="hidden" name="action" value="{{ next_action }}">
+                    <button type="submit" class="btn btn-primary btn-block">Save the rest of the tags as the lowest
+                        priority and
+                        Continue.
+                    </button>
+                    <!--input type="submit" name="button" id="next_button" value="Next" disabled/-->
+                </form>
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
+                 aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">
+                Rank: {{ percent }}% Complete
+            </div>
+        </div>
     </div>
-    </div><div class="progress">
-    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
-         aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">
-        Rank: {{ percent }}% Complete
-    </div>
-</div>
-</div>
 </div>
 <script src="/static/survey/js/rank.js"></script>
 <script type="text/javascript">
