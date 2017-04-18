@@ -50,7 +50,12 @@
             understand the relationship between all tags, please drag them into the relevant priority. You will have to
             repeat this for each policy action.</p>
     </div>
-
+        <div class="progress top">
+            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
+                 aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">
+                Rank: {{ percent }}% Complete
+            </div>
+        </div>
     <div class="panel panel-default consent">
         <div class="panel-heading"><strong>Current Policy Action: {{ a.text }}</strong>
         </div>
@@ -93,12 +98,7 @@
                 </form>
             </div>
         </div>
-        <div class="progress">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
-                 aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">
-                Rank: {{ percent }}% Complete
-            </div>
-        </div>
+
     </div>
 </div>
 <script src="/static/survey/js/rank.js"></script>

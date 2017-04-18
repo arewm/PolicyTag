@@ -15,6 +15,10 @@ body{
     bottom: 0;
 }
 
+.progress .top {
+    top: 0;
+}
+
 .consent {
     margin: 5px 5em;
 }
