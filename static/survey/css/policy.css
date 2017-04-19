@@ -66,17 +66,21 @@ div#policy_suggestion {
 div#tags {
     float: right;
     width: 48%;
+    height: 100%;
+    margin: 0 1%;
+    overflow-y: scroll;
 }
 
 div#tags_no_suggestion {
     float: right;
     width: 98%;
-}
-
-div#tag_content {
     height: 100%;
     margin: 0 1%;
     overflow-y: scroll;
+}
+
+div#tag_content {
+
 }
 
 /*div#tutorial_buffer{
