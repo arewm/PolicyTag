@@ -77,12 +77,12 @@
                     </div>
                 {% endfor %}
             </div>
-            <div id="tags" style="position:absolute">
+            <div id="tags">
 
         {% else %}
-            <div id="tags_no_suggestion" style="position:absolute">
+            <div id="tags_no_suggestion">
         {% endif %}
-        <div style="position:relative;top:0;">
+        <div>
             <span class="label label-default" style="font-size: 100%;">Tag Suggestions</span>
             {% for c in categories %}
                 <label class="checkbox-inline"><input id="{{ c.name }}-check" type="checkbox" checked
