@@ -91,20 +91,24 @@
                 </label>
             {% endfor %}
         </div>
-        {% for c, ta in tags %}
-            <div id="{{ c.name }}-group" class="panel panel-default class-description">
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        <a href="#" data-toggle="tooltip" title="{{ c.help_text }}" data-placement="right">{{ c.name }}</a></div>
+        <div id="tag_content">
+            {% for c, ta in tags %}
+                <div id="{{ c.name }}-group" class="panel panel-default class-description">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <a href="#" data-toggle="tooltip" title="{{ c.help_text }}"
+                               data-placement="right">{{ c.name }}</a></div>
+                    </div>
+                    <div class="panel-body">
+                        {% for t in ta %}
+                            <div id="{{ t.tag_id }}" class="{{ c.name }} tag-properties move-me">{{ t.text }}</div>
+                        {% endfor %}
+                        <div id="custom-{{ c.name }}" class="{{ c.name }} tag-properties write-in-me">_____________
+                        </div>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    {% for t in ta %}
-                        <div id="{{ t.tag_id }}" class="{{ c.name }} tag-properties move-me">{{ t.text }}</div>
-                    {% endfor %}
-                    <div id="custom-{{ c.name }}" class="{{ c.name }} tag-properties write-in-me" >_____________</div>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
         </div>
         </div>
         <!--div id="top_right">
@@ -131,10 +135,13 @@
         <div id="operation">
             <!--div class="buff"></div-->
             <div id="operation-holder">
-            <a href="#" data-toggle="tooltip" title="Accept this policy" data-placement="top">
-                <div><i class="fa fa-check fa-3x" aria-hidden="true" onclick="savePolicy()"></i></div></a>
-            <a href="#" data-toggle="tooltip" title="Reset this policy and clear the workspace." data-placement="bottom">
-                <div><i class="fa fa-times fa-3x" aria-hidden="true" onclick="clearPolicy()"></i></div></a>
+                <a href="#" data-toggle="tooltip" title="Accept this policy" data-placement="top">
+                    <div><i class="fa fa-check fa-3x" aria-hidden="true" onclick="savePolicy()"></i></div>
+                </a>
+                <a href="#" data-toggle="tooltip" title="Reset this policy and clear the workspace."
+                   data-placement="bottom">
+                    <div><i class="fa fa-times fa-3x" aria-hidden="true" onclick="clearPolicy()"></i></div>
+                </a>
             </div>
         </div>
         <div id="action">
@@ -161,11 +168,12 @@
         </div>
     </div>
 
-    <form id="next_page" action="{% url 'rank' %}" method="post"  onsubmit="return checkPolicies()">
+    <form id="next_page" action="{% url 'rank' %}" method="post" onsubmit="return checkPolicies()">
         {% csrf_token %}
         <input type="hidden" name="person" value="{{ person }}">
         <!--input type="submit" name="button" id="next_button" value="Next" disabled/-->
-        <button type="submit" id="next_button" class="btn btn-primary btn-block"  style="position:absolute;bottom:1em;z-index:200;">Continue to the next
+        <button type="submit" id="next_button" class="btn btn-primary btn-block"
+                style="position:absolute;bottom:1em;z-index:200;">Continue to the next
             part.
         </button>
     </form>

@@ -10,9 +10,10 @@ body{
 }
 
 .progress.no-shadow {
-  background-color: #fff;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+    background-color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin-bottom: 0;
 }
 
 .progress.bottom{
