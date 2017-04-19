@@ -269,6 +269,9 @@ def generate_policy(p):
                     categories.append(c)
             if done:
                 break
+            else:
+                print('iter', file=sys.stderr)
+                new_policy.clear()
         i += 1
     return_tags = []
     for t in new_policy:
