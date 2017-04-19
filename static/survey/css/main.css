@@ -9,19 +9,16 @@ body{
     bottom: 0px;
 }
 
-.progress {
+.progress.bottom{
     width: 100%;
     position: absolute;
-}
-
-.progress.bottom{
     bottom: 0;
 }
 
 .progress.top.center {
-    width: 50%;
+    /*width: 50%;
     left: 50%;
-    margin-left: -25%;
+    margin-left: -25%;*/
 }
 
 .panel.middle {

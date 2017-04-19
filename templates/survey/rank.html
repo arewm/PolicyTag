@@ -48,12 +48,13 @@
 
     <div class="panel panel-default middle">
         <div class="panel-heading" style="text-align: center;">Current Policy Action: <strong>{{ action.text }}</strong>
-        </div>
-        <div class="progress top center">
             <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
                  aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%">
                 Rank: {{ percent }}% Complete
             </div>
+        </div>
+        <div class="progress top center">
+
         </div>
         <div class="panel-body" style="position:relative;" id="rank-holder">
 
