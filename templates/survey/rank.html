@@ -47,13 +47,14 @@
     </div>
 
     <div class="panel panel-default middle">
-        <div class="panel-heading" style="text-align: center;">Current Policy Action: <strong>{{ action.text }}</strong>
+        <div class="panel-heading" style="text-align: center;font-size:2em;">
             <div class="progress no-shadow">
-            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
-                 aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%;float: none;">
-                Rank: {{ percent }}% Complete
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ percent }}"
+                     aria-valuemin="0" aria-valuemax="100" style="width:{{ percent }}%;float: none;">
+                    Rank: {{ percent }}% Complete
+                </div>
             </div>
-            </div>
+            Current Policy Action: <strong>{{ action.text }}</strong>
         </div>
         <div class="panel-body" style="position:relative;" id="rank-holder">
 

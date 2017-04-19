@@ -230,6 +230,7 @@ def need_more_policies(p):
 
 
 def generate_policy(p):
+    import sys
     policy_tags = [Tag.objects.get(tag_id=t['tags']) for t in Policies.objects.filter(owner=p).values('tags').distinct()]
     new_policy = []
     i = 0
@@ -259,6 +260,7 @@ def generate_policy(p):
             # make sure we do not have two of any category
             done = True
             for t in new_policy:
+                print(t, file=sys.stderr)
                 c = t.tag_cat
                 if c in categories:
                     # if c.name == 'time' or c.name == 'location':
