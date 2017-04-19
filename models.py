@@ -12,13 +12,14 @@ class TagCategory(models.Model):
 
 
 class Person(models.Model):
-    expert_class = models.BooleanField(default=False)
+    expert = models.BooleanField(default=False)
     person_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     consent_accepted = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True)
 
 
     def __str__(self):
-        return '{}: expert={}'.format(self.person_id, self.expert_class)
+        return '{}: expert={}'.format(self.person_id, self.expert)
 
 
 class Tag(models.Model):

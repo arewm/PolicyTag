@@ -3,7 +3,6 @@ function hasClass(element, cls) {
     return (' ' + element.attr('class') + ' ').indexOf(' ' + cls + ' ') > -1;
 }
 function add_to_workspace(tag_div_clone, tag_id) {
-    console.log(tag_id);
     tag_div_clone.attr("id", "drag-" + tag_id);
     tag_div_clone.addClass('moved-me');
     var close = $('<button type="button" class="close" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>');

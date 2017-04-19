@@ -10,6 +10,7 @@ import re
 
 is_test = False
 default_id = 'c54de108-7cf1-493c-912d-a4ddb990a185' if is_test else None
+system = Person.objects.filter(person_id='00000000-0000-0000-0000-000000000000')
 
 
 def index(request):
@@ -35,7 +36,7 @@ def tutorial(request):
         p = Person.objects.get(person_id=default_id)
         expert = bool(request.GET.get('e', 0))
     else:
-        p = Person(expert_class=expert, consent_accepted=consent_accepted)
+        p = Person(expert=expert, consent_accepted=consent_accepted)
         p.save()
 
     # Make sure we set some kind of cookie here to determine if they have completed the survey.
@@ -48,9 +49,9 @@ def policy(request):
     # Determine who is creating policies
     p = get_object_or_404(Person, person_id=request.POST.get('person', default_id))
 
-    is_expert = bool(request.GET.get('e', 0))
-    policy_sugg_owner = None if p.expert_class else p
+    policy_sugg_owner = None if p.expert else system
     if is_test:
+        is_expert = bool(request.GET.get('e', 0))
         policy_sugg_owner = None if is_expert else p
 
     # Get all system defaults to populate the page with
@@ -61,7 +62,7 @@ def policy(request):
     categories = TagCategory.objects.order_by('display_order')
     tag_list = []
     for c in categories:
-        tags = Tag.objects.filter(tag_cat=c).filter(creator=None).order_by('text')
+        tags = Tag.objects.filter(tag_cat=c).filter(Q(creator=None) | Q(creator=policy_sugg_owner)).order_by('text')
         for t in tags:
             t.tag_id = 't{}'.format(t.tag_id)
         tag_list.append((c, tags))
@@ -188,10 +189,6 @@ def rank(request):
                'action': a,
                'next_action': action_number,
                'percent': int(action_number/Action.objects.count()*100)}
-    # todo display the current action information on the rank page
-    # todo make the next button go to the next action and update the completion bar
-    # todo make all progress bars to have the context of the specific page
-    # context['end_div'] = '' if len(tag_list) % 4 == 0 else '</div>'
     return render(request, 'survey/rank.html', context)
 
 
@@ -217,7 +214,7 @@ def gen(request):
 
     more, percent = need_more_policies(p)
     context = {'person': p, 'actions': action_list, 'tags': {}, 'percent': int(percent)}
-    context['type'] = 'e' if p.expert_class else 'n'
+    context['type'] = 'e' if p.expert else 'n'
     if more:
         context['tags'], context['categories'] = generate_policy(p)
     return render(request, 'survey/generate.html', context)
@@ -259,13 +256,13 @@ def generate_policy(p):
                     break
         if new_policy:
             # hooray, we still have a new policy!
-            # make sure we do not have two time or location tags
+            # make sure we do not have two of any category
             done = True
             for t in new_policy:
                 c = t.tag_cat
                 if c in categories:
-                    if c.name == 'time' or c.name == 'location':
-                        done = False
+                    # if c.name == 'time' or c.name == 'location':
+                    done = False
                 else:
                     categories.append(c)
             if done:
