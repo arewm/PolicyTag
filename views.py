@@ -5,7 +5,7 @@ from django.forms.models import model_to_dict
 
 from .models import Tag, Person, Action, PolicyAction, Policies, PolicyTag, TagCategory
 
-from random import random, randint, choice
+from random import random, randint, choice, sample
 import re
 
 is_test = False
@@ -229,50 +229,71 @@ def need_more_policies(p):
     return percent < 100, percent
 
 
+def verify_policy(p, policy):
+    search = Policies.objects.filter(owner=p)
+    for np in policy:
+        search = search & np.policies_set.all()
+    if search:
+        for s in search:
+            if s.tags.all().count == len(policy):
+                return False
+    return True
+
+
 def generate_policy(p):
     import sys
-    policy_tags = [Tag.objects.get(tag_id=t['tags']) for t in Policies.objects.filter(owner=p).values('tags').distinct()]
-    new_policy = []
-    i = 0
+    t = [t['tags'] for t in Policies.objects.filter(owner=p).values('tags').distinct()]
+    t_cats = [c for c in Tag.objects.filter(tag_id__in=t).values('tag_cat').distinct()]
     ntags = randint(2, 3)
+    new_policy = []
     categories = []
-    while i < 5:
-        # five attempts to find a policy suggestion
-        while len(new_policy) < ntags:
-            # find three unique tags
-            selection = choice(policy_tags)
-            if selection not in new_policy:
-                new_policy.append(selection)
-        # We have a potential policy, test to see if it exists.
-        # get the intersection of policies that contain each filter
-        search = Policies.objects.filter(owner=p)
-        for np in new_policy:
-            search = search & np.policies_set.all()
-        if search:
-            # loop through all possible policy matches
-            for s in search:
-                # if there are only these tags in the policy, it exists
-                if s.tags.all().count() == ntags:
-                    new_policy.clear()
-                    break
-        if new_policy:
-            # hooray, we still have a new policy!
-            # make sure we do not have two of any category
-            done = True
-            for t in new_policy:
-                print(t, file=sys.stderr)
-                c = t.tag_cat
-                if c in categories:
-                    # if c.name == 'time' or c.name == 'location':
-                    done = False
-                else:
-                    categories.append(c)
-            if done:
+    i = 0
+    if len(t_cats) >= ntags:
+        # we have enough categories to ensure each is unique
+        while i < 5:
+            i += 1
+            cats = sample(t_cats, ntags)
+            for c in cats:
+                new_policy.append(choice(Tag.objects.filter(tag_id__in=t).filter(tag_cat=c['tag_cat'])))
+            # We have a potential policy, test to see if it exists.
+            # get the intersection of policies that contain each filter
+            if verify_policy(p, new_policy):
+                categories = [TagCategory.objects.get(pk=c['tag_cat']) for c in cats]
                 break
             else:
-                print('iter', file=sys.stderr)
                 new_policy.clear()
-        i += 1
+    else:
+        policy_tags = Tag.objects.filter(tag_id__in=t)
+        while i < 5:
+            i += 1
+            # five attempts to find a policy suggestion
+            while len(new_policy) < ntags:
+                # find three unique tags
+                selection = choice(policy_tags)
+                if selection not in new_policy:
+                    new_policy.append(selection)
+            # We have a potential policy, test to see if it exists.
+            # get the intersection of policies that contain each filter
+            if not verify_policy(p, new_policy):
+                new_policy.clear()
+            if new_policy:
+                # hooray, we still have a new policy!
+                # make sure we do not have two of any category
+                done = True
+                for t in new_policy:
+                    print(t, file=sys.stderr)
+                    c = t.tag_cat
+                    if c in categories:
+                        if c.name == 'time' or c.name == 'location':
+                            done = False
+                    else:
+                        categories.append(c)
+                if done:
+                    break
+                else:
+                    print('iter', file=sys.stderr)
+                    categories.clear()
+                    new_policy.clear()
     return_tags = []
     for t in new_policy:
         return_tags.append(model_to_dict(t))
