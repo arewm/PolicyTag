@@ -10,7 +10,7 @@ import re
 
 is_test = False
 default_id = 'c54de108-7cf1-493c-912d-a4ddb990a185' if is_test else None
-system = Person.objects.filter(person_id='00000000-0000-0000-0000-000000000000')
+system = Person.objects.filter(person_id='00000000-0000-0000-0000-000000000000')[0]
 
 
 def index(request):
@@ -45,9 +45,9 @@ def tutorial(request):
 
 
 def add_system_policy(request):
-    import sys
-    print(request.GET, file=sys.stderr)
-    p = get_object_or_404(Person, request.GET.get('long_securitybyObsc.3tyPhrasetha18tIsjus-~hIBLE', None))
+    p=None
+    if request.GET.get('long_securitybyObsc.3tyPhrasetha18tIsjus-~hIBLE', None) is not None:
+        p = system
 
     policy_sugg_owner = system
     if is_test:
