@@ -63,23 +63,6 @@ class PolicyTag(models.Model):
         return '{}: {} = {} ==> {}'.format(self.owner, self.tag, self.action, self.priority)
 
 
-# class TagRank(models.Model):
-#     tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
-#     action = models.ForeignKey(Action, on_delete=models.CASCADE)
-#     priority = models.IntegerField(default=-1)
-#     owner = models.ForeignKey(Person, on_delete=models.CASCADE)
-
-
-# class PolicyElement(models.Model):
-#     action = models.ForeignKey(Action, on_delete=models.CASCADE)
-#     tags = models.ManyToManyField(PolicyTag)
-#     allow = models.BooleanField()
-#     owner = models.ForeignKey(Person, on_delete=models.CASCADE, default=None)
-#
-#     def __str__(self):
-#         return '{} : {} ==> {}'.format(self.tags, self.action, self.allow)
-
-
 class Policies(models.Model):
     policy_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     tags = models.ManyToManyField(Tag)

@@ -32,8 +32,6 @@ function makeDraggable() {
         revert: "invalid",
         appendTo: "body"
     }).click(function () {
-        //var b = parseInt($(this).width());
-        //$(this).css('width', b + 5);
     });
     $('.moved-me').draggable({
 
@@ -51,7 +49,7 @@ function makeDraggable() {
 
             }
             else if (hasClass(src, 'move-me')) {
-                var a = u.helper.clone();//.attr("id", "drag-" + src.attr("id"));
+                var a = u.helper.clone();
                 a.removeClass('move-me', a);
                 add_to_workspace(a, src.attr("id"));
             }
