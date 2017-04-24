@@ -31,7 +31,6 @@ def tutorial(request):
         return redirect('end')
     # Create the user for this instance. Randomly assign them to expert or non-expert.
     expert = random() < 0.5
-    expert = True
     if is_test:
         p = Person.objects.get(person_id=default_id)
         expert = bool(request.GET.get('e', 0))
