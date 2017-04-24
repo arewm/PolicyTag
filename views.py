@@ -44,6 +44,42 @@ def tutorial(request):
     return render(request, 'survey/tutorial.html', context)
 
 
+def add_system_policy(request):
+    p = get_object_or_404(Person, request.GET.get('long_securitybyObsc.3tyPhrasetha18tIsjus-~h)$$IBLE', None))
+
+    policy_sugg_owner = system
+    if is_test:
+        is_expert = bool(request.GET.get('e', 0))
+        policy_sugg_owner = None if is_expert else p
+
+    # Get all system defaults to populate the page with
+    actions = Action.objects.all()
+    action_list = []
+    for a in actions:
+        action_list.append(('a{}'.format(a.action_id), a.text))
+    categories = TagCategory.objects.order_by('display_order')
+    tag_list = []
+    for c in categories:
+        tags = Tag.objects.filter(tag_cat=c).filter(Q(creator=None) | Q(creator=policy_sugg_owner)).order_by('text')
+        for t in tags:
+            t.tag_id = 't{}'.format(t.tag_id)
+        tag_list.append((c, tags))
+    # Get the suggested policies if we want to display them.
+    expert_policies = Policies.objects.filter(owner=policy_sugg_owner)
+    sugg_policies = []
+    for e in expert_policies:
+        this_policy = []
+        for t in e.tags.all():
+            this_policy.append((t.tag_cat.name, 't{}'.format(t.tag_id), t.text))
+        sugg_policies.append(('p{}'.format(e.policy_id), this_policy))
+    # make the context for generating the page
+    context = {'person': p.person_id,
+               'actions': action_list,
+               'categories': categories,
+               'tags': tag_list,
+               'policies': sugg_policies}
+    return render(request, 'survey/policy.html', context)
+
 def policy(request):
     # Determine who is creating policies
     p = get_object_or_404(Person, person_id=request.POST.get('person', default_id))
