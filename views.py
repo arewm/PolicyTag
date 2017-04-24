@@ -45,7 +45,7 @@ def tutorial(request):
 
 
 def add_system_policy(request):
-    p = get_object_or_404(Person, request.GET.get('long_securitybyObsc.3tyPhrasetha18tIsjus-~h)$$IBLE', None))
+    p = get_object_or_404(Person, request.GET.get('long_securitybyObsc.3tyPhrasetha18tIsjus-~hIBLE', None))
 
     policy_sugg_owner = system
     if is_test:
