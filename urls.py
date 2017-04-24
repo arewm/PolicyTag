@@ -12,5 +12,5 @@ urlpatterns = [
     url(r'^save_rank', views.save_rank, name='save_rank'),
     url(r'^gen', views.gen, name='generator'),
     url(r'^thankyou', views.end, name='end'),
-    url(r'^policy_make_system', views.add_system_policy),
+    url(r'^policyMakeSystem', views.add_system_policy, name='policymaker'),
 ]
