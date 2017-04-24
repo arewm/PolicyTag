@@ -241,7 +241,6 @@ def verify_policy(p, policy):
 
 
 def generate_policy(p):
-    import sys
     t = [t['tags'] for t in Policies.objects.filter(owner=p).values('tags').distinct()]
     t_cats = [c for c in Tag.objects.filter(tag_id__in=t).values('tag_cat').distinct()]
     ntags = randint(2, 3)
@@ -281,7 +280,6 @@ def generate_policy(p):
                 # make sure we do not have two of any category
                 done = True
                 for t in new_policy:
-                    print(t, file=sys.stderr)
                     c = t.tag_cat
                     if c in categories:
                         if c.name == 'time' or c.name == 'location':
@@ -291,7 +289,6 @@ def generate_policy(p):
                 if done:
                     break
                 else:
-                    print('iter', file=sys.stderr)
                     categories.clear()
                     new_policy.clear()
     return_tags = []
