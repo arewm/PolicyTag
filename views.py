@@ -45,6 +45,8 @@ def tutorial(request):
 
 
 def add_system_policy(request):
+    import sys
+    print(request.GET, file=sys.stderr)
     p = get_object_or_404(Person, request.GET.get('long_securitybyObsc.3tyPhrasetha18tIsjus-~hIBLE', None))
 
     policy_sugg_owner = system
