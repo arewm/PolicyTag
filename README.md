@@ -4,4 +4,4 @@ I created PolicyTag for CSC 705 (Operating Systems Security) at NCSU during the 
 
 You can find the final paper I wrote up [here](https://www.dropbox.com/s/l6toizls4y1qj8h/policytag.pdf?dl=0). I also created a tutorial for the system that you can find below.
 
-[![Project alt text](http://img.youtube.com/vi/mYTs5U5vKXw/0.jpg)](https://www. youtube.com/watch?v=mYTs5U5vKXw)
+[![PolicyTag tutorial video](https://img.youtube.com/vi/mYTs5U5vKXw/0.jpg)](https://www.youtube.com/watch?v=mYTs5U5vKXw)
